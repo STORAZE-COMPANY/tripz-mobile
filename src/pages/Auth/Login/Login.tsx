@@ -35,7 +35,7 @@ export default function Login() {
                     <AppleSvg />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('Register2') }}>
+                <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('Register') }}>
                     <Text style={styles.buttonEmail}>E-mail</Text>
                 </TouchableOpacity>
             </Box>

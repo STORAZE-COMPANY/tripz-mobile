@@ -1,5 +1,5 @@
 import i18n from 'i18next';
-import ptBR from './pt-BR.json';
+import ptBR from './pt-br.json';
 
 import { initReactI18next } from 'react-i18next';
 
