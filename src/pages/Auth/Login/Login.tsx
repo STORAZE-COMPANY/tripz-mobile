@@ -10,6 +10,7 @@ import AppleSvg from '../../../../assets/apple.svg'; // Substitua pelo caminho d
 import LogoSVG from '../../../../assets/logoOn.svg'; // Substitua pelo caminho do seu arquivo SVG
 import { useNavigation } from '@react-navigation/native';
 import { t } from 'i18next';
+import { fontBold, fontRegular } from '@mobile/typograph/typograph';
 
 
 export default function Login() {
@@ -35,8 +36,8 @@ export default function Login() {
                     <AppleSvg />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('Register') }}>
-                    <Text style={styles.buttonEmail}>E-mail</Text>
+                <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('Register')}}>
+                    <Text style={styles.buttonEmail}>{t('PAGES.AUTH.LOGIN.EMAIL')}</Text>
                 </TouchableOpacity>
             </Box>
 
@@ -56,11 +57,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 20,
     },
-    subtitle: {
-        fontSize: 35,
+    subtitle: { 
         marginBottom: 31,
         textAlign: 'center',
-        fontWeight: 'bold',
+        fontFamily: fontRegular.fontFamily,
+        fontSize: fontRegular.fontSize.large,   
     },
     googleButton: {
         marginBottom: 16,
