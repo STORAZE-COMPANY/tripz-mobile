@@ -1,12 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import MainNavigation from './src/MainNavigation';
+import { NavigationContainer } from '@react-navigation/native';
+import { useFonts } from 'expo-font';
+import { Lato_100Thin_Italic, Lato_300Light } from '@expo-google-fonts/lato';
 
 export default function App() {
+
+  const [fontLoaded, fontError] = useFonts({
+    Lato_300Light
+  });
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <StatusBar style="auto" />
+        <MainNavigation />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 
