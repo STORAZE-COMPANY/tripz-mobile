@@ -3,6 +3,8 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, useWindowDimensions } from 'react-native';
 import Arrow from '../../../assets/shape.svg'; // Substitua pelo caminho do seu arquivo SVG
 import { useNavigation } from '@react-navigation/native';
+import { styles } from './styles';
+import {Box} from '../Box/Box';
 
 interface TopBarProps {
   titleText: string;
@@ -19,32 +21,15 @@ const TopBarComponent: React.FC<TopBarProps> = ({ titleText, currentStep, totalS
   };
 
   return (
-    <View style={[styles.container, { width }]}>
+    <Box flexDirection='row' justifyContent='space-between' pdVertical={10} alignItems='center' pdHorizontal={10}>
       <TouchableOpacity onPress={goBack}>
         <Arrow />
       </TouchableOpacity>
       <Text style={styles.title}>{titleText}</Text>
       <Text style={styles.stepCount}>{`${currentStep}/${totalSteps}`}</Text>
-    </View>
+    </Box>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-  },
-  title: {
-    fontSize: 20,
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-  stepCount: {
-    fontSize: 16,
-    color:'grey'
-  },
-});
 
-export default TopBarComponent;
+export {TopBarComponent};

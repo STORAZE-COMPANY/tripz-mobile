@@ -6,11 +6,13 @@ import PeoplesSVG from '../../../../assets/peoples.svg';
 import PeoplesMapsSVG from '../../../../assets/peoplesMap.svg';
 import LogoSVG from '../../../../assets/logoOn.svg';
 import { MaterialIcons } from '@expo/vector-icons';
-import Background from '../../../components/Background/Background';
-import Box from '../../../components/Box/Box';
+
 import { useNavigation, CommonActions } from '@react-navigation/native';
-import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
+import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import * as Location from 'expo-location';
+import { styles } from './styles';
+import { Box } from '@mobile/components/Box';
+import { Background } from '@mobile/components/Background';
 
 const { width } = Dimensions.get('window');
 
@@ -51,7 +53,7 @@ const OnBoarding: React.FC = () => {
     const data = [
         {
             id: 1,
-            title: 'Bem-vindo ao Seu Novo Guia de Viagens!',
+            title: <Text>Bem-vindo ao Traveler</Text>,
             subtitle: 'Descubra experiências incríveis e personalize sua jornada dos sonhos. Vamos iniciar sua aventura?',
             image: <PassaportSvg width={250} height={230} />,
         },
@@ -169,80 +171,5 @@ const OnBoarding: React.FC = () => {
         </Background>
     );
 };
-
-const styles = StyleSheet.create({
-    slide: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
-    },
-    text: {
-        fontSize: 44,
-        fontWeight: 'bold',
-        marginTop: 20,
-        textAlign: 'center',
-        paddingHorizontal: 28,
-    },
-    subtitle: {
-        fontSize: 16,
-        marginTop: 10,
-        textAlign: 'center',
-        color: '#555',
-        paddingHorizontal: 20,
-    },
-    footer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        width: '100%',
-    },
-    skipButton: {
-        color: '#2F419E',
-        fontSize: 16,
-    },
-    nextButton: {
-        backgroundColor: '#2F419E',
-        borderRadius: 10,
-        padding: 10,
-    },
-    indicatorContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    indicator: {
-        width: 45,
-        height: 2,
-        borderRadius: 2,
-        marginHorizontal: 5,
-    },
-    activeIndicator: {
-        backgroundColor: '#2F419E',
-    },
-    inactiveIndicator: {
-        backgroundColor: 'gray',
-    },
-    locationButton: {
-        marginTop: 20,
-        backgroundColor: '#2F419E',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 10,
-        alignItems: 'center',
-    },
-    locationButtonText: {
-        color: 'white',
-        fontSize: 16,
-    },
-    disabledText: {
-        color: 'gray',
-    },
-    disabledNextButton: {
-        backgroundColor: 'gray',
-    },
-});
 
 export default OnBoarding;

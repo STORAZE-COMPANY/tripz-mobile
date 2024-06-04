@@ -23,12 +23,7 @@ export default function Splash() {
             }))
         }, 4000)
     }, [])
-    // useEffect(() => {
-    //     animationRef.current?.play();
-    //     // Or set a specific startFrame and endFrame with:
-    //     animationRef.current?.play(30, 120);
-    //   }, []);
-
+    
   return (
     <View style={styles.container}>
       <LottieView autoPlay loop 

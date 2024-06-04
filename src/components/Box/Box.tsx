@@ -1,52 +1,13 @@
-// Box.tsx
-import React, { useMemo } from 'react';
-import { View, StyleSheet, ViewStyle, StyleProp, FlexAlignType } from 'react-native';
-import { scale, verticalScale, moderateScale } from '../../utils/scale/scale';
-
-interface IBoxProps {
-  children?: React.ReactNode;
-  justifyContent?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly";
-  alignItems?: FlexAlignType;
-  alignSelf?: FlexAlignType;
-  width?: number;
-  height?: number;
-  backgroundColor?: string;
-  position?: "absolute" | "relative";
-  marginTop?: number;
-  marginBottom?: number;
-  marginLeft?: number;
-  marginRight?: number;
-  marginVertical?: number;
-  marginHorizontal?: number;
-  pdTop?: number;
-  pdBottom?: number;
-  pdLeft?: number;
-  pdRight?: number;
-  pdVertical?: number;
-  pdHorizontal?: number;
-  left?: number;
-  right?: number;
-  bottom?: number;
-  top?: number;
-  borderRadius?: number;
-  shadowBox?: boolean;
-  shadowColor?: string;
-  borderColor?: string;
-  elevation?: number;
-  borderWidth?: number;
-  flexDirection?: "row" | "column" | "row-reverse" | "column-reverse";
-  flexWrap?: "wrap" | "nowrap" | "wrap-reverse";
-  zIndex?: number;
-  ref?: React.Ref<View>;
-  style?: StyleProp<ViewStyle>;
-  flex?: number;
-  maxWidth?: number | string;
-}
+import { useWindow } from "@mobile/hooks/windowHook";
+import { DimensionValue, FlexAlignType, StyleProp, View, ViewStyle } from "react-native";
+import { styles } from './styles';
+import { IStyleProps } from "@mobile/utils/stylesProps";
 
 const Box = ({
   elevation,
   borderColor,
   borderWidth,
+  borderBottomWidth,
   children,
   justifyContent,
   alignItems,
@@ -81,92 +42,56 @@ const Box = ({
   zIndex,
   flex,
   maxWidth,
-}: IBoxProps) => {
+}: IStyleProps) => {
 
-  const styles = useMemo(() => StyleSheet.create({
-    BoxContainer: {
-      alignItems,
-      flex,
-      alignSelf,
-      justifyContent,
-      flexDirection,
-      flexWrap,
-      width: width ? `${width}%` : undefined,
-      height: height ? `${height}%` : undefined,
-      backgroundColor,
-      position,
-      paddingHorizontal: pdHorizontal ? scale(pdHorizontal) : undefined,
-      paddingVertical: pdVertical ? verticalScale(pdVertical) : undefined,
-      paddingLeft: pdLeft ? scale(pdLeft) : undefined,
-      paddingRight: pdRight ? scale(pdRight) : undefined,
-      paddingTop: pdTop ? verticalScale(pdTop) : undefined,
-      paddingBottom: pdBottom ? verticalScale(pdBottom) : undefined,
-      marginHorizontal: marginHorizontal ? scale(marginHorizontal) : undefined,
-      marginVertical: marginVertical ? verticalScale(marginVertical) : undefined,
-      marginLeft: marginLeft ? scale(marginLeft) : undefined,
-      marginRight: marginRight ? scale(marginRight) : undefined,
-      marginTop: marginTop ? verticalScale(marginTop) : undefined,
-      marginBottom: marginBottom ? verticalScale(marginBottom) : undefined,
-      borderColor,
-      left: left ? scale(left) : undefined,
-      right: right ? scale(right) : undefined,
-      bottom: bottom ? verticalScale(bottom) : undefined,
-      top: top ? verticalScale(top) : undefined,
-      borderRadius: borderRadius ? scale(borderRadius) : undefined,
-      elevation: elevation || shadowBox ? 5 : undefined,
-      shadowColor: shadowColor || shadowBox ? 'black' : undefined,
-      shadowOffset: shadowBox ? { width: 0, height: 2 } : undefined,
-      shadowOpacity: shadowBox ? 0.25 : undefined,
-      shadowRadius: shadowBox ? 3 : undefined,
-      zIndex,
-      maxWidth,
-      borderWidth,
-    }
-  }), [
-    alignItems,
-    flex,
-    alignSelf,
-    justifyContent,
-    flexDirection,
-    flexWrap,
-    width,
-    height,
-    backgroundColor,
-    position,
-    pdHorizontal,
-    pdVertical,
-    pdLeft,
-    pdRight,
-    pdTop,
-    pdBottom,
-    marginHorizontal,
-    marginVertical,
-    marginLeft,
-    marginRight,
-    marginTop,
-    marginBottom,
-    borderColor,
-    left,
-    right,
-    bottom,
-    top,
-    borderRadius,
-    elevation,
-    shadowBox,
-    shadowColor,
-    zIndex,
-    maxWidth,
-    borderWidth,
-  ]);
+  const { widthScale, heightScale } = useWindow();
+
+  const boxStyles = {
+    ...styles.container,
+    alignItems: alignItems && alignItems,
+    flex: flex && flex,
+    alignSelf: alignSelf && alignSelf,
+    justifyContent: justifyContent && justifyContent,
+    flexDirection: flexDirection && flexDirection,
+    flexWrap: flexWrap && flexWrap,
+    width: width ? widthScale(width) : undefined,
+    height: height ? heightScale(height) : undefined,
+    backgroundColor: backgroundColor && backgroundColor,
+    position: position && position,
+    paddingHorizontal: pdHorizontal ? heightScale(pdHorizontal) : undefined,
+    paddingVertical: pdVertical ? heightScale(pdVertical) : undefined,
+    paddingLeft: pdLeft ? heightScale(pdLeft) : undefined,
+    paddingRight: pdRight ? heightScale(pdRight) : undefined,
+    paddingTop: pdTop ? heightScale(pdTop) : undefined,
+    paddingBottom: pdBottom ? heightScale(pdBottom) : undefined,
+    marginHorizontal: marginHorizontal ? heightScale(marginHorizontal) : undefined,
+    marginVertical: marginVertical ? heightScale(marginVertical) : undefined,
+    marginLeft: marginLeft ? heightScale(marginLeft) : undefined,
+    marginRight: marginRight ? heightScale(marginRight) : undefined,
+    marginTop: marginTop ? heightScale(marginTop) : undefined,
+    marginBottom: marginBottom ? heightScale(marginBottom) : undefined,
+    borderColor: borderColor && borderColor,
+    left: left ? heightScale(left) : undefined,
+    right: right ? heightScale(right) : undefined,
+    bottom: bottom ? heightScale(bottom) : undefined,
+    top: top ? heightScale(top) : undefined,
+    borderRadius: borderRadius ? heightScale(borderRadius) : undefined,
+    elevation: elevation || shadowBox ? 5 : undefined,
+    shadowColor: shadowColor || shadowBox ? 'black' : undefined,
+    shadowOffset: shadowBox ? { width: 0, height: 2 } : undefined,
+    shadowOpacity: shadowBox ? 0.25 : undefined,
+    shadowRadius: shadowBox ? 3 : undefined,
+    zIndex: zIndex && zIndex,
+    maxWidth: maxWidth && maxWidth,
+    borderWidth: borderWidth && widthScale(borderWidth),
+    borderBottomWidth: borderBottomWidth && widthScale(borderBottomWidth)
+  }
 
   return (
-    <View
-      style={[styles.BoxContainer, style]}
-      ref={ref}
-    >
+    <View ref={ref} style={boxStyles}>
       {children}
     </View>
-  );
-};
+  )
+}
 
-export default Box;
+export { Box };

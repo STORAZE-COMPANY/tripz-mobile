@@ -4,6 +4,32 @@ export const fontLight = {
 }
 
 export const fontRegular = {
-    fontFamily: 'lato',
-    fontSize: 14,
+    fontFamily: 'Lato_400Regular',
+    fontSize: {
+        small: 14,
+        medium: 16,
+        large: 36,
+    },
+    lineHeight: {
+        small: 20,
+        medium: 24,
+        large: 36,
+    },
 }
+
+export const fontBold = {
+    fontFamily: 'Lato_700Bold',
+    fontSize:{
+        small: 14,
+        medium: 16,
+        large: 36,
+    },
+    lineHeight: {
+        small: 20,
+        medium: 24,
+        large: 36,
+    },
+}
+
+    
+
