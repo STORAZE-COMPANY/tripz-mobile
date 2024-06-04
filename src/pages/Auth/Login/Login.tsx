@@ -1,7 +1,7 @@
 import React from 'react';
 import {  Text, TouchableOpacity } from 'react-native';
-import Box from '../../../components/Box/Box';
-import Background from '../../../components/Background/Background';
+import {Box} from '../../../components/Box/Box';
+import {Background} from '../../../components/Background';
 import GoogleSvg from '../../../../assets/google.svg'; // Substitua pelo caminho do seu arquivo SVG
 import AppleSvg from '../../../../assets/apple.svg'; // Substitua pelo caminho do seu arquivo SVG
 import LogoSVG from '../../../../assets/logoOn.svg'; // Substitua pelo caminho do seu arquivo SVG
@@ -10,12 +10,12 @@ import { t } from 'i18next';
 import { styles } from './styles';
 
 
-export default function Login() {
+function Login() {
 
     const navigation = useNavigation();
     const toRegister = () => {
         navigation.navigate('Register');
-
+    }
         return (
             <Background>
 
@@ -43,3 +43,4 @@ export default function Login() {
             </Background >
         );
     }
+export {Login}

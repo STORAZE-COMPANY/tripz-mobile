@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './styles';
 import { TextInput } from 'react-native-gesture-handler';
-import Box from '../Box/Box';
+import {Box} from '../Box/Box';
 import { Text } from 'react-native'; 
-interface InputProps {
+import { IStyleProps } from '@mobile/utils/stylesProps';
+interface InputProps extends IStyleProps{
     label?: string;
     placeholder?: string;
 }
@@ -14,14 +15,15 @@ function Input(props: InputProps) {
     const inputStyles = {
         ...styles.inputText,
     }
-
-    const conatinerSytles = {
-        ...styles.TextContainer,
+    const labelSytles = {
+        ...styles.Label,
     }
 
+    const isLabel = props.label && <Text style={labelSytles}>{props.label}</Text>
+    
     return (
         <Box>
-            {props.label && <Text style={styles.Label}>{props.label}</Text>}
+            {isLabel}
             <Box flexDirection='row' alignItems='center'>
                 <TextInput
                     style={inputStyles}
