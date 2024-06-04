@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     slide: {
@@ -90,7 +90,5 @@ export const styles = StyleSheet.create({
     },
     disabledNextButton: {
         backgroundColor: 'gray',
-    },
+    }
 });
-
-export default styles;

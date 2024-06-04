@@ -1,0 +1,41 @@
+import { StyleSheet } from 'react-native';
+ 
+const styles = StyleSheet.create({
+  container: {
+    width: undefined,
+    alignSelf:undefined,
+    alignItems: undefined,
+    justifyContent: undefined,
+    flexDirection: undefined,
+    flexWrap: undefined,
+    backgroundColor: undefined,
+    position: undefined,
+    flex: undefined,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    marginHorizontal: 0,
+    marginVertical: 0,
+    marginLeft: 0,
+    marginRight: 0,
+    marginTop: 0,
+    marginBottom: 0,
+    bottom: undefined,
+    borderColor: undefined,
+    borderWidth: 0,
+    borderBottomWidth:0,
+    borderRadius: 0,
+    shadowColor: undefined,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    elevation: 0,
+    zIndex: 0,
+    maxWidth: undefined,
+  },
+});
+ 
+export { styles }

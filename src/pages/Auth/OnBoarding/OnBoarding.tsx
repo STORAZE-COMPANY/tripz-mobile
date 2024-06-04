@@ -6,13 +6,15 @@ import PeoplesSVG from '../../../../assets/peoples.svg';
 import PeoplesMapsSVG from '../../../../assets/peoplesMap.svg';
 import LogoSVG from '../../../../assets/logoOn.svg';
 import { MaterialIcons } from '@expo/vector-icons';
-import Background from '../../../components/Background/Background';
-import Box from '../../../components/Box/Box';
+
 import { useNavigation, CommonActions } from '@react-navigation/native';
-import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
+import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import * as Location from 'expo-location';
-import styles from './styles';
+
 import { t } from 'i18next';
+import { styles } from './styles';
+import { Box } from '@mobile/components/Box';
+import { Background } from '@mobile/components/Background';
 
 const { width } = Dimensions.get('window');
 

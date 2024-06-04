@@ -1,4 +1,4 @@
-const LightTheme = {
+const lightTheme = {
     colors: {
         primary: '#6200EE',
         secondary: '#03DAC6',
@@ -10,6 +10,9 @@ const LightTheme = {
         onBackground: '#000000',
         onSurface: '#000000',
         onError: '#FFFFFF',
+
     },
     
 }
+
+export {lightTheme}
