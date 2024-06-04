@@ -10,6 +10,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation, CommonActions } from '@react-navigation/native';
 import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import * as Location from 'expo-location';
+
+import { t } from 'i18next';
 import { styles } from './styles';
 import { Box } from '@mobile/components/Box';
 import { Background } from '@mobile/components/Background';
@@ -18,7 +20,7 @@ const { width } = Dimensions.get('window');
 
 const OnBoarding: React.FC = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const carouselRef = useRef<Carousel <any>>(null);
+    const carouselRef = useRef<Carousel<any>>(null);
     const navigation = useNavigation();
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -27,24 +29,24 @@ const OnBoarding: React.FC = () => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
+                setErrorMsg(t('PAGES.AUTH.ONBOARDING.ERROR'));
                 return;
             }
             try {
                 let location = await Location.getCurrentPositionAsync({});
                 setLocation(location);
-                // Inicia a atualização da localização em tempo real
+
                 let locationSubscription = await Location.watchPositionAsync({}, (newLocation) => {
                     setLocation(newLocation);
                 });
-                // Certifique-se de cancelar a assinatura quando o componente for desmontado
+
                 return () => {
                     if (locationSubscription) {
                         locationSubscription.remove();
                     }
                 };
             } catch (error) {
-                setErrorMsg('Error fetching location');
+                setErrorMsg(t('PAGES.AUTH.ONBOARDING.ERRORTWO'));
                 console.error(error);
             }
         })();
@@ -53,37 +55,48 @@ const OnBoarding: React.FC = () => {
     const data = [
         {
             id: 1,
-            title: <Text>Bem-vindo ao Traveler</Text>,
-            subtitle: 'Descubra experiências incríveis e personalize sua jornada dos sonhos. Vamos iniciar sua aventura?',
+            title: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.ONE.TITLE'),
+            subtitle: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.ONE.SUBTITLE'),
             image: <PassaportSvg width={250} height={230} />,
         },
         {
             id: 2,
-            title: 'Visite os melhores Pontos Turísticos',
-            subtitle: 'Nós coletamos informações que nos ajudam a entender quais locais você gostaria de visitar, assim conseguiremos manter uma melhor comunicação. Para isso, permita o rastreamento na tela seguinte. 🔎 Lembre-se: você poderá mudar essa configuração quando quiser!',
+            title: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.TWO.TITLE'),
+            subtitle: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.TWO.SUBTITLE'),
+            subtitleRemember: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.TWO.REMEMBER'),
+            textRemember: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.TWO.REMEMBERTEXT'),
             image: <PeoplesSVG width={300} height={184} />,
         },
         {
             id: 3,
-            title: 'Ative sua localização',
-            subtitle: 'Para que nosso app possa funcionar, permita o uso da sua localização por GPS 🌎 Assim, fica mais fácil buscar pontos turísticos, atividades e comércios credenciados próximos a você. Lembre-se: você poderá alterar essa opção mais tarde nas Configurações do app.',
+            title: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.TITLE'),
+            subtitle: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.SUBTITLE'),
+            subtitleRemember: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.REMEMBER'),
+            textRemember: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.REMEMBERTEXT'),
             image: <PeoplesMapsSVG width={250} height={240} />,
         },
     ];
 
     const renderItem = ({ item }: { item: any }) => (
-        <View style={styles.slide}>
+        <Box flex={1} alignItems='center' justifyContent='center' alignSelf='center' >
             {item.image}
-            <Box top={20}>
+            <Box top={15} alignItems='center' justifyContent='center' alignSelf='center' pdHorizontal={10}>
                 <Text style={styles.text}>{item.title}</Text>
                 <Text style={styles.subtitle}>{item.subtitle}</Text>
+
+                <Box flexDirection='row' width={80} justifyContent='center'>
+                    <Text style={styles.subtitleRemember}>{item.subtitleRemember}</Text>
+                    <Text style={styles.textRemember}>{item.textRemember}</Text>
+                </Box>
                 {item.id === 3 && (
                     <TouchableOpacity style={styles.locationButton} onPress={handleLocationPermission}>
-                        <Text style={styles.locationButtonText}>Permitir Localização</Text>
+                        <Text style={styles.locationButtonText}>Ativar</Text>
                     </TouchableOpacity>
                 )}
             </Box>
-        </View>
+
+
+        </Box>
     );
 
     const renderIndicators = () => {
@@ -123,22 +136,19 @@ const OnBoarding: React.FC = () => {
     const handleLocationPermission = async () => {
         const permission =
             Platform.OS === 'ios' ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
-            
+
         const result = await request(permission);
 
         if (result === RESULTS.GRANTED) {
-            // Navigate to the Login screen
+
             navigation.dispatch(CommonActions.reset({
                 index: 0,
                 routes: [{ name: 'Login' }]
             }));
         } else if (result === RESULTS.DENIED) {
-            Alert.alert('Permissão Negada', 'Por favor, permita o acesso à localização para continuar.');
+            Alert.alert(t('PAGES.AUTH.ONBOARDING.ALERT.DENIED'));
         } else if (result === RESULTS.BLOCKED) {
-            Alert.alert(
-                'Permissão Bloqueada',
-                'Por favor, ative a permissão de localização nas configurações do dispositivo.'
-            );
+            Alert.alert(t('PAGES.AUTH.ONBOARDING.ALERT.BLOCKED'));
         }
     };
 
@@ -160,9 +170,9 @@ const OnBoarding: React.FC = () => {
                     <Text style={[styles.skipButton, currentIndex === data.length - 1 && styles.disabledText]}>Pular</Text>
                 </TouchableOpacity>
                 {renderIndicators()}
-                <TouchableOpacity 
-                    onPress={handleNext} 
-                    style={[styles.nextButton, currentIndex === data.length - 1 && styles.disabledNextButton]} 
+                <TouchableOpacity
+                    onPress={handleNext}
+                    style={[styles.nextButton, currentIndex === data.length - 1 && styles.disabledNextButton]}
                     disabled={currentIndex === data.length - 1}
                 >
                     <MaterialIcons name="arrow-forward-ios" size={24} color="white" />
@@ -172,4 +182,4 @@ const OnBoarding: React.FC = () => {
     );
 };
 
-export default OnBoarding;
+export { OnBoarding };

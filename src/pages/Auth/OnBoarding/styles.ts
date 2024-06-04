@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
 
-
 export const styles = StyleSheet.create({
     slide: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'center',
+        bottom: 10,
+       
     },
     text: {
         fontSize: 44,
@@ -20,7 +21,21 @@ export const styles = StyleSheet.create({
         marginTop: 10,
         textAlign: 'center',
         color: '#555',
-        paddingHorizontal: 20,
+     
+    },
+    subtitleRemember: {
+        fontSize: 16,
+        marginTop: 10,
+        color: '#553',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        
+    },
+    textRemember: {
+        fontSize: 16,
+        marginTop: 10,
+        textAlign: 'center',
+        color: '#555',
     },
     footer: {
         flexDirection: 'row',
@@ -63,6 +78,8 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 10,
         alignItems: 'center',
+        width: 200,
+       
     },
     locationButtonText: {
         color: 'white',
@@ -73,5 +90,5 @@ export const styles = StyleSheet.create({
     },
     disabledNextButton: {
         backgroundColor: 'gray',
-    },
+    }
 });
