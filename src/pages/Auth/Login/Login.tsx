@@ -11,6 +11,7 @@ import LogoSVG from '../../../../assets/logoOn.svg'; // Substitua pelo caminho d
 import { useNavigation } from '@react-navigation/native';
 import { t } from 'i18next';
 import { fontBold, fontRegular } from '@mobile/typograph/typograph';
+import { styles } from './styles';
 
 
 export default function Login() {
@@ -20,7 +21,7 @@ export default function Login() {
     return (
         <Background>
 
-            <Box flex={1} marginTop={45}>
+            <Box marginTop={45}>
                 <LogoSVG width={145} height={60} />
             </Box>
 
@@ -36,7 +37,7 @@ export default function Login() {
                     <AppleSvg />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('Register')}}>
+                <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('Register') }}>
                     <Text style={styles.buttonEmail}>{t('PAGES.AUTH.LOGIN.EMAIL')}</Text>
                 </TouchableOpacity>
             </Box>
@@ -44,54 +45,3 @@ export default function Login() {
         </Background>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        paddingHorizontal: 20,
-        backgroundColor: 'white',
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 20,
-    },
-    subtitle: { 
-        marginBottom: 31,
-        textAlign: 'center',
-        fontFamily: fontRegular.fontFamily,
-        fontSize: fontRegular.fontSize.large,   
-    },
-    googleButton: {
-        marginBottom: 16,
-
-    },
-    buttonInner: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    appleButton: {
-
-    },
-    emailButton: {
-        height: 48,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 5,
-        backgroundColor: '#ddd',
-        marginBottom: 10,
-        textAlign: 'center',
-    },
-    buttonEmail: {
-        color: '#2F419E',
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginTop: 15,
-
-    },
-    button: {
-
-    }
-});
