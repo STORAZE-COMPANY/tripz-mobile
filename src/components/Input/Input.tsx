@@ -1,10 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
 import styles from './styles';
 import { TextInput } from 'react-native-gesture-handler';
 import Box from '../Box/Box';
-import { Text } from 'react-native'; // Import the Text component
-import { StyleProps } from '@mobile/utils/styleProps'; // Import the StyleProps interface
+import { Text } from 'react-native'; 
 interface InputProps {
     label?: string;
     placeholder?: string;
