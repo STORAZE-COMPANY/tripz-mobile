@@ -11,7 +11,6 @@ const AuthNavigation = () => {
         <AuthStack.Navigator
             screenOptions={{ headerShown: false, presentation: 'transparentModal' }}
             initialRouteName="OnBoarding" >
-
             <AuthStack.Screen name="OnBoarding" component={OnBoarding} />
             <AuthStack.Screen name="Login" component={Login} />
             <AuthStack.Screen name="Register" component={Register} />

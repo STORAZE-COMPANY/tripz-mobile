@@ -1,7 +1,7 @@
 // Box.tsx
 import React, { useMemo } from 'react';
 import { View, StyleSheet, ViewStyle, StyleProp, FlexAlignType } from 'react-native';
-import { scale, verticalScale, moderateScale } from '../../utils/scale/scale';
+import { scale, verticalScale } from '../../utils/scale/scale';
 
 interface IBoxProps {
   children?: React.ReactNode;

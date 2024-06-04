@@ -9,7 +9,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import Background from '../../../components/Background/Background';
 import Box from '../../../components/Box/Box';
 import { useNavigation, CommonActions } from '@react-navigation/native';
-import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
+import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import * as Location from 'expo-location';
 import { styles } from './styles';
 
