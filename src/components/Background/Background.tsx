@@ -1,20 +1,25 @@
 import React from 'react';
-import {  View } from 'react-native';
+import { View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from './style';
+import { IStyleProps } from '@mobile/utils/stylesProps';
 
-interface BackgroundProps {
-  children: React.ReactNode;
-}
+const Background: React.FC<IStyleProps> = ({ children, height }) => {
 
-const Background: React.FC<BackgroundProps> = ({ children }) => {
+  const backGroundStyles = {
+    ...styles.container,
+  }
+  const backGroundGradientStyles = {
+    ...styles.gradient
+  }
+
   return (
-    <View style={styles.container}>
+    <View style={backGroundStyles}>
       <LinearGradient
-        colors={['#F5F6FF', '#D3E0FF']} 
-        start={{ x: 0, y: 0 }} 
-        end={{ x: 0, y: 1 }} 
-        style={styles.gradient}
+        colors={['#F5F6FF', '#D3E0FF']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+        style={backGroundGradientStyles}
       >
         {children}
       </LinearGradient>
@@ -23,4 +28,4 @@ const Background: React.FC<BackgroundProps> = ({ children }) => {
 };
 
 
-export default Background;
+export { Background };

@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet, useWindowDimensions } from 'r
 import Arrow from '../../../assets/shape.svg'; // Substitua pelo caminho do seu arquivo SVG
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
-import Box from '../Box/Box';
+import {Box} from '../Box/Box';
 
 interface TopBarProps {
   titleText: string;
@@ -32,4 +32,4 @@ const TopBarComponent: React.FC<TopBarProps> = ({ titleText, currentStep, totalS
 };
 
 
-export default TopBarComponent;
+export {TopBarComponent};

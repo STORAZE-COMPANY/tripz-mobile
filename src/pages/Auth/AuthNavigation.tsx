@@ -1,7 +1,7 @@
 import React from 'react';
 import OnBoarding from './OnBoarding/OnBoarding.1';
 import { createStackNavigator } from '@react-navigation/stack';
-import Login from './Login/Login';
+import {Login} from './Login/Login';
 import Register from './Register/Register';
 
 const AuthNavigation = () => {
@@ -18,4 +18,4 @@ const AuthNavigation = () => {
     );
 };
 
-export default AuthNavigation;
+export { AuthNavigation };

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import Background from '../../../components/Background/Background';
-import Box from '../../../components/Box/Box';
-import TopBarComponent from '../../../components/TopBarAuth/TopBarAuth';
+import {Background} from '../../../components/Background/Background';
+import {Box} from '../../../components/Box/Box';
+import {TopBarComponent} from '../../../components/TopBarAuth/TopBarAuth';
 import { Input } from '../../../components/Input/Input';
 
 const Register: React.FC = () => {
@@ -32,13 +32,6 @@ const Register: React.FC = () => {
                         <Box top={20} alignItems='center'>
                             <Input placeholder='E-mail' label='Por favor, informe seu e-mail' />
                         </Box>
-
-                        {/* <TextInput
-                            style={styles.input}
-                            value={email}
-                            onChangeText={setEmail}
-                            keyboardType="email-address"
-                        /> */}
                         <Box top={510}>
                             <Button title="Avançar" onPress={handleNextStep} />
                         </Box>
@@ -52,13 +45,6 @@ const Register: React.FC = () => {
                         <Box top={20} alignItems='center'>
                             <Input placeholder='Digite sua senha' label='Senha' />
                         </Box>
-
-                        {/* <TextInput
-                        style={styles.input}
-                        value={email}
-                        onChangeText={setEmail}
-                        keyboardType="email-address"
-                    /> */}
                         <Box top={510}>
                             <Button title="Avançar" onPress={handleNextStep} />
                         </Box>
@@ -72,13 +58,6 @@ const Register: React.FC = () => {
                         <Box top={20} alignItems='center'>
                             <Input placeholder='oi' label='Por favor, informe seu e-mail' />
                         </Box>
-
-                        {/* <TextInput
-                         style={styles.input}
-                         value={email}
-                         onChangeText={setEmail}
-                         keyboardType="email-address"
-                     /> */}
                         <Box top={510}>
                             <Button title="Avançar" onPress={handleNextStep} />
                         </Box>
