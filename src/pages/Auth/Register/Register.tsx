@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import {Background} from '../../../components/Background/Background';
-import {Box} from '../../../components/Box/Box';
-import {TopBarComponent} from '../../../components/TopBarAuth/TopBarAuth';
+import { Background } from '../../../components/Background/Background';
+import { Box } from '../../../components/Box/Box';
+import { TopBarComponent } from '../../../components/TopBarAuth/TopBarAuth';
 import { Input } from '../../../components/Input/Input';
 
 const Register: React.FC = () => {
@@ -16,7 +16,7 @@ const Register: React.FC = () => {
     const handleNextStep = () => {
         setStep(prevStep => prevStep + 1);
     };
-  
+
     const handleRegister = () => {
         // Aqui você vai cadastrar o usuário com os dados coletados
         console.log('Registering user:', { email, password, userData });
@@ -88,4 +88,4 @@ const Register: React.FC = () => {
     );
 };
 
-export default Register;
+export { Register };

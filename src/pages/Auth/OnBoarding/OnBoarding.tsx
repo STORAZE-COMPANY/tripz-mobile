@@ -80,7 +80,7 @@ const OnBoarding: React.FC = () => {
     const renderItem = ({ item }: { item: any }) => (
         <Box flex={1} alignItems='center' justifyContent='center' alignSelf='center' >
             {item.image}
-            <Box top={15} alignItems='center' justifyContent='center' alignSelf='center'pdHorizontal={10}>
+            <Box top={15} alignItems='center' justifyContent='center' alignSelf='center' pdHorizontal={10}>
                 <Text style={styles.text}>{item.title}</Text>
                 <Text style={styles.subtitle}>{item.subtitle}</Text>
 
@@ -182,4 +182,4 @@ const OnBoarding: React.FC = () => {
     );
 };
 
-export default OnBoarding;
+export { OnBoarding };
