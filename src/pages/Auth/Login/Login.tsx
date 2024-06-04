@@ -9,6 +9,7 @@ import GoogleSvg from '../../../../assets/google.svg'; // Substitua pelo caminho
 import AppleSvg from '../../../../assets/apple.svg'; // Substitua pelo caminho do seu arquivo SVG
 import LogoSVG from '../../../../assets/logoOn.svg'; // Substitua pelo caminho do seu arquivo SVG
 import { useNavigation } from '@react-navigation/native';
+import { t } from 'i18next';
 
 
 export default function Login() {
@@ -24,7 +25,7 @@ export default function Login() {
 
             <Box justifyContent='flex-end' flex={2} marginBottom={50}>
 
-                <Text style={styles.subtitle}>Entre ou faça seu cadastro</Text>
+                <Text style={styles.subtitle}>{t('PAGES.AUTH.LOGIN.SUBTITLE')}</Text>
 
                 <TouchableOpacity style={styles.googleButton} onPress={() => { }}>
                     <GoogleSvg />
@@ -34,7 +35,7 @@ export default function Login() {
                     <AppleSvg />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('Register2') }}>
+                <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('Register') }}>
                     <Text style={styles.buttonEmail}>E-mail</Text>
                 </TouchableOpacity>
             </Box>

@@ -5,9 +5,10 @@ import MainNavigation from './src/MainNavigation';
 import { NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Lato_100Thin_Italic, Lato_300Light } from '@expo-google-fonts/lato';
-
+import './src/i18n';
+import { useTranslation } from 'react-i18next';
 export default function App() {
-
+  const { t } = useTranslation();
   const [fontLoaded, fontError] = useFonts({
     Lato_300Light
   });
