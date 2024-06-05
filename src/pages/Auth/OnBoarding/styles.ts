@@ -25,16 +25,16 @@ export const styles = StyleSheet.create({
     },
     subtitleRemember: {
         fontSize: 16,
-        marginTop: 10,
+   
         color: '#553',
         fontWeight: 'bold',
-        textAlign: 'center',
+     
         
     },
     textRemember: {
         fontSize: 16,
-        marginTop: 10,
-        textAlign: 'center',
+
+     
         color: '#555',
     },
     footer: {
@@ -48,6 +48,7 @@ export const styles = StyleSheet.create({
     skipButton: {
         color: '#2F419E',
         fontSize: 16,
+        fontWeight: 'bold',
     },
     nextButton: {
         backgroundColor: '#2F419E',
@@ -78,7 +79,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 10,
         alignItems: 'center',
-        width: 200,
+        width: "100%",
        
     },
     locationButtonText: {
