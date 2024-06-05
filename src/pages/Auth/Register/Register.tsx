@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { Background } from '../../../components/Background/Background';
-import { Box } from '../../../components/Box/Box';
-import { TopBarComponent } from '../../../components/TopBarAuth/TopBarAuth';
-import { Input } from '../../../components/Input/Input';
+import { Background } from '@mobile/components/Background/Background';
+import { Box } from '@mobile/components/Box/Box';
+import { TopBarComponent } from '@mobile/components/TopBarAuth/TopBarAuth';
+import { Input } from '@mobile/components/Input/Input';
 
 const Register: React.FC = () => {
     const [step, setStep] = useState(1);
