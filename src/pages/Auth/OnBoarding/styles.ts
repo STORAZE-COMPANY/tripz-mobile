@@ -1,3 +1,4 @@
+import { typography } from "@mobile/utils/typograph";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -11,28 +12,28 @@ export const styles = StyleSheet.create({
     },
     text: {
         fontSize: 44,
-        fontWeight: 'bold',
+        fontWeight: typography.fontWeightBold.fontWeight,
         marginTop: 20,
         textAlign: 'center',
         paddingHorizontal: 28,
     },
     subtitle: {
-        fontSize: 16,
+        fontSize: typography.fontSizeMedium.fontSize,
         marginTop: 10,
         textAlign: 'center',
         color: '#555',
      
     },
     subtitleRemember: {
-        fontSize: 16,
+        fontSize:  typography.fontSizeMedium.fontSize,
         marginTop: 10,
         color: '#553',
-        fontWeight: 'bold',
+        fontWeight: typography.fontWeightBold.fontWeight,
         textAlign: 'center',
         
     },
     textRemember: {
-        fontSize: 16,
+        fontSize: typography.fontSizeMedium.fontSize,
         marginTop: 10,
         textAlign: 'center',
         color: '#555',
@@ -47,7 +48,7 @@ export const styles = StyleSheet.create({
     },
     skipButton: {
         color: '#2F419E',
-        fontSize: 16,
+        fontSize: typography.fontSizeMedium.fontSize,
     },
     nextButton: {
         backgroundColor: '#2F419E',
@@ -83,7 +84,7 @@ export const styles = StyleSheet.create({
     },
     locationButtonText: {
         color: 'white',
-        fontSize: 16,
+        fontSize: typography.fontSizeMedium.fontSize,
     },
     disabledText: {
         color: 'gray',
