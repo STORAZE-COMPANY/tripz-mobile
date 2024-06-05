@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         bottom: 10,
-       
     },
     text: {
         fontSize: 44,
@@ -22,7 +21,6 @@ export const styles = StyleSheet.create({
         marginTop: 10,
         textAlign: 'center',
         color: '#555',
-     
     },
     subtitleRemember: {
         fontSize:  typography.fontSizeMedium.fontSize,
@@ -79,8 +77,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 10,
         alignItems: 'center',
-        width: 200,
-       
+        width: "100%",
     },
     locationButtonText: {
         color: 'white',

@@ -15,20 +15,20 @@ export default function App() {
     Lato_400Regular,
   
   });
-
+/*
   if (!fontLoaded || fontError) {
     return (
       <SafeAreaView style={styles.container}>
         <ActivityIndicator size="large" color="#0000ff" />
       </SafeAreaView>
     );
-  }
+  }*/
 
   return (
     <SafeAreaProvider>
       <NavigationContainer>
         <StatusBar style="auto" />
-        <MainNavigation />
+       {fontLoaded ? <MainNavigation /> :   <ActivityIndicator size="large" color="#0000ff" /> }
       </NavigationContainer>
     </SafeAreaProvider>
   );

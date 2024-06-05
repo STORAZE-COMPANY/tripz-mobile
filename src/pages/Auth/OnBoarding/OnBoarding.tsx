@@ -15,8 +15,9 @@ import { t } from 'i18next';
 import { styles } from './styles';
 import { Box } from '@mobile/components/Box';
 import { Background } from '@mobile/components/Background';
+import { useWindow } from '@mobile/hooks/windowHook';
 
-const { width } = Dimensions.get('window');
+
 
 const OnBoarding: React.FC = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -24,7 +25,7 @@ const OnBoarding: React.FC = () => {
     const navigation = useNavigation();
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
+const {width} = useWindow()
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
@@ -78,22 +79,23 @@ const OnBoarding: React.FC = () => {
     ];
 
     const renderItem = ({ item }: { item: any }) => (
-        <Box flex={1} alignItems='center' justifyContent='center' alignSelf='center' >
+        <Box flex={1} alignItems='center' justifyContent='center'  pdHorizontal={2}>
             {item.image}
-            <Box top={15} alignItems='center' justifyContent='center' alignSelf='center' pdHorizontal={10}>
+          
                 <Text style={styles.text}>{item.title}</Text>
                 <Text style={styles.subtitle}>{item.subtitle}</Text>
-
-                <Box flexDirection='row' width={80} justifyContent='center'>
+                <Box flexDirection='row' justifyContent='center'>
                     <Text style={styles.subtitleRemember}>{item.subtitleRemember}</Text>
                     <Text style={styles.textRemember}>{item.textRemember}</Text>
+
                 </Box>
                 {item.id === 3 && (
                     <TouchableOpacity style={styles.locationButton} onPress={handleLocationPermission}>
                         <Text style={styles.locationButtonText}>Ativar</Text>
                     </TouchableOpacity>
                 )}
-            </Box>
+
+          
 
 
         </Box>
