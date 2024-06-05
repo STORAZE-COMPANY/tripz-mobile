@@ -1,4 +1,3 @@
-// typography.js
 import { StyleSheet } from 'react-native';
 
 const typography = StyleSheet.create({
@@ -13,7 +12,6 @@ const typography = StyleSheet.create({
         fontFamily: 'Lato_700Bold',
     },
 
-    // Font Sizes
     fontSizeSmall: {
         fontSize: 14,
     },
@@ -52,7 +50,6 @@ const typography = StyleSheet.create({
         lineHeight: 1.8,
     },
 
-    // Example Combined Styles
     bodyText: {
         fontFamily: 'Lato_400Regular',
         fontSize: 16,
