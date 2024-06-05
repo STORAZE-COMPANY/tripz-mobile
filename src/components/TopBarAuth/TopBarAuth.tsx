@@ -1,7 +1,7 @@
 // src/components/TopBarComponent.tsx
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, useWindowDimensions } from 'react-native';
-import Arrow from '../../../assets/shape.svg'; // Substitua pelo caminho do seu arquivo SVG
+import Arrow from '@mobile/assets/shape.svg'; // Substitua pelo caminho do seu arquivo SVG
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
 import {Box} from '../Box/Box';

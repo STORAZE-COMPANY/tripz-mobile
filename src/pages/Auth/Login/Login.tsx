@@ -1,13 +1,13 @@
 import React from 'react';
 import {  Text, TouchableOpacity } from 'react-native';
-import {Box} from '../../../components/Box/Box';
-import {Background} from '../../../components/Background';
-import GoogleSvg from '../../../../assets/google.svg'; // Substitua pelo caminho do seu arquivo SVG
-import AppleSvg from '../../../../assets/apple.svg'; // Substitua pelo caminho do seu arquivo SVG
-import LogoSVG from '../../../../assets/logoOn.svg'; // Substitua pelo caminho do seu arquivo SVG
+import {Background} from '@mobile/components/Background';
+import GoogleSvg from '@mobile/assets/google.svg'; // Substitua pelo caminho do seu arquivo SVG
+import AppleSvg from '@mobile/assets/apple.svg'; // Substitua pelo caminho do seu arquivo SVG
+import LogoSVG from '@mobile/assets/logoOn.svg'; // Substitua pelo caminho do seu arquivo SVG
 import { useNavigation } from '@react-navigation/native';
 import { t } from 'i18next';
 import { styles } from './styles';
+import { Box } from '@mobile/components/Box';
 
 
 function Login() {
