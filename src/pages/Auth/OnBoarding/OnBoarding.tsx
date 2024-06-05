@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, Dimensions, StyleSheet, TouchableOpacity, Alert, Platform } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import PassaportSvg from '../../../../assets/passaport.svg';
-import PeoplesSVG from '../../../../assets/peoples.svg';
-import PeoplesMapsSVG from '../../../../assets/peoplesMap.svg';
-import LogoSVG from '../../../../assets/logoOn.svg';
+import PassaportSvg from '@mobile/assets/passaport.svg';
+import PeoplesSVG from '@mobile/assets/peoples.svg';
+import PeoplesMapsSVG from '@mobile/assets/peoplesMap.svg';
+import LogoSVG from '@mobile/assets/logoOn.svg';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { useNavigation, CommonActions } from '@react-navigation/native';
