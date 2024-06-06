@@ -1,13 +1,14 @@
 import React from 'react';
 import {  Text, TouchableOpacity } from 'react-native';
-import {Box} from '../../../components/Box/Box';
-import {Background} from '../../../components/Background';
-import GoogleSvg from '../../../../assets/google.svg'; // Substitua pelo caminho do seu arquivo SVG
-import AppleSvg from '../../../../assets/apple.svg'; // Substitua pelo caminho do seu arquivo SVG
-import LogoSVG from '../../../../assets/logoOn.svg'; // Substitua pelo caminho do seu arquivo SVG
+import {Box} from '@mobile/components/Box/Box';
+import {Background} from '@mobile/components/Background';
+import GoogleSvg from '@mobile/assets/google.svg'; 
+import AppleSvg from '@mobile/assets/apple.svg'; 
+import LogoSVG from '@mobile/assets/logoOn.svg'; 
 import { useNavigation } from '@react-navigation/native';
 import { t } from 'i18next';
 import { styles } from './styles';
+import { lightTheme } from '@mobile/theme';
 
 
 function Login() {
@@ -16,8 +17,14 @@ function Login() {
     const toRegister = () => {
         navigation.navigate('Register');
     }
+    const backgroundStyle = {
+        gradient1: lightTheme.colors.backgroundColorTwo,
+        gradient2: lightTheme.colors.backgroundColorOne,
+    };
+
+
         return (
-            <Background>
+            <Background {...backgroundStyle}>
 
                 <Box marginTop={45}>
                     <LogoSVG width={145} height={60} />

@@ -1,7 +1,7 @@
 import { View, Text , StyleSheet } from 'react-native'
 import React, { useEffect, useRef  } from 'react'
 import LottieView from 'lottie-react-native'
-import splash from './../../assets/splash.json'
+import splash from '@mobile/assets/splash.json'
 import { useNavigation, CommonActions } from '@react-navigation/native';
 
 

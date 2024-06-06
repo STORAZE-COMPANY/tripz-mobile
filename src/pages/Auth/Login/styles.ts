@@ -1,4 +1,4 @@
-import { fontBold, fontRegular } from "@mobile/typograph/typograph";
+
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -16,8 +16,6 @@ export const styles = StyleSheet.create({
     subtitle: { 
         marginBottom: 31,
         textAlign: 'center',
-        fontFamily: fontRegular.fontFamily,
-        fontSize: fontRegular.fontSize.large,  
         fontWeight:'500'
     },
     googleButton: {
@@ -34,8 +32,6 @@ export const styles = StyleSheet.create({
     },
     buttonEmail: {
         color: '#2F419E',
-       fontFamily: fontBold.fontFamily,
-       fontSize: fontBold.fontSize.small,
         textAlign: 'center',
         marginTop: 15,
 

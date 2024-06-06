@@ -1,57 +1,44 @@
+import { lightTheme } from "@mobile/theme";
+import { typography } from "@mobile/utils/typograph";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    slide: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        bottom: 10,
-       
-    },
     text: {
-        fontSize: 44,
-        fontWeight: 'bold',
-        marginTop: 20,
+        fontSize: typography.fontSizeXXXLarger.fontSize,
+        fontWeight: typography.fontWeightBold.fontWeight,
         textAlign: 'center',
-        paddingHorizontal: 28,
+   
     },
     subtitle: {
-        fontSize: 16,
-        marginTop: 10,
+        fontSize: typography.fontSizeMedium.fontSize,
         textAlign: 'center',
-        color: '#555',
+        color: lightTheme.colors.textColorOnboarding,
      
     },
     subtitleRemember: {
-        fontSize: 16,
-   
-        color: '#553',
-        fontWeight: 'bold',
-     
+        fontSize:  typography.fontSizeMedium.fontSize,
+        color: lightTheme.colors.textColorOnboarding,
+        fontWeight: typography.fontWeightBold.fontWeight,
+        textAlign: 'center',
         
     },
     textRemember: {
-        fontSize: 16,
-
-     
-        color: '#555',
+        fontSize: typography.fontSizeMedium.fontSize,
+        textAlign: 'center',
+        color: lightTheme.colors.textColorOnboarding,
     },
-    footer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        width: '100%',
+    textRemember2: {
+        fontSize: typography.fontSizeMedium.fontSize,
+        textAlign: 'center',
+        color: lightTheme.colors.textColorOnboarding,
     },
     skipButton: {
-        color: '#2F419E',
-        fontSize: 16,
-        fontWeight: 'bold',
+        color: lightTheme.colors.primary,
+        fontSize: typography.fontSizeMedium.fontSize,
+        fontWeight: typography.fontWeightSemiBold.fontWeight,
     },
     nextButton: {
-        backgroundColor: '#2F419E',
+        backgroundColor: lightTheme.colors.primary,
         borderRadius: 10,
         padding: 10,
     },
@@ -67,29 +54,17 @@ export const styles = StyleSheet.create({
         marginHorizontal: 5,
     },
     activeIndicator: {
-        backgroundColor: '#2F419E',
+        backgroundColor: lightTheme.colors.primary,
     },
     inactiveIndicator: {
-        backgroundColor: 'gray',
-    },
-    locationButton: {
-        marginTop: 20,
-        backgroundColor: '#2F419E',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 10,
-        alignItems: 'center',
-        width: "100%",
-       
-    },
-    locationButtonText: {
-        color: 'white',
-        fontSize: 16,
+        backgroundColor: lightTheme.colors.disableIndicator,
+
     },
     disabledText: {
-        color: 'gray',
+        color: lightTheme.colors.disableColor,
     },
     disabledNextButton: {
-        backgroundColor: 'gray',
+        backgroundColor: lightTheme.colors.disableColor,
+        
     }
 });

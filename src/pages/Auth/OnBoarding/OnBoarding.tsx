@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, Dimensions, StyleSheet, TouchableOpacity, Alert, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, Platform} from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
-import PassaportSvg from '../../../../assets/passaport.svg';
-import PeoplesSVG from '../../../../assets/peoples.svg';
-import PeoplesMapsSVG from '../../../../assets/peoplesMap.svg';
-import LogoSVG from '../../../../assets/logoOn.svg';
+import PassaportSvg from '@mobile/assets/passaport.svg';
+import PeoplesSVG from '@mobile/assets/peoples.svg';
+import PeoplesMapsSVG from '@mobile/assets/peoplesMap.svg';
+import LogoSVG from '@mobile/assets/logoOn.svg';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { useNavigation, CommonActions } from '@react-navigation/native';
@@ -16,6 +16,8 @@ import { styles } from './styles';
 import { Box } from '@mobile/components/Box';
 import { Background } from '@mobile/components/Background';
 import { useWindow } from '@mobile/hooks/windowHook';
+import { lightTheme } from '@mobile/theme';
+import { ButtonDefault } from '@mobile/components/ButtonDefault';
 
 
 
@@ -25,7 +27,8 @@ const OnBoarding: React.FC = () => {
     const navigation = useNavigation();
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-const {width} = useWindow()
+    const { width } = useWindow()
+
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
@@ -66,6 +69,7 @@ const {width} = useWindow()
             subtitle: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.TWO.SUBTITLE'),
             subtitleRemember: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.TWO.REMEMBER'),
             textRemember: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.TWO.REMEMBERTEXT'),
+            textRemember2: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.TWO.REMEMBERTEXT2'),
             image: <PeoplesSVG width={300} height={184} />,
         },
         {
@@ -74,29 +78,39 @@ const {width} = useWindow()
             subtitle: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.SUBTITLE'),
             subtitleRemember: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.REMEMBER'),
             textRemember: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.REMEMBERTEXT'),
+            textRemember2: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.REMEMBERTEXT2'),
             image: <PeoplesMapsSVG width={250} height={240} />,
         },
     ];
 
     const renderItem = ({ item }: { item: any }) => (
-        <Box flex={1} alignItems='center' justifyContent='center'  pdHorizontal={2}>
+        <Box flex={1} alignItems='center' justifyContent='center' pdHorizontal={1} top={4.5}>
             {item.image}
-          
-                <Text style={styles.text}>{item.title}</Text>
-                <Text style={styles.subtitle}>{item.subtitle}</Text>
-                <Box flexDirection='row' justifyContent='center'>
+            <Box top={2}>
+                <Box pdHorizontal={2} marginTop={1}>
+                    <Text style={styles.text}>{item.title}</Text>
+                </Box>
+                <Box pdTop={2.2} marginTop={2}>
+                    <Text style={styles.subtitle}>{item.subtitle}</Text>
+                </Box>
+                <Box flexDirection='row' justifyContent='center' alignSelf='center'>
                     <Text style={styles.subtitleRemember}>{item.subtitleRemember}</Text>
                     <Text style={styles.textRemember}>{item.textRemember}</Text>
-
                 </Box>
-                {item.id === 3 && (
-                    <TouchableOpacity style={styles.locationButton} onPress={handleLocationPermission}>
-                        <Text style={styles.locationButtonText}>Ativar</Text>
-                    </TouchableOpacity>
-                )}
-
-          
-
+                <Box>
+                    <Text style={styles.textRemember2}>{item.textRemember2}</Text>
+                </Box>
+            </Box>
+            {item.id === 3 && (
+                <ButtonDefault
+                    top={6}
+                    text={t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.BUTTONS.ALLOW')}
+                    onPress={handleLocationPermission}
+                    width={90}
+                    height={5}
+                    color={lightTheme.colors.secondary}
+                ></ButtonDefault>
+            )}
 
         </Box>
     );
@@ -154,9 +168,34 @@ const {width} = useWindow()
         }
     };
 
+    const isDisabled = currentIndex === data.length - 1;
+
+    const isDisabledFunction = isDisabled ? (
+        <MaterialIcons name="arrow-forward-ios" size={24} color={lightTheme.colors.disableText} />
+    ) : (
+        <MaterialIcons name="arrow-forward-ios" size={24} color="white" />
+    );
+
+    const backgroundStyle = {
+        gradient1: lightTheme.colors.backgroundColorTwo,
+        gradient2: lightTheme.colors.backgroundColorOne,
+    };
+
+    const getNextButtonStyles = () => {
+        return [
+
+            styles.nextButton,
+            currentIndex === data.length - 1 && styles.disabledNextButton
+        ];
+    };
+
+    const getSkipTextStyles = () => {
+        return [styles.skipButton, currentIndex === data.length - 1 && styles.disabledText]
+
+    };
     return (
-        <Background>
-            <Box>
+        <Background {...backgroundStyle}>
+            <Box width={0} height={1}>
                 <LogoSVG width={150} height={150} />
             </Box>
             <Carousel
@@ -167,19 +206,24 @@ const {width} = useWindow()
                 onSnapToItem={(index) => setCurrentIndex(index)}
                 pagingEnabled
             />
-            <View style={styles.footer}>
+            <Box flexDirection='row' alignItems='center' justifyContent='space-between' width={100} pdHorizontal={2} bottom={2}>
                 <TouchableOpacity onPress={handleSkip}>
-                    <Text style={[styles.skipButton, currentIndex === data.length - 1 && styles.disabledText]}>Pular</Text>
+                    <Text style={getSkipTextStyles()}>
+                        {t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.BUTTONS.SKIP')}
+                    </Text>
                 </TouchableOpacity>
                 {renderIndicators()}
-                <TouchableOpacity
-                    onPress={handleNext}
-                    style={[styles.nextButton, currentIndex === data.length - 1 && styles.disabledNextButton]}
-                    disabled={currentIndex === data.length - 1}
-                >
-                    <MaterialIcons name="arrow-forward-ios" size={24} color="white" />
-                </TouchableOpacity>
-            </View>
+                <Box >
+                    <TouchableOpacity
+                        onPress={handleNext}
+                        style={getNextButtonStyles()}
+                        disabled={isDisabled}
+                    >
+                        {isDisabledFunction}
+
+                    </TouchableOpacity>
+                </Box>
+            </Box>
         </Background>
     );
 };

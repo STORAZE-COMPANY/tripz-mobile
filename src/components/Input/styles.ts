@@ -1,4 +1,3 @@
-import { fontLight } from "@mobile/typograph/typograph";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -19,7 +18,7 @@ const styles = StyleSheet.create({
     inputText:{
         color:'#A0A0A0',
         width: '100%',
-        fontFamily: fontLight.fontFamily
+
     }
   });
 

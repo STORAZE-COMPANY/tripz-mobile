@@ -7,6 +7,7 @@ interface IStyleProps {
     alignSelf?: FlexAlignType;
     width?: number;
     height?: number;
+    color?:string;
     backgroundColor?: string;
     position?: "absolute" | "relative";
     marginTop?: number;

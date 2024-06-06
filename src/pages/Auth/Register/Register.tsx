@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { Background } from '../../../components/Background/Background';
-import { Box } from '../../../components/Box/Box';
-import { TopBarComponent } from '../../../components/TopBarAuth/TopBarAuth';
-import { Input } from '../../../components/Input/Input';
+import { Background } from '@mobile/components/Background/Background';
+import { Box } from '@mobile/components/Box/Box';
+import { TopBarComponent } from '@mobile/components/TopBarAuth';
+import { Input } from '@mobile/components/Input';
+import { lightTheme } from '@mobile/theme';
 
 const Register: React.FC = () => {
     const [step, setStep] = useState(1);
@@ -18,11 +19,18 @@ const Register: React.FC = () => {
     };
 
     const handleRegister = () => {
-        // Aqui você vai cadastrar o usuário com os dados coletados
+        //cadastro de usuário
         console.log('Registering user:', { email, password, userData });
     };
+
+    
+    const backgroundStyle = {
+        gradient1: lightTheme.colors.backgroundColorTwo,
+        gradient2: lightTheme.colors.backgroundColorOne,
+    };
+
     return (
-        <Background>
+        <Background {...backgroundStyle}>
             <Box>
                 {step === 1 && (
                     <Box flex={1}>
