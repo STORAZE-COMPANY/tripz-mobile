@@ -1,13 +1,14 @@
+import { typography } from "@mobile/utils/typograph";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     title: {
-      fontSize: 20,
+      fontSize: typography.fontSizeLarge.fontSize,
       textAlign: 'center',
-      fontWeight: 'bold',
+      fontWeight: typography.fontWeightBold.fontWeight,
     },
     stepCount: {
-      fontSize: 16,
+      fontSize: typography.fontSizeMedium.fontSize,
       color:'grey'
     },
   });

@@ -6,6 +6,7 @@ import { TopBarComponent } from '@mobile/components/TopBarAuth';
 import { Input } from '@mobile/components/Input';
 import { lightTheme } from '@mobile/theme';
 
+
 const Register: React.FC = () => {
     const [step, setStep] = useState(1);
     const [email, setEmail] = useState('');
@@ -79,13 +80,7 @@ const Register: React.FC = () => {
                         <Box top={20} alignItems='center'>
                             <Input placeholder='oi' label='Por favor, informe seu e-mail' />
                         </Box>
-
-                        {/* <TextInput
-                        style={styles.input}
-                        value={email}
-                        onChangeText={setEmail}
-                        keyboardType="email-address"
-                    /> */}
+                  
                         <Box top={510}>
                             <Button title="Avançar" onPress={handleNextStep} />
                         </Box>

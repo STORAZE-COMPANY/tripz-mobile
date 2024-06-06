@@ -3,6 +3,7 @@ import { typography } from "@mobile/utils/typograph";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+
     text: {
         fontSize: typography.fontSizeXXXLarger.fontSize,
         fontWeight: typography.fontWeightBold.fontWeight,
@@ -26,6 +27,7 @@ export const styles = StyleSheet.create({
         fontSize: typography.fontSizeMedium.fontSize,
         textAlign: 'center',
         color: lightTheme.colors.textColorOnboarding,
+
     },
     textRemember2: {
         fontSize: typography.fontSizeMedium.fontSize,
@@ -36,6 +38,7 @@ export const styles = StyleSheet.create({
         color: lightTheme.colors.primary,
         fontSize: typography.fontSizeMedium.fontSize,
         fontWeight: typography.fontWeightSemiBold.fontWeight,
+
     },
     nextButton: {
         backgroundColor: lightTheme.colors.primary,
@@ -58,7 +61,6 @@ export const styles = StyleSheet.create({
     },
     inactiveIndicator: {
         backgroundColor: lightTheme.colors.disableIndicator,
-
     },
     disabledText: {
         color: lightTheme.colors.disableColor,

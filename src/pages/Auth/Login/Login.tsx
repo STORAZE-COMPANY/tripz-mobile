@@ -1,15 +1,14 @@
 import React from 'react';
 import {  Text, TouchableOpacity } from 'react-native';
-import {Box} from '@mobile/components/Box/Box';
+import { lightTheme } from '@mobile/theme';
 import {Background} from '@mobile/components/Background';
-import GoogleSvg from '@mobile/assets/google.svg'; 
-import AppleSvg from '@mobile/assets/apple.svg'; 
-import LogoSVG from '@mobile/assets/logoOn.svg'; 
+import GoogleSvg from '@mobile/assets/google.svg'; // Substitua pelo caminho do seu arquivo SVG
+import AppleSvg from '@mobile/assets/apple.svg'; // Substitua pelo caminho do seu arquivo SVG
+import LogoSVG from '@mobile/assets/logoOn.svg'; // Substitua pelo caminho do seu arquivo SVG
 import { useNavigation } from '@react-navigation/native';
 import { t } from 'i18next';
 import { styles } from './styles';
-import { lightTheme } from '@mobile/theme';
-
+import { Box } from '@mobile/components/Box';
 
 function Login() {
 

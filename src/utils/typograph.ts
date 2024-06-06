@@ -27,9 +27,11 @@ const typography = StyleSheet.create({
     fontSizeXXLarger: {
         fontSize: 36
     },
+
     fontSizeXXXLarger: {
         fontSize: 44
     },
+
     fontWeightLight: {
         fontWeight: '300',
     },
