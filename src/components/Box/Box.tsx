@@ -75,7 +75,7 @@ const Box = ({
     right: right ? heightScale(right) : undefined,
     bottom: bottom ? heightScale(bottom) : undefined,
     top: top ? heightScale(top) : undefined,
-    borderRadius: borderRadius ? heightScale(borderRadius) : undefined,
+    borderRadius: borderRadius && heightScale(borderRadius),
     elevation: elevation || shadowBox ? 5 : undefined,
     shadowColor: shadowColor || shadowBox ? 'black' : undefined,
     shadowOffset: shadowBox ? { width: 0, height: 2 } : undefined,

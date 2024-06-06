@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
         color:'#A0A0A0',
         width: '100%',
         fontFamily: typography.fontFamilyLight.fontFamily
+
     }
   });
 
