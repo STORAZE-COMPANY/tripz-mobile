@@ -24,7 +24,10 @@ const typography = StyleSheet.create({
     fontSizeXLarge: {
         fontSize: 24,
     },
-    fontSizeXXLarger: {
+    fontSizeXXLarge: {
+        fontSize: 32
+    },
+    fontSizeXXXLarge: {
         fontSize: 36
     },
 

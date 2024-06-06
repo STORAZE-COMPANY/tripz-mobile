@@ -34,11 +34,11 @@
             "ERROR": "Permissão para acessar a localização foi negada",
             "ERROR2": "Erro ao obter localização"
           }
-        },
-        "LOGIN": {
-          "SUBTITLE": "Entre ou faça seu cadastro",
-          "EMAIL": "E-mail"
         }
+      },
+      "LOGIN": {
+        "TITLE": "Entre ou faça seu cadastro",
+        "EMAIL": "E-mail"
       }
     }
   }
