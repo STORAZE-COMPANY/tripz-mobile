@@ -10,17 +10,17 @@
               "BUTTON": "Próximo"
             },
             "TWO": {
-              "TITLE": "Visite os melhores Pontos Turísticos",
+              "TITLE": "Visite os Melhores Pontos Turísticos",
               "SUBTITLE": "Nós coletamos informações que nos ajudam a entender quais locais você gostaria de visitar, assim conseguiremos manter uma melhor comunicação.\n \n Para isso, permita o rastreamento na tela seguinte.🔎\n",
               "REMEMBER": "Lembre-se:",
-              "REMEMBERTEXT": "você poderá mudar essa configuração ",
+              "REMEMBERTEXT": " você poderá mudar essa configuração ",
               "REMEMBERTEXT2": "quando quiser!"
             },
             "THREE": {
               "TITLE": "Ative sua localização",
               "SUBTITLE": "Para que nosso app possa funcionar, permita o uso da sua localização por GPS 🌎 \n \n Assim, fica mais fácil buscar pontos turísticos, atividades e comércios credenciados próximos a você.\n",
               "REMEMBER": "Lembre-se:",
-              "REMEMBERTEXT": "você poderá alterar essa opção mais tarde",
+              "REMEMBERTEXT": " você poderá alterar essa opção mais tarde",
               "REMEMBERTEXT2": "nas Configurações do app.",
               "BUTTONS": {
                 "ALLOW": "Ativar",
@@ -38,7 +38,8 @@
       },
       "LOGIN": {
         "TITLE": "Entre ou faça seu cadastro",
-        "EMAIL": "E-mail"
+        "EMAIL": "E-mail",
+        "TEXTREGISTER":"Por favor, informe seu e-mail"
       }
     }
   }
