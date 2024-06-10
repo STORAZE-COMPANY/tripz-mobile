@@ -26,8 +26,8 @@ const Register: React.FC = () => {
 
     
     const backgroundStyle = {
-        gradient1: lightTheme.colors.backgroundColorTwo,
-        gradient2: lightTheme.colors.backgroundColorOne,
+        gradient1: lightTheme.colors.gradientBackgroundColorTwo,
+        gradient2: lightTheme.colors.gradientBackgroundColorOne,
     };
 
     return (
