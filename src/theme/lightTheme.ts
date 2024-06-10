@@ -10,8 +10,8 @@ const lightTheme = {
         disableColor: '#DEDEDE',
         disableIndicator: '#BDBDBD',
         disableText:'#333333',
-        backgroundColorOne: '#F5F6FF', 
-        backgroundColorTwo: '#D3E0FF',
+        gradientBackgroundColorOne: '#F5F6FF', 
+        gradientBackgroundColorTwo: '#D3E0FF',
 
         error: '#B00020',
         onPrimary: '#FFFFFF',
