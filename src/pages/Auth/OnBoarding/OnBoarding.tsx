@@ -85,26 +85,25 @@ const OnBoarding: React.FC = () => {
 
     const renderItem = ({ item }: { item: any }) => (
         <Box flex={1} alignItems='center' justifyContent='center' pdHorizontal={1} top={4.5}>
-            
             {item.image}
             <Box top={2}>
-                <Box pdHorizontal={4} marginTop={1} top={6}>
+                <Box pdHorizontal={2} marginTop={1}>
                     <Text style={styles.text}>{item.title}</Text>
                 </Box>
-                <Box pdTop={2.2} top={5} marginTop={2} pdHorizontal={3} alignItems='center' alignSelf='center'>
+                <Box pdTop={2.2} marginTop={2}>
                     <Text style={styles.subtitle}>{item.subtitle}</Text>
                 </Box>
-                <Box flexDirection='row' justifyContent='center' alignSelf='center' top={5}>
+                <Box flexDirection='row' justifyContent='center' alignSelf='center'>
                     <Text style={styles.subtitleRemember}>{item.subtitleRemember}</Text>
                     <Text style={styles.textRemember}>{item.textRemember}</Text>
                 </Box>
-                <Box top={4.2}>
+                <Box>
                     <Text style={styles.textRemember2}>{item.textRemember2}</Text>
                 </Box>
             </Box>
             {item.id === 3 && (
                 <ButtonDefault
-                    top={12}
+                    top={6}
                     text={t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.BUTTONS.ALLOW')}
                     onPress={handleLocationPermission}
                     width={90}

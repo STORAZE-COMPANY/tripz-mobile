@@ -1,49 +1,43 @@
 import { lightTheme } from "@mobile/theme";
-import { fonts, latoTypography, poppinsTypography} from "@mobile/utils/typograph";
+import { typography } from "@mobile/utils/typograph";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
 
     text: {
-        fontSize: fonts.fontSizeXXXLarger.fontSize,
+        fontSize: typography.fontSizeXXXLarger.fontSize,
+        fontWeight: typography.fontWeightBold.fontWeight,
         textAlign: 'center',
-        fontFamily: latoTypography.fontFamilyBold.fontFamily,
+   
     },
     subtitle: {
-        fontSize: fonts.fontSizeMediumLSmall.fontSize,
-        fontFamily: poppinsTypography.fontFamilyRegular.fontFamily,
+        fontSize: typography.fontSizeMedium.fontSize,
         textAlign: 'center',
         color: lightTheme.colors.textColorOnboarding,
-        
      
     },
     subtitleRemember: {
-        fontFamily: poppinsTypography.fontFamilyRegular.fontFamily,
-        fontSize: fonts.fontSizeMediumLSmall.fontSize,
+        fontSize:  typography.fontSizeMedium.fontSize,
         color: lightTheme.colors.textColorOnboarding,
-        fontWeight: poppinsTypography.fontWeightBold.fontWeight,
+        fontWeight: typography.fontWeightBold.fontWeight,
         textAlign: 'center',
         
     },
     textRemember: {
-        fontSize: fonts.fontSizeMediumLSmall.fontSize,
-        fontWeight: poppinsTypography.fontWeightRegular.fontWeight,
-        fontFamily: poppinsTypography.fontFamilyRegular.fontFamily,
+        fontSize: typography.fontSizeMedium.fontSize,
         textAlign: 'center',
         color: lightTheme.colors.textColorOnboarding,
 
     },
     textRemember2: {
-        fontSize: fonts.fontSizeMediumLSmall.fontSize,
-        fontWeight: poppinsTypography.fontWeightRegular.fontWeight,
-        fontFamily: poppinsTypography.fontFamilyRegular.fontFamily,
+        fontSize: typography.fontSizeMedium.fontSize,
         textAlign: 'center',
         color: lightTheme.colors.textColorOnboarding,
     },
     skipButton: {
         color: lightTheme.colors.primary,
-        fontFamily: latoTypography.fontFamilyBold.fontFamily,
-        fontSize: fonts.fontSizeMediumSmall.fontSize,
+        fontSize: typography.fontSizeMedium.fontSize,
+        fontWeight: typography.fontWeightSemiBold.fontWeight,
 
     },
     nextButton: {

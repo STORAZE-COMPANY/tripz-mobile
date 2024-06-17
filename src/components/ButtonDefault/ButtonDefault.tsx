@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle, ColorValue } 
 import { Box } from '../Box';
 import { useWindow } from '@mobile/hooks/windowHook';
 import { lightTheme } from '@mobile/theme';
-import { fonts, latoTypography } from '@mobile/utils/typograph'
+import { typography } from '@mobile/utils/typograph'
 import { styles } from './styles';
 import { IStyleProps } from '@mobile/utils/stylesProps';
 
@@ -20,7 +20,6 @@ const ButtonDefault: React.FC<ButtonDefaultProps> = ({
     height,
     color,
     top,
-    bottom,
     borderRadius
 }) => {
     const { heightScale ,widthScale} = useWindow();
@@ -33,23 +32,21 @@ const ButtonDefault: React.FC<ButtonDefaultProps> = ({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: borderRadius ? heightScale(borderRadius) : heightScale(1),
-        top: top ? widthScale(top) : 0,
-        bottom: bottom ? widthScale(bottom) : 0,
+        top: top ? widthScale(top) : 0
     };
 
     const textStyles: TextStyle = {
-        fontSize: fonts.fontSizeMediumSmall.fontSize,
-        fontWeight: latoTypography.fontWeightSemiBold.fontWeight,
-        fontFamily: latoTypography.fontFamilyBold.fontFamily,
+        fontSize: typography.fontSizeSmall.fontSize,
+        fontWeight: typography.fontWeightSemiBold.fontWeight,
         color: color && color
     };
 
     return (
-      
+        <Box >
             <TouchableOpacity onPress={onPress} style={buttonStyles}>
                 <Text style={textStyles}>{text}</Text>
             </TouchableOpacity>
-       
+        </Box>
     );
 };
 
