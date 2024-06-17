@@ -1,18 +1,13 @@
 import { StyleSheet } from 'react-native';
 
-const typography = StyleSheet.create({
-
-    fontFamilyLight: {
-        fontFamily: 'Lato_300Light'
-    },
-    fontFamilyRegular: {
-        fontFamily: 'Lato_400Regular',
-    },
-    fontFamilyBold: {
-        fontFamily: 'Lato_700Bold',
-    },
-
+const fonts = {
     fontSizeSmall: {
+        fontSize: 10,
+    },
+    fontSizeMediumLSmall: {
+        fontSize: 12,
+    },
+    fontSizeMediumSmall: {
         fontSize: 14,
     },
     fontSizeMedium: {
@@ -32,7 +27,17 @@ const typography = StyleSheet.create({
     },
 
     fontSizeXXXLarger: {
-        fontSize: 44
+        fontSize: 40
+    },
+}
+
+const latoTypography = StyleSheet.create({
+
+    fontFamilyRegular: {
+        fontFamily: 'Lato_400Regular',
+    },
+    fontFamilyBold: {
+        fontFamily: 'Lato_700Bold',
     },
 
     fontWeightLight: {
@@ -41,8 +46,8 @@ const typography = StyleSheet.create({
     fontWeightNormal: {
         fontWeight: '400',
     },
-    fontWeightSemiBold:{
-        fontWeight:'500'
+    fontWeightSemiBold: {
+        fontWeight: '500'
     },
     fontWeightBold: {
         fontWeight: '700',
@@ -75,4 +80,60 @@ const typography = StyleSheet.create({
     }
 });
 
-export { typography };
+const poppinsTypography = StyleSheet.create({
+   
+    fontFamilyLight: {
+        fontFamily: 'Poppins_300Light',
+    },
+    fontFamilyRegular: {
+        fontFamily: 'Poppins_400Regular',
+    },
+    fontFamilyMedium: {
+        fontFamily: 'Poppins_500Medium'
+    },
+    fontFamilyBold: {
+        fontFamily: 'Poppins_600SemiBold',
+    },
+    fontWeightLight: {
+        fontWeight: '300',
+    },
+    fontWeightRegular: {
+        fontWeight: '400',
+    },
+    fontWeightSemiBold: {
+        fontWeight: '500'
+    },
+    fontWeightBold: {
+        fontWeight: '700',
+    },
+
+    lineHeightTight: {
+        lineHeight: 1.2,
+    },
+    lineHeightNormal: {
+        // lineHeight: 16,
+        lineHeight: 18,
+    },
+    lineHeightLoose: {
+        lineHeight: 1.8,
+    },
+
+    bodyText: {
+        fontFamily: 'Lato_400Regular',
+        fontSize: 16,
+        lineHeight: 1.5,
+    },
+    heading: {
+        fontFamily: 'Lato_700Bold',
+        fontSize: 24,
+        lineHeight: 1.5,
+    },
+    subheading: {
+        fontFamily: 'Lato_400Regular',
+        fontSize: 20,
+        lineHeight: 1.5,
+    }
+});
+
+
+export { fonts, latoTypography, poppinsTypography };
