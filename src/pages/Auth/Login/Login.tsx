@@ -15,7 +15,7 @@ function Login() {
     const navigation = useNavigation();
 
     const toRegister = () => {
-        navigation.navigate('Register');
+        navigation.navigate('StepEmail');
     }
 
     const backgroundStyle = {

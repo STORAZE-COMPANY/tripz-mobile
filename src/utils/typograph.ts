@@ -111,7 +111,8 @@ const poppinsTypography = StyleSheet.create({
         lineHeight: 1.2,
     },
     lineHeightNormal: {
-        lineHeight: 16,
+        // lineHeight: 16,
+        lineHeight: 18,
     },
     lineHeightLoose: {
         lineHeight: 1.8,

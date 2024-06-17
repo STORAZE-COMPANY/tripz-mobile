@@ -1,43 +1,43 @@
 import React, { useState } from 'react';
-import { TextInput, Text, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { TextInput, Text, View, StyleSheet, TouchableOpacity, FlatList, TextInputProps } from 'react-native';
 import { Box } from '../Box/Box';
 import { IStyleProps } from '@mobile/utils/stylesProps';
 import { lightTheme } from '@mobile/theme';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Fontisto';
+import EyeIcon from '@mobile/assets/eye.svg';
+import EyeClosed from '@mobile/assets/eyeclose.svg';
 import { fonts, poppinsTypography } from '@mobile/utils/typograph';
+import { use } from 'i18next';
 
-interface InputProps extends IStyleProps {
+interface InputProps extends TextInputProps{
     label?: string;
     placeholder?: string;
     type?: 'text' | 'password' | 'code' | 'dropdown';
-    value?: string;
-    onChange?: (value: string) => void;
     strengthBars?: boolean;
     options?: string[];
     onSelect?: (value: string) => void;
     icon?: string;
+
+width?: number ;
+
 }
 
-const Input: React.FC<InputProps> = ({
+const Input = ({
     label,
     placeholder,
     type = 'text',
-    value = '',
-    onChange = () => { },
     strengthBars = false,
     options = [],
     onSelect = () => { },
     icon,
+width,
     ...rest
-}) => {
-    const [inputValue, setInputValue] = useState(value);
+}: InputProps) => {
+    const [value, setValue] = useState("")
+     const [inputValue, setInputValue] = useState(value);
     const [showDropdown, setShowDropdown] = useState(false);
-
-    const handleTextChange = (text: string) => {
-        setInputValue(text);
-        onChange(text);
-    };
+    const [secureText, setSecureText] = useState(type === 'password');
 
     const handleSelect = (option: string) => {
         setInputValue(option);
@@ -64,7 +64,7 @@ const Input: React.FC<InputProps> = ({
                         style={[
                             styles.strengthBar,
                             {
-                                backgroundColor: index < strength ? '#4CAF50' : '#E0E0E0',
+                                backgroundColor: index < strength ? '#4CAF50' : '#BCBCBC',
                             },
                         ]}
                     />
@@ -86,7 +86,6 @@ const Input: React.FC<InputProps> = ({
                             placeholder='___'
                             placeholderTextColor={lightTheme.colors.disableColor}
                         />
-                        <View style={styles.underline} />
                     </View>
                 ))}
             </View>
@@ -114,7 +113,6 @@ const Input: React.FC<InputProps> = ({
                             keyExtractor={(item, index) => index.toString()}
                             renderItem={({ item }) => (
                                 <TouchableOpacity style={styles.dropdownItem} onPress={() => handleSelect(item)}>
-
                                     <Text>{item}</Text>
                                 </TouchableOpacity>
                             )}
@@ -126,28 +124,35 @@ const Input: React.FC<InputProps> = ({
     };
 
     return (
-        <Box {...rest}>
+        <Box >
             {label && <Text style={styles.label}>{label}</Text>}
-            <Box flexDirection='row' alignItems='center'>
+            <Box flexDirection='row' width={width} alignItems='center'>
                 {type === 'code' ? (
                     renderCodeInput()
                 ) : type === 'dropdown' ? (
                     renderDropdown()
                 ) : (
-                    <TextInput
-                        style={styles.inputText}            
-                        placeholder={placeholder}
-                        placeholderTextColor={'#A0A0A0'}
-                        secureTextEntry={type === 'password'}
-                        value={inputValue}
-                        onChangeText={handleTextChange}
-                    />
+                    <View style={styles.inputWrapper}>
+                        <TextInput
+                            {...rest}
+                            style={styles.inputText}
+                            placeholder={placeholder}
+                            placeholderTextColor={'gray'}
+                            secureTextEntry={type === 'password' && secureText}
+
+                        />
+                        {type === 'password' && (
+                            <TouchableOpacity onPress={() => setSecureText(!secureText)}>
+                                {secureText ? <EyeClosed width={20} height={20} /> : <EyeIcon width={20} height={20} />}
+                            </TouchableOpacity>
+                        )}
+                    </View>
                 )}
             </Box>
             {type === 'password' && strengthBars && renderStrengthBars()}
         </Box>
     );
-};
+}
 
 const styles = StyleSheet.create({
     label: {
@@ -155,32 +160,42 @@ const styles = StyleSheet.create({
         color: lightTheme.colors.textDefault,
         fontFamily: poppinsTypography.fontFamilyRegular.fontFamily,
         lineHeight: poppinsTypography.lineHeightNormal.lineHeight,
-      
+    },
+    inputWrapper: {
         
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: lightTheme.colors.inputColor,
+        borderRadius: 7,
+        padding: 8,
+        flex: 1,
     },
     inputText: {
-        height: 45,
-        elevation: 5,
-        shadowColor: 'gray',
-        padding: 8,
-        borderRadius: 7,
+    
         flex: 1,
+        height: 45,
+     
+        borderRadius: 7,
         backgroundColor: lightTheme.colors.inputColor,
-        bottom: 1,      
+        padding: 8,
+        bottom: 1,
     },
     strengthContainer: {
         flexDirection: 'row',
-        marginTop: 8,
+        marginTop: 3,
     },
     strengthBar: {
         height: 4,
         flex: 1,
         marginHorizontal: 2,
+        borderRadius: 2,
     },
     codeContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
+        alignItems: 'center',
+        paddingHorizontal: 70,
     },
     codeInputWrapper: {
         alignItems: 'center',
@@ -188,23 +203,13 @@ const styles = StyleSheet.create({
         marginHorizontal: 5,
     },
     codeInput: {
-        height: 40,
-        width: 40,
-        shadowColor: '#000',
-        shadowOpacity: 40,
-        shadowRadius: 4,
+        height: 42,
+        width: 42,
+        elevation: 5,
         textAlign: 'center',
-        borderRadius: 4,
+        borderRadius: 8,
         position: 'relative',
         backgroundColor: '#fff',
-    },
-    underline: {
-        position: 'absolute',
-        bottom: -10,
-        left: 0,
-        right: 0,
-        height: 2,
-        backgroundColor: '#E0E0E0',
     },
     dropdownContainer: {
         flex: 1,
@@ -212,8 +217,8 @@ const styles = StyleSheet.create({
     },
     dropdown: {
         height: 50,
-        borderColor: '#ccc',
-        borderWidth: 0.7,
+        elevation: 5,
+        shadowColor: 'gray',
         padding: 10,
         borderRadius: 10,
         justifyContent: 'space-between',
@@ -223,7 +228,8 @@ const styles = StyleSheet.create({
     },
     dropdownText: {
         flex: 1,
-        marginLeft: 8,
+        color: lightTheme.colors.disableIndicator,
+        justifyContent: 'flex-start',
     },
     dropdownList: {
         position: 'absolute',
@@ -231,8 +237,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         backgroundColor: '#fff',
-        borderWidth: 0.3,
-        borderColor: '#ccc',
+        elevation: 2,
         borderRadius: 4,
         zIndex: 1000,
     },

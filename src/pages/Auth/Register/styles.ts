@@ -13,4 +13,7 @@ export const styles = StyleSheet.create({
         marginVertical: 8,
         borderRadius: 4,
     },
+    TextTerms: {
+        textAlign: 'center',
+    }
 });

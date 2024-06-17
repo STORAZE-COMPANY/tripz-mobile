@@ -7,6 +7,7 @@ const lightTheme = {
         thirdary: '#FF0266',
         textColorOnboarding: '#5E5E5E',
         textDefault: '#5E5E5E',
+        textBold: '#4B4B4B',
         background: '#FFFFFF',
         disableColor: '#DEDEDE',
         disableIndicator: '#BDBDBD',
