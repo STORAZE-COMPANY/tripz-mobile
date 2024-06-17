@@ -1,16 +1,14 @@
-import { lightTheme } from "@mobile/theme";
-import { fonts, latoTypography, poppinsTypography } from "@mobile/utils/typograph";
+import { typography } from "@mobile/utils/typograph";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     title: {
-      fontSize: fonts.fontSizeMediumSmall.fontSize,
+      fontSize: typography.fontSizeLarge.fontSize,
       textAlign: 'center',
-      fontWeight: latoTypography.fontWeightBold.fontWeight
+      fontWeight: typography.fontWeightBold.fontWeight,
     },
     stepCount: {
-      fontSize: fonts.fontSizeMediumLSmall.fontSize,
-      fontFamily: poppinsTypography.fontFamilyRegular.fontFamily,
-      color: lightTheme.colors.textDefault
+      fontSize: typography.fontSizeMedium.fontSize,
+      color:'grey'
     },
   });

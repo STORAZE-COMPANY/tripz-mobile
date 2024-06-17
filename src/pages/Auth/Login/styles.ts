@@ -1,19 +1,19 @@
 import { lightTheme } from "@mobile/theme";
-import { fonts, latoTypography } from "@mobile/utils/typograph";
+import { typography } from "@mobile/utils/typograph";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     title: {
         textAlign: 'center',
-        fontFamily: latoTypography.fontFamilyRegular.fontFamily,
-        fontSize: fonts.fontSizeXXLarge.fontSize,
-        fontWeight: 'semibold'
+        fontFamily: typography.fontFamilyRegular.fontFamily,
+        fontSize: typography.fontSizeXXLarge.fontSize,
+        fontWeight: typography.fontWeightSemiBold.fontWeight
 
     },
     buttonEmail: {
         color: lightTheme.colors.primary,
-        fontFamily: latoTypography.fontFamilyBold.fontFamily,
-        fontSize: fonts.fontSizeMediumSmall.fontSize,
+        fontFamily: typography.fontFamilyBold.fontFamily,
+        fontSize: typography.fontSizeSmall.fontSize,
         textAlign: 'center',
     },
 });
