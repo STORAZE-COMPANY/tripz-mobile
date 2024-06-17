@@ -74,8 +74,9 @@ const Register: React.FC = () => {
 
 
     const backgroundStyle = {
-        gradient1: lightTheme.colors.backgroundColorOne,
-        gradient2: lightTheme.colors.backgroundColorTwo
+
+        gradient1: lightTheme.colors.gradientBackgroundColorTwo,
+        gradient2: lightTheme.colors.gradientBackgroundColorOne,
     };
 
     const boldText = {
