@@ -5,6 +5,7 @@ const lightTheme = {
         primary: '#2F419E',
         secondary: '#FFFFFF',
         thirdary: '#FF0266',
+        inputColor:'#FFF',
         textColorOnboarding: '#5E5E5E',
         textDefault: '#5E5E5E',
         textBold: '#4B4B4B',
