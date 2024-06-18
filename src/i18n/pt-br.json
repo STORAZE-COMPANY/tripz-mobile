@@ -10,17 +10,17 @@
               "BUTTON": "Próximo"
             },
             "TWO": {
-              "TITLE": "Visite os melhores Pontos Turísticos",
+              "TITLE": "Visite os Melhores Pontos Turísticos",
               "SUBTITLE": "Nós coletamos informações que nos ajudam a entender quais locais você gostaria de visitar, assim conseguiremos manter uma melhor comunicação.\n \n Para isso, permita o rastreamento na tela seguinte.🔎\n",
               "REMEMBER": "Lembre-se:",
-              "REMEMBERTEXT": "você poderá mudar essa configuração ",
+              "REMEMBERTEXT": " você poderá mudar essa configuração ",
               "REMEMBERTEXT2": "quando quiser!"
             },
             "THREE": {
               "TITLE": "Ative sua localização",
               "SUBTITLE": "Para que nosso app possa funcionar, permita o uso da sua localização por GPS 🌎 \n \n Assim, fica mais fácil buscar pontos turísticos, atividades e comércios credenciados próximos a você.\n",
               "REMEMBER": "Lembre-se:",
-              "REMEMBERTEXT": "você poderá alterar essa opção mais tarde",
+              "REMEMBERTEXT": " você poderá alterar essa opção mais tarde",
               "REMEMBERTEXT2": "nas Configurações do app.",
               "BUTTONS": {
                 "ALLOW": "Ativar",
@@ -39,6 +39,71 @@
       "LOGIN": {
         "TITLE": "Entre ou faça seu cadastro",
         "EMAIL": "E-mail"
+      },
+      "REGISTER": {
+        "TITLETOP1": "Entre ou faça seu cadastro",
+        "LABELNAME": "Nome completo",
+        "PLACEHOLDERNAME": "Digite seu nome completo",
+        "EMAIL": "E-mail",
+        "TEXTREGISTER": "Por favor, informe seu e-mail",
+        "PASSWORD": "Senha",
+        "PLACEHOLDERPASSWORD": "Digite sua senha",
+        "TEXTEMAIL": "Por favor, informe seu e-mail",
+        "TITLETOP": "Bem vindo(a)!",
+        "TITLETOP2": "Insira sua senha",
+        "TITLETOP3": "Faça seu cadastro",
+        "BUTTON": {
+          "NEXT": "Avançar",
+          "LOGIN": "Entrar",
+          "REGISTER": "Cadastrar"
+        },
+        "TEXTCODE": {
+          "TEXT": "Por favor, digite o código de 4 dígitos que acabamos de enviar para o e-mail:",
+          "TEXTIMPORTANT": {
+            "ONE": "Importante:",
+            "TWO": "confira a sua caixa de",
+            "THREE": "Lixo Eletrônico",
+            "FOUR": "ou",
+            "FIVE": "Spam",
+            "SIX": "para ver se o e-mail não está lá",
+            "SEVEN": "O envio do e-mail pode levar até"
+          },
+          "BUTTON": {
+            "CONFIRM": "Confirmar",
+            "REGISTER": "Cadastrar"
+          }
+        },
+        "TEXTPASSWORD": {
+          "TITLETOP": "Faça seu cadastro",
+          "TEXT": "Importante:",
+          "TEXT2": "Crie uma senha mais segura",
+          "TEXT3": "•  Use mais de 8 dígitos",
+          "TEXT4": "•  Combine letras maiúsculas e minúsculas",
+          "TEXT5": "•  Inclua números",
+          "TEXT6": "•  Não use informações pessoais",
+          "TEXT7": "•  Utilize caracteres especiais: !@#$%¨...",
+          "BUTTON": {
+            "CONFIRM": "Confirmar",
+            "REGISTER": "Cadastrar"
+          }
+        },
+        "DATAUSER": {
+          "TITLETOP": "Faça seu cadastro",
+          "LABELLOCATION": "Conta pra gente de onde você é:",
+          "TEXTTERMS": "Ao continuar, nós entendemos que você tem 18 anos ou mais e",
+          "TEXTTERMS2": "aceita os ",
+          "TEXTTERMS3": "Termos de Uso, condições gerais",
+          "TEXTTERMS4": " e a ",
+          "TEXTTERMS5": "Política de Privacidade.",
+          "NAME": "Nome",
+          "EMAIL": "E-mail",
+          "PASSWORD": "Senha",
+          "CONFIRMPASSWORD": "Confirme sua senha",
+          "BUTTON": {
+            "CONFIRM": "Confirmar",
+            "REGISTER": "Cadastrar"
+          }
+        }
       }
     }
   }

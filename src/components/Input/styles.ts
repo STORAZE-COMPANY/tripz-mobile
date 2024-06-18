@@ -1,4 +1,4 @@
-import { typography } from "@mobile/utils/typograph";
+import { fonts, latoTypography, poppinsTypography } from "@mobile/utils/typograph";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -12,14 +12,11 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       flexWrap: 'wrap',
     },
-    Label: {
-        fontSize: 16,
-        color: '#5E5E5E',
-    },
     inputText:{
         color:'#A0A0A0',
         width: '100%',
-        fontFamily: typography.fontFamilyLight.fontFamily
+        fontFamily: poppinsTypography.fontFamilyLight.fontFamily,
+        fontSize: fonts.fontSizeSmall.fontSize,
 
     }
   });

@@ -12,20 +12,27 @@ interface TopBarProps {
 }
 
 const TopBarComponent: React.FC<TopBarProps> = ({ titleText, currentStep, totalSteps }) => {
-  const { width } = useWindowDimensions();
   const navigation = useNavigation();
 
   const goBack = () => {
     navigation.goBack();
   };
 
+  const titleTop= {
+    ...styles.title,
+  }
+
+  const stepCount={
+    ...styles.stepCount
+  }
+
   return (
-    <Box flexDirection='row' justifyContent='space-between' pdVertical={10} alignItems='center' pdHorizontal={10}>
+    <Box flexDirection='row' justifyContent='space-between' pdTop={4} alignItems='center' pdHorizontal={2}>
       <TouchableOpacity onPress={goBack}>
         <Arrow />
       </TouchableOpacity>
-      <Text style={styles.title}>{titleText}</Text>
-      <Text style={styles.stepCount}>{`${currentStep}/${totalSteps}`}</Text>
+      <Text style={titleTop}>{titleText}</Text>
+      <Text style={stepCount}>{`${currentStep}/${totalSteps}`}</Text>
     </Box>
   );
 };
