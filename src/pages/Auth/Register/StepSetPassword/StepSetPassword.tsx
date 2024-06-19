@@ -35,8 +35,8 @@ const StepSetPassword: React.FC = () => {
     };
 
     const backgroundStyle = {
-        gradient1: lightTheme.colors.backgroundColorOne,
-        gradient2: lightTheme.colors.backgroundColorTwo
+        gradient1: lightTheme.colors.gradientBackgroundColorOne,
+        gradient2: lightTheme.colors.gradientBackgroundColorTwo
     };
 
     const textSimple2 = {
