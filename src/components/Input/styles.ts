@@ -1,6 +1,6 @@
 import { lightTheme } from "@mobile/theme";
 import { fonts, poppinsTypography } from "@mobile/utils/typograph";
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   label: {
@@ -10,21 +10,19 @@ export const styles = StyleSheet.create({
       lineHeight: poppinsTypography.lineHeightNormal.lineHeight,
   },
   inputWrapper: {
-      
+    backgroundColor: lightTheme.colors.inputColor,
+    borderRadius: 7,
+    paddingRight:9,
+    elevation: 2,
+    flexWrap:'wrap',
       flexDirection: 'row',
       alignItems: 'center',
-      backgroundColor: lightTheme.colors.inputColor,
-      borderRadius: 7,
-      padding: 8,
       flex: 1,
   },
   inputText: {
-  
-      flex: 1,
-      height: 45,
-   
+      flex: 1,  
+        height:45,
       borderRadius: 7,
-      backgroundColor: lightTheme.colors.inputColor,
       padding: 8,
       bottom: 1,
   },
@@ -95,6 +93,69 @@ export const styles = StyleSheet.create({
   icon: {
       marginRight: 10,
   },
+
+barsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+},
+strengthLabel: {
+    marginLeft: 5,
+    fontSize: 14,
+    fontWeight: 'bold',
+},
+modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent:'center'
+},
+modalContent: {
+    width: 300,
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    alignItems: 'center',
+},
+modalCloseButton: {
+    marginTop: 10,
+    color: 'blue',
+},
+tooltipContainer: {
+    flex:1,
+    position: 'absolute',
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 4,
+    borderColor: '#fff',
+    borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
+    maxWidth: Dimensions.get('window').width - 40,
+    width: 300, 
+},
+tooltipText: {
+    fontSize: 14,
+    color: '#333',
+},
+
+tooltipArrow: {
+    position: 'absolute',
+    top: -10, 
+    left: '100%',
+    borderLeftWidth: 10,
+    borderLeftColor: 'transparent',
+    borderRightWidth: 10,
+    borderRightColor: 'transparent',
+    borderTopWidth: 0,
+    borderBottomColor: '#fff', 
+    borderBottomWidth: 10,
+   
+}
+
 });
 
 

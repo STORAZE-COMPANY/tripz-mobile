@@ -50,17 +50,17 @@ const StepSetPassword: React.FC = () => {
 
     return (
         <Background {...backgroundStyle}>
-            <Box>
-                <Box pdTop={1}>
+            <Box >
+                <Box pdTop={1} width={100} >
                     <TopBarComponent titleText={(t('PAGES.AUTH.REGISTER.TEXTPASSWORD.TITLETOP'))} currentStep={3} totalSteps={4} />
                 </Box>
 
-                <Box alignItems='center' pdTop={4} >
+                <Box alignItems='center' pdTop={4} flex={1} >
                     <Input type='password' strengthBars width={90} pdTop={2} justifyContent='flex-start' label='Crie uma senha' placeholder={(t('PAGES.AUTH.REGISTER.PLACEHOLDERPASSWORD'))}
                         onChangeText={setPassword}
                     />
                 </Box>
-                <Box flex={6} pdTop={2} >
+                <Box flex={6} pdHorizontal={3} pdVertical={4}>
                     <Box flexDirection='row' alignItems='center' marginBottom={0.5}>
                         <Text style={textBold} >{(t('PAGES.AUTH.REGISTER.TEXTPASSWORD.TEXT'))} </Text>
                         <Text >{(t('PAGES.AUTH.REGISTER.TEXTPASSWORD.TEXT2'))}</Text>

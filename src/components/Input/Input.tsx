@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { TextInput, Text, View, StyleSheet, TouchableOpacity, FlatList, TextInputProps } from 'react-native';
+import { TextInput, Text, View, StyleSheet, TouchableOpacity, FlatList, TextInputProps, Modal, Dimensions } from 'react-native';
 import { Box } from '../Box/Box';
 import { lightTheme } from '@mobile/theme';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Fontisto';
+import WarningIcon from 'react-native-vector-icons/MaterialIcons';
 import EyeIcon from '@mobile/assets/eye.svg';
 import EyeClosed from '@mobile/assets/eyeclose.svg';
 import { fonts, poppinsTypography } from '@mobile/utils/typograph';
 import { use } from 'i18next';
 import { styles } from './styles';
+import { useWindow } from '@mobile/hooks/windowHook';
 
-interface InputProps extends TextInputProps{
+interface InputProps extends TextInputProps {
     label?: string;
     placeholder?: string;
     type?: 'text' | 'password' | 'code' | 'dropdown';
@@ -18,8 +20,8 @@ interface InputProps extends TextInputProps{
     options?: string[];
     onSelect?: (value: string) => void;
     icon?: string;
-
-width?: number ;
+    height?: number;
+    width?: number;
 
 }
 
@@ -31,18 +33,29 @@ const Input = ({
     options = [],
     onSelect = () => { },
     icon,
-width,
+    height,
+    width,
     ...rest
 }: InputProps) => {
     const [value, setValue] = useState("")
-     const [inputValue, setInputValue] = useState(value);
+    const [inputValue, setInputValue] = useState(value);
     const [showDropdown, setShowDropdown] = useState(false);
     const [secureText, setSecureText] = useState(type === 'password');
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalMessage, setModalMessage] = useState('false');
+    const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
     const handleSelect = (option: string) => {
         setInputValue(option);
         onSelect(option);
         setShowDropdown(false);
+    };
+
+    const handleTextChange = (text: string) => {
+        setInputValue(text);
+        if (rest.onChangeText) {
+            rest.onChangeText(text);
+        }
     };
 
     const calculateStrength = (password: string) => {
@@ -53,26 +66,90 @@ width,
         if (/[^A-Za-z0-9]/.test(password)) strength += 1;
         return strength;
     };
-
+    
     const renderStrengthBars = () => {
         const strength = calculateStrength(inputValue);
+        const colors = ['#FF0000', '#FFA500', '#00FF00'];
+        const labels = ['Fraca', 'Média', 'Boa', 'Ótima!'];
+    
+        let bars = Array(4).fill({ backgroundColor: '#BCBCBC' });
+    
+        if (inputValue.length === 0) {
+            // Nenhum caractere digitado, todas as barras ficam cinza
+            bars = Array(4).fill({ backgroundColor: '#BCBCBC' });
+        } else if (inputValue.length < 8) {
+            // Menos de 8 caracteres, apenas uma barra vermelha
+            bars[0] = { backgroundColor: '#FF0000' };
+        } else {
+            // 8 ou mais caracteres, barras variam conforme a força da senha
+            bars = bars.map((_, index) => ({
+                backgroundColor: index < strength ? colors[Math.min(strength - 1, 2)] : '#BCBCBC',
+            }));
+        }
+    
+        const label = inputValue.length === 0 ? '' : (inputValue.length < 8 ? labels[0] : labels[Math.min(strength - 1, 3)]);
+        const color = inputValue.length < 8 ? '#FF0000' : colors[Math.min(strength - 1, 2)];
+        const showIcon = inputValue.length > 0 && (label === 'Fraca' || label === 'Média');
+
+       const handleIconPress = (event: any) => {
+            const { pageX, pageY } = event.nativeEvent;
+            const screenWidth = Dimensions.get('window').width;
+            const tooltipWidth = 300; // Largura fixa do tooltip
+            const adjustedX = pageX + tooltipWidth > screenWidth ? screenWidth - tooltipWidth - 20 : pageX;
+
+           
+            setTooltipPosition({ x: adjustedX, y: pageY });
+            if (label === 'Fraca') {
+                setModalMessage('Sua senha é muito fácil de adivinhar. Tente adicionar caracteres diferentes.');
+            } else if (label === 'Média') {
+                setModalMessage('Sua senha continua fácil de adivinhar. Adicione mais caracteres diferentes.');
+            }
+            setModalVisible(true);
+        };
+
         return (
-            <View style={styles.strengthContainer}>
-                {[...Array(4)].map((_, index) => (
-                    <View
-                        key={index}
-                        style={[
-                            styles.strengthBar,
-                            {
-                                backgroundColor: index < strength ? '#4CAF50' : '#BCBCBC',
-                            },
-                        ]}
-                    />
-                ))}
-            </View>
+            <>
+                <View style={styles.strengthContainer}>
+                    {bars.map((bar, index) => (
+                        <View
+                            key={index}
+                            style={[
+                                styles.strengthBar,
+                                { backgroundColor: bar.backgroundColor },
+                            ]}
+                        />
+                    ))}
+                </View>
+                {inputValue.length > 0 && (
+                    <Box flexDirection='row' justifyContent='flex-end' alignItems='center'>
+                        <Text style={[styles.strengthLabel, { color }]}>{label}</Text>
+                        {showIcon && (
+                            <TouchableOpacity onPress={handleIconPress}>
+                                <WarningIcon name="error-outline" size={20} color={color} />
+                            </TouchableOpacity> )}
+                    </Box>
+                    
+                )}
+                {modalVisible && (
+                    <Modal
+                        transparent={true}
+                        animationType="none"
+                        visible={modalVisible}
+                        onRequestClose={() => setModalVisible(false)}
+                    >
+                        <TouchableOpacity style={styles.modalOverlay} onPress={() => setModalVisible(false)}>
+                            <View style={[styles.tooltipContainer, { top: tooltipPosition.y, left: tooltipPosition.x }]}>
+                            <View style={styles.tooltipArrow} />
+                                <Text style={styles.tooltipText}>{modalMessage}</Text>
+                               
+                            </View>
+                        </TouchableOpacity>
+                    </Modal>
+                )}
+            </>
         );
     };
-
+    
     const renderCodeInput = () => {
         return (
             <View style={styles.codeContainer}>
@@ -117,7 +194,9 @@ width,
                                 </TouchableOpacity>
                             )}
                         />
+                       
                     </View>
+                    
                 )}
             </View>
         );
@@ -126,23 +205,26 @@ width,
     return (
         <Box >
             {label && <Text style={styles.label}>{label}</Text>}
-            <Box flexDirection='row' width={width} alignItems='center'>
+            <Box flexDirection='row' width={width} height={height} alignItems='center'>
                 {type === 'code' ? (
                     renderCodeInput()
                 ) : type === 'dropdown' ? (
                     renderDropdown()
                 ) : (
-                    <View style={styles.inputWrapper}>
+                    <View style={[styles.inputWrapper, { width, height }]}>
                         <TextInput
                             {...rest}
                             style={styles.inputText}
                             placeholder={placeholder}
                             placeholderTextColor={'gray'}
                             secureTextEntry={type === 'password' && secureText}
-
+                            onChangeText={handleTextChange}
                         />
                         {type === 'password' && (
-                            <TouchableOpacity onPress={() => setSecureText(!secureText)}>
+                            <TouchableOpacity
+                              
+                                onPress={() => setSecureText(!secureText)}
+                            >
                                 {secureText ? <EyeClosed width={20} height={20} /> : <EyeIcon width={20} height={20} />}
                             </TouchableOpacity>
                         )}

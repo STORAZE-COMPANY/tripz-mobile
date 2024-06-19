@@ -71,6 +71,7 @@ const StepEmail: React.FC = () => {
                 <Box flex={1} alignItems='center' pdTop={4.6} width={100}>
                     <Input
                         width={90}
+                    
                         placeholder={t('PAGES.AUTH.REGISTER.EMAIL')}
                         label={t('PAGES.AUTH.REGISTER.TEXTEMAIL')}
                         value={email}
