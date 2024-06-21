@@ -14,7 +14,19 @@ const StepEmail: React.FC = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [isLogin, setIsLogin] = useState(false);
+  
 
+    const showEmailNotFoundAlert = (setIsLogin, t, navigation, email) => {
+        setIsLogin(false);
+        Alert.alert(
+            t('PAGES.AUTH.REGISTER.ALERTS.ERROR.EMAILNOTFOUND'),
+            t('PAGES.AUTH.REGISTER.ALERTS.ERROR.EMAILNOTFOUND2'),
+            [
+                { text: t('PAGES.AUTH.REGISTER.ALERTS.ERROR.CANCEL'), style: 'cancel' },
+                { text: t('PAGES.AUTH.REGISTER.ALERTS.ERROR.ACCEPT'), onPress: () => navigation.navigate('StepCode', { email }) },
+            ]
+        );
+    };
 
     const handleNextStep = async () => {
        
@@ -29,31 +41,23 @@ const StepEmail: React.FC = () => {
                     const status = error.response.status;
 
                     if (status === 404) { 
-                      Alert.alert("Pagina não encontrada")
+                      console.log("Erro 404")
 
                     } else if (status === 403) {
-                        console.log("alaaaaaaaaaa",email)
-                        Alert.alert('Erro', `Acesso negado. ${error.message}`);
+
+                        Alert.alert(t('PAGES.AUTH.REGISTER.ALERTS.ERROR.403'));
 
                     } else if (status === 400) {
-                        setIsLogin(false);
-                        Alert.alert(
-                            'Email não encontrado',
-                            'O email não foi encontrado. Deseja continuar para a criação de conta?',
-                            [
-                                { text: 'Cancelar', style: 'cancel' },
-                                { text: 'Sim', onPress: () => navigation.navigate('StepCode', { email }) },
-                            ]
-                        );
+                        {showEmailNotFoundAlert(setIsLogin, t, navigation, email)}
+                                      
                     } else {
-                        Alert.alert('Erro', `Erro ao verificar e-mail. ${error.message}`);
+                        Alert.alert(t('PAGES.AUTH.REGISTER.ALERTS.ERROR.ERROREMAIL'));
+                        
                     }
-                } else {
-                    Alert.alert('Erro', `Erro ao verificar e-mail. ${error.message}`);
-                }
+                } 
             }
         } else {
-            Alert.alert('Erro', 'Por favor, insira um e-mail.');
+            Alert.alert(t('PAGES.AUTH.REGISTER.ALERTS.ERROR.EMAILNULL'));
         }
     };
 

@@ -51,14 +51,15 @@ const StepDataUser: React.FC = () => {
                 setIsLogin(true);
                 navigation.navigate('StepEmail', { email });
 
-                console.log('Cadastro realizado com sucesso!',userData);
+                console.log('Cadastro realizado com sucesso!', userData);
                
             } else {
-                throw new Error(`Erro ao cadastrar usuário. Status: ${response.status}`);
+                throw new Error(t('PAGES.AUTH.REGISTER.ALERTS.ERROR.DATAUSER.REGISTERERROR'));
+               
             }
         } catch (error: any) {
             console.error('Erro ao cadastrar usuário:', error.message);
-            Alert.alert('Erro', `Erro ao cadastrar usuário. ${error.message}`);
+            throw new Error(t('PAGES.AUTH.REGISTER.ALERTS.ERROR.DATAUSER.REGISTERERROR')); 
         }
     };
 

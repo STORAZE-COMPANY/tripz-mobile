@@ -57,6 +57,25 @@
           "LOGIN": "Entrar",
           "REGISTER": "Cadastrar"
         },
+        "ALERTS": {
+          "ERROR":{
+            "ERRO": "Erro",
+            "PASSWORDNULL":"Por favor, preencha o email e a senha.",
+            "PASSWORDERROR":"Erro ao fazer login.",
+            "PASSWORDINCORRECT":"Senha incorreta.",
+            "404":"",
+            "403": "Erro, acesso negado",
+            "ERROREMAIL":"Erro ao verificar e-mail.",
+            "EMAILNOTFOUND": "Email não encontrado",
+            "EMAILNULL": "Por favor, insira um e-mail.",
+            "EMAILNOTFOUND2": "O email não foi encontrado. Deseja continuar para a criação de conta?",
+            "CANCEL": "Cancelar",
+             "ACCEPT": "Sim",
+             "DATAUSER": {
+              "REGISTERERROR":"Erro ao cadastrar usuário."
+             }
+          }
+        },
         "TEXTCODE": {
           "TEXT": "Por favor, digite o código de 4 dígitos que acabamos de enviar para o e-mail:",
           "TEXTIMPORTANT": {
