@@ -69,26 +69,26 @@ const Input = ({
     
     const renderStrengthBars = () => {
         const strength = calculateStrength(inputValue);
-        const colors = ['#FF0000', '#FFA500', '#00FF00'];
+        const colors = [lightTheme.colors.strengthBarsColor1, lightTheme.colors.strengthBarsColor2,lightTheme.colors.strengthBarsColor3];
         const labels = ['Fraca', 'Média', 'Boa', 'Ótima!'];
     
-        let bars = Array(4).fill({ backgroundColor: '#BCBCBC' });
+        let bars = Array(4).fill({ backgroundColor: lightTheme.colors.strengthBarsColor0 });
     
         if (inputValue.length === 0) {
             // Nenhum caractere digitado, todas as barras ficam cinza
-            bars = Array(4).fill({ backgroundColor: '#BCBCBC' });
+            bars = Array(4).fill({ backgroundColor: lightTheme.colors.strengthBarsColor0});
         } else if (inputValue.length < 8) {
             // Menos de 8 caracteres, apenas uma barra vermelha
-            bars[0] = { backgroundColor: '#FF0000' };
+            bars[0] = { backgroundColor: lightTheme.colors.strengthBarsColor1 };
         } else {
             // 8 ou mais caracteres, barras variam conforme a força da senha
             bars = bars.map((_, index) => ({
-                backgroundColor: index < strength ? colors[Math.min(strength - 1, 2)] : '#BCBCBC',
+                backgroundColor: index < strength ? colors[Math.min(strength - 1, 2)] : lightTheme.colors.strengthBarsColor0,
             }));
         }
     
         const label = inputValue.length === 0 ? '' : (inputValue.length < 8 ? labels[0] : labels[Math.min(strength - 1, 3)]);
-        const color = inputValue.length < 8 ? '#FF0000' : colors[Math.min(strength - 1, 2)];
+        const color = inputValue.length < 8 ? lightTheme.colors.strengthBarsColor1 : colors[Math.min(strength - 1, 2)];
         const showIcon = inputValue.length > 0 && (label === 'Fraca' || label === 'Média');
 
        const handleIconPress = (event: any) => {
@@ -179,7 +179,7 @@ const Input = ({
         return (
             <View style={styles.dropdownContainer}>
                 <TouchableOpacity activeOpacity={2} style={styles.dropdown} onPress={() => setShowDropdown(!showDropdown)}>
-                    {icon && <Icon2 name={icon} size={20} color="#A0A0A0" style={styles.icon} />}
+                    {icon && <Icon2 name={icon} size={20} color={lightTheme.colors.iconWorldColor} style={styles.icon} />}
                     <Text style={styles.dropdownText}>{inputValue || placeholder}</Text>
                     <Icon name="keyboard-arrow-down" size={20} color="black" />
                 </TouchableOpacity>

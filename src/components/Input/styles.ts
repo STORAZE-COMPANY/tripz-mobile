@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
       textAlign: 'center',
       borderRadius: 8,
       position: 'relative',
-      backgroundColor: '#fff',
+      backgroundColor:  lightTheme.colors.secondary
   },
   dropdownContainer: {
       flex: 1,
@@ -64,13 +64,13 @@ export const styles = StyleSheet.create({
   dropdown: {
       height: 50,
       elevation: 5,
-      shadowColor: 'gray',
+      shadowColor:  lightTheme.colors.textDefault,
       padding: 10,
       borderRadius: 10,
       justifyContent: 'space-between',
       alignItems: 'center',
       flexDirection: 'row',
-      backgroundColor: '#fff',
+      backgroundColor: lightTheme.colors.secondary
   },
   dropdownText: {
       flex: 1,
@@ -82,7 +82,7 @@ export const styles = StyleSheet.create({
       top: 45,
       left: 0,
       right: 0,
-      backgroundColor: '#fff',
+      backgroundColor: lightTheme.colors.secondary,
       elevation: 2,
       borderRadius: 4,
       zIndex: 1000,
@@ -105,7 +105,7 @@ strengthLabel: {
 },
 modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: lightTheme.colors.onBackground,
     justifyContent: 'center',
     alignItems: 'center',
     alignContent:'center'
@@ -113,23 +113,19 @@ modalOverlay: {
 modalContent: {
     width: 300,
     padding: 20,
-    backgroundColor: 'white',
+    backgroundColor: lightTheme.colors.secondary,
     borderRadius: 10,
     alignItems: 'center',
-},
-modalCloseButton: {
-    marginTop: 10,
-    color: 'blue',
 },
 tooltipContainer: {
     flex:1,
     position: 'absolute',
-    backgroundColor: '#fff',
+    backgroundColor: lightTheme.colors.secondary,
     padding: 10,
     borderRadius: 4,
-    borderColor: '#fff',
+    borderColor: lightTheme.colors.secondary,
     borderWidth: 1,
-    shadowColor: '#000',
+    shadowColor:  lightTheme.colors.onBackground,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
@@ -139,7 +135,7 @@ tooltipContainer: {
 },
 tooltipText: {
     fontSize: 14,
-    color: '#333',
+    color: lightTheme.colors.toolTipTextColor,
 },
 
 tooltipArrow: {
@@ -151,7 +147,7 @@ tooltipArrow: {
     borderRightWidth: 10,
     borderRightColor: 'transparent',
     borderTopWidth: 0,
-    borderBottomColor: '#fff', 
+    borderBottomColor: lightTheme.colors.secondary,
     borderBottomWidth: 10,
    
 }
