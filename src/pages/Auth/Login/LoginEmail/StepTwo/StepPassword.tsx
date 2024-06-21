@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {  Alert } from 'react-native';
+import { Alert } from 'react-native';
 import { Background } from '@mobile/components/Background';
 import { Box } from '@mobile/components/Box';
 import { ButtonDefault } from '@mobile/components/ButtonDefault';
@@ -26,7 +26,9 @@ const StepPassword: React.FC = () => {
 
     const handleNextStep = async () => {
         if (!password) {
-            Alert.alert('Erro', 'Por favor, preencha o email e a senha.');
+            Alert.alert(
+                t('PAGES.AUTH.REGISTER.ALERTS.ERROR.ERRO'),
+                t('PAGES.AUTH.REGISTER.ALERTS.ERROR.PASSWORDNULL'));
             return;
         }
 
@@ -37,59 +39,57 @@ const StepPassword: React.FC = () => {
                 navigation.navigate('StepLogin', { email });
 
             } else {
-                throw new Error(`Erro ao fazer login. Status: ${userPassword.status}`);
+                throw new Error(t('PAGES.AUTH.REGISTER.ALERTS.ERROR.PASSWORDERROR'));
             }
-        } catch (error:any) {
+        } catch (error: any) {
             if (error.response) {
                 const status = error.response.status;
                 if (status === 401) {
-                    Alert.alert('Erro', 'Senha incorreta.');
+                    Alert.alert(t('PAGES.AUTH.REGISTER.ALERTS.ERROR.ERRO'),
+                        t('PAGES.AUTH.REGISTER.ALERTS.ERROR.PASSWORDINCORRECT'));
                 } else if (status === 403) {
-                    Alert.alert('Erro', 'Acesso negado. Senha incorreta');
-                } else {
-                    Alert.alert('Erro', `Erro ao fazer login. ${error.message}`);
+                    Alert.alert(t('PAGES.AUTH.REGISTER.ALERTS.ERROR.ERRO'),
+                        t('PAGES.AUTH.REGISTER.ALERTS.ERROR.PASSWORDINCORRECT'));
                 }
-            } else {
-                Alert.alert('Erro', `Erro ao fazer login. ${error.message}`);
             }
-        }
+        };
+
+        const backgroundStyle = {
+            gradient1: lightTheme.colors.gradientBackgroundColorOne,
+            gradient2: lightTheme.colors.gradientBackgroundColorTwo
+        };
+
+        return (
+            <Background {...backgroundStyle}>
+                <Box>
+                    <Box pdTop={1}>
+                        <TopBarComponent titleText={t('PAGES.AUTH.REGISTER.TITLETOP2')} currentStep={2} totalSteps={2} />
+                    </Box>
+                    <Box flex={1} alignItems='center' pdTop={4.6} width={100} >
+                        <Input
+                            type='password'
+
+                            width={90}
+                            placeholder={t('PAGES.AUTH.REGISTER.PLACEHOLDERPASSWORD')}
+                            label={t('PAGES.AUTH.REGISTER.PASSWORD')}
+                            value={password}
+                            onChangeText={setPassword}
+
+                        />
+                    </Box>
+                    <Box alignItems='center' bottom={5}>
+                        <ButtonDefault
+                            width={90}
+                            height={5}
+                            text={t('PAGES.AUTH.REGISTER.BUTTON.LOGIN')}
+                            color={lightTheme.colors.secondary}
+                            onPress={handleNextStep}
+                        />
+                    </Box>
+                </Box>
+            </Background>
+        );
     };
+}
 
-    const backgroundStyle = {
-        gradient1: lightTheme.colors.gradientBackgroundColorOne,
-        gradient2: lightTheme.colors.gradientBackgroundColorTwo
-    };
-
-    return (
-        <Background {...backgroundStyle}>
-            <Box>
-                <Box pdTop={1}>
-                    <TopBarComponent titleText={t('PAGES.AUTH.REGISTER.TITLETOP2')} currentStep={2} totalSteps={2} />
-                </Box>
-                <Box flex={1} alignItems='center' pdTop={4.6} width={100} >
-                    <Input
-                        type='password'
-
-                        width={90}
-                        placeholder={t('PAGES.AUTH.REGISTER.PLACEHOLDERPASSWORD')}
-                        label={t('PAGES.AUTH.REGISTER.PASSWORD')}
-                        value={password}
-                        onChangeText={setPassword}
-
-                    />
-                </Box>
-                <Box alignItems='center' bottom={5}>
-                    <ButtonDefault
-                        width={90}
-                        height={5}
-                        text={t('PAGES.AUTH.REGISTER.BUTTON.LOGIN')}
-                        color={lightTheme.colors.secondary}
-                        onPress={handleNextStep}
-                    />
-                </Box>
-            </Box>
-        </Background>
-    );
-};
-
-export { StepPassword };
+    export { StepPassword };

@@ -30,7 +30,7 @@ const StepSetPassword: React.FC = () => {
         if (password) {
             navigation.navigate("StepDataUser", { email, password });
         } else {
-            console.log("Password is missing");
+            console.log("Sem senha");
         }
     };
 
