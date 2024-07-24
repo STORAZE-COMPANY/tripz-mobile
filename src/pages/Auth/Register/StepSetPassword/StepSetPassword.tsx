@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text } from 'react-native';
+import { Alert, Text } from 'react-native';
 import { Background } from '@mobile/components/Background';
 import { Box } from '@mobile/components/Box';
 import { ButtonDefault } from '@mobile/components/ButtonDefault';
@@ -31,6 +31,7 @@ const StepSetPassword: React.FC = () => {
             navigation.navigate("StepDataUser", { email, password });
         } else {
             console.log("Sem senha");
+            Alert.alert(t('PAGES.AUTH.REGISTER.ALERTS.ERROR.PASSWORDNULL'))
         }
     };
 

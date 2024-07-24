@@ -1,8 +1,6 @@
 import React from 'react';
 import {OnBoarding} from './OnBoarding/OnBoarding';
 import { createStackNavigator } from '@react-navigation/stack';
-
-
 import { Login } from './Login/Login';
 import { StepEmail } from './Login/LoginEmail/StepOne/StepEmail';
 import { StepPassword } from './Login/LoginEmail/StepTwo/StepPassword';
@@ -24,6 +22,7 @@ const AuthNavigation = () => {
             <AuthStack.Screen name="StepSetPassword" component={StepSetPassword} />
             <AuthStack.Screen name="StepCode" component={StepCode} />
             <AuthStack.Screen name="StepDataUser" component={StepDataUser} />
+        
         </AuthStack.Navigator>
     );
 };

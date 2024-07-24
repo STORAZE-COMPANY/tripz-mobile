@@ -31,9 +31,11 @@ const StepEmail: React.FC = () => {
     const handleNextStep = async () => {
        
         if (email) {
+            console.log(email)
             try {
                 const userEmail = await getUserByEmail(email);
                 if (userEmail) {
+                    console.log(userEmail)
                   navigation.navigate('StepPassword', { email });     
                 }
             } catch (error:any) {

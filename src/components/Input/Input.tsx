@@ -22,7 +22,10 @@ interface InputProps extends TextInputProps {
     icon?: string;
     height?: number;
     width?: number;
-
+    dropdownOpacity?: number;
+    dropdownColor?: string;
+    iconOpacity?: number;
+    iconComponent?: React.ReactNode;
 }
 
 const Input = ({
@@ -35,6 +38,10 @@ const Input = ({
     icon,
     height,
     width,
+    dropdownOpacity,
+    dropdownColor,
+    iconOpacity,
+    iconComponent,
     ...rest
 }: InputProps) => {
     const [value, setValue] = useState("")
@@ -66,17 +73,17 @@ const Input = ({
         if (/[^A-Za-z0-9]/.test(password)) strength += 1;
         return strength;
     };
-    
+
     const renderStrengthBars = () => {
         const strength = calculateStrength(inputValue);
-        const colors = [lightTheme.colors.strengthBarsColor1, lightTheme.colors.strengthBarsColor2,lightTheme.colors.strengthBarsColor3];
+        const colors = [lightTheme.colors.strengthBarsColor1, lightTheme.colors.strengthBarsColor2, lightTheme.colors.strengthBarsColor3];
         const labels = ['Fraca', 'Média', 'Boa', 'Ótima!'];
-    
+
         let bars = Array(4).fill({ backgroundColor: lightTheme.colors.strengthBarsColor0 });
-    
+
         if (inputValue.length === 0) {
             // Nenhum caractere digitado, todas as barras ficam cinza
-            bars = Array(4).fill({ backgroundColor: lightTheme.colors.strengthBarsColor0});
+            bars = Array(4).fill({ backgroundColor: lightTheme.colors.strengthBarsColor0 });
         } else if (inputValue.length < 8) {
             // Menos de 8 caracteres, apenas uma barra vermelha
             bars[0] = { backgroundColor: lightTheme.colors.strengthBarsColor1 };
@@ -86,18 +93,18 @@ const Input = ({
                 backgroundColor: index < strength ? colors[Math.min(strength - 1, 2)] : lightTheme.colors.strengthBarsColor0,
             }));
         }
-    
+
         const label = inputValue.length === 0 ? '' : (inputValue.length < 8 ? labels[0] : labels[Math.min(strength - 1, 3)]);
         const color = inputValue.length < 8 ? lightTheme.colors.strengthBarsColor1 : colors[Math.min(strength - 1, 2)];
         const showIcon = inputValue.length > 0 && (label === 'Fraca' || label === 'Média');
 
-       const handleIconPress = (event: any) => {
+        const handleIconPress = (event: any) => {
             const { pageX, pageY } = event.nativeEvent;
             const screenWidth = Dimensions.get('window').width;
             const tooltipWidth = 300; // Largura fixa do tooltip
             const adjustedX = pageX + tooltipWidth > screenWidth ? screenWidth - tooltipWidth - 20 : pageX;
 
-           
+
             setTooltipPosition({ x: adjustedX, y: pageY });
             if (label === 'Fraca') {
                 setModalMessage('Sua senha é muito fácil de adivinhar. Tente adicionar caracteres diferentes.');
@@ -126,9 +133,9 @@ const Input = ({
                         {showIcon && (
                             <TouchableOpacity onPress={handleIconPress}>
                                 <WarningIcon name="error-outline" size={20} color={color} />
-                            </TouchableOpacity> )}
+                            </TouchableOpacity>)}
                     </Box>
-                    
+
                 )}
                 {modalVisible && (
                     <Modal
@@ -139,9 +146,9 @@ const Input = ({
                     >
                         <TouchableOpacity style={styles.modalOverlay} onPress={() => setModalVisible(false)}>
                             <View style={[styles.tooltipContainer, { top: tooltipPosition.y, left: tooltipPosition.x }]}>
-                            <View style={styles.tooltipArrow} />
+                                <View style={styles.tooltipArrow} />
                                 <Text style={styles.tooltipText}>{modalMessage}</Text>
-                               
+
                             </View>
                         </TouchableOpacity>
                     </Modal>
@@ -149,7 +156,7 @@ const Input = ({
             </>
         );
     };
-    
+
     const renderCodeInput = () => {
         return (
             <View style={styles.codeContainer}>
@@ -176,12 +183,17 @@ const Input = ({
     };
 
     const renderDropdown = () => {
+        const dropdownStyle = {
+            ...styles.dropdown,
+            backgroundColor: dropdownColor || 'white',
+            opacity: dropdownOpacity !== undefined ? dropdownOpacity : 1,
+        };
         return (
             <View style={styles.dropdownContainer}>
-                <TouchableOpacity activeOpacity={2} style={styles.dropdown} onPress={() => setShowDropdown(!showDropdown)}>
+                <TouchableOpacity activeOpacity={2} style={dropdownStyle} onPress={() => setShowDropdown(!showDropdown)}>
                     {icon && <Icon2 name={icon} size={20} color={lightTheme.colors.iconWorldColor} style={styles.icon} />}
                     <Text style={styles.dropdownText}>{inputValue || placeholder}</Text>
-                    <Icon name="keyboard-arrow-down" size={20} color="black" />
+                    <Icon name="keyboard-arrow-down" size={20} color="black" style={{ opacity: iconOpacity !== undefined ? iconOpacity : 1 }} />
                 </TouchableOpacity>
                 {showDropdown && (
                     <View style={styles.dropdownList}>
@@ -194,9 +206,9 @@ const Input = ({
                                 </TouchableOpacity>
                             )}
                         />
-                       
+
                     </View>
-                    
+
                 )}
             </View>
         );
@@ -212,6 +224,11 @@ const Input = ({
                     renderDropdown()
                 ) : (
                     <View style={[styles.inputWrapper, { width, height }]}>
+                        {iconComponent && (
+                            <Box pdLeft={1}>  
+                                {iconComponent}
+                            </Box>
+                        )}
                         <TextInput
                             {...rest}
                             style={styles.inputText}
@@ -222,7 +239,7 @@ const Input = ({
                         />
                         {type === 'password' && (
                             <TouchableOpacity
-                              
+
                                 onPress={() => setSecureText(!secureText)}
                             >
                                 {secureText ? <EyeClosed width={20} height={20} /> : <EyeIcon width={20} height={20} />}

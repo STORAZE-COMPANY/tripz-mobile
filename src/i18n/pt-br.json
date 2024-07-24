@@ -60,7 +60,7 @@
         "ALERTS": {
           "ERROR":{
             "ERRO": "Erro",
-            "PASSWORDNULL":"Por favor, preencha o email e a senha.",
+            "PASSWORDNULL":"Por favor, insira a senha.",
             "PASSWORDERROR":"Erro ao fazer login.",
             "PASSWORDINCORRECT":"Senha incorreta.",
             "404":"",

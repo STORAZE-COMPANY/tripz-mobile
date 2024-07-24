@@ -5,6 +5,7 @@ const lightTheme = {
         primary: '#2F419E',
         secondary: '#FFFFFF',
         thirdary: '#FF0266',
+        textDisable:'#BCBCBC',
         strengthBarsColor0:"#BCBCBC",
         strengthBarsColor1:"#CD3636",
         strengthBarsColor2:"#FBBC55",
