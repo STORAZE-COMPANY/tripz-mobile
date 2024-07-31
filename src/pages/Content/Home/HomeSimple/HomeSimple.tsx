@@ -1,34 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { Image, ImageBackground, ScrollView, Text, TextStyle, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, ImageBackground, ScrollView, Text, TextStyle, TouchableOpacity, useColorScheme, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Background } from '@mobile/components/Background';
 import { lightTheme } from '@mobile/theme';
 import { Box } from '@mobile/components/Box';
-import { MenuDrawner } from '@mobile/components/MenuDrawner/MenuDrawner';
 import img_city from '@mobile/assets/cidadeexample.png';
 import { Input } from '@mobile/components/Input';
 import { latoTypography } from '@mobile/utils/typograph';
 import SearchIcon from '@mobile/assets/searchSVG.svg';
-import EstadioSVG from '@mobile/assets/estadiumSVG.svg';
-import MonumentosSVG from '@mobile/assets/monumentosSVG.svg';
 import ArrowRoute from '@mobile/assets/seta.svg';
-import PetSVG from '@mobile/assets/petSVG.svg';
-import TrilhasSVG from '@mobile/assets/trilhasSVG.svg';
-import AcessSVG from '@mobile/assets/acessibilidadeSVG.svg';
-import ComercioSVG from '@mobile/assets/comercioSVG.svg';
-import IgrejaSVG from '@mobile/assets/igrejaSVG.svg';
-import ArLivreSVG from '@mobile/assets/arLivreSVG.svg';
-import RoteirosSVG from '@mobile/assets/roteiroSVG.svg';
 import { ButtonDefault } from '@mobile/components/ButtonDefault';
-import Carousel from 'react-native-reanimated-carousel';
-import Weather from '@mobile/components/MenuDrawner/ViewWeather/ViewWeather';
 import { getAllCities, getCommercesByCityId, getTouristPointsByCityId, getEventsByCityId, getAllCategories } from '@mobile/services/UserService';
 import { RatingStars } from './CardLocais/RatingStars/RatingStars';
 import PinSVG from '@mobile/assets/pinSVG.svg'
 import FavButtonSVG from '@mobile/assets/FavButtonSVG.svg'
 import { CityHeader } from './CityHeader/CityHeader';
 import { SearchInput } from './SearchInput/SearchInput';
-import { Svg, SvgUri } from 'react-native-svg';
+import { SvgUri } from 'react-native-svg';
+import { MultiSelect } from 'react-native-element-dropdown';
+import { styles } from './stylesDropdown';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Feather from '@expo/vector-icons/Feather';
+import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import { MultipleSelectList } from 'react-native-dropdown-select-list'
+
+
+
 
 
 const HomeSimple: React.FC = () => {
@@ -36,10 +33,12 @@ const HomeSimple: React.FC = () => {
     const [selectedCity, setSelectedCity] = useState<{ name: string, id: string } | null>(null);
     const [selectedUF, setSelectedUF] = useState<string>('');
     const [activeTab, setActiveTab] = useState('Pontos Turisticos');
-    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+    const [selectedCategories, setSelectedCategories] = useState<{ label: string, value: string }[]>([]);
     const [data, setData] = useState<any[]>([]);
-    const [availableCategories, setAvailableCategories] = useState<string[]>([]);
+    const [availableCategories, setAvailableCategories] = useState<{ label: string, value: string }[]>([]);
+
     const nav = useNavigation();
+   
 
     useEffect(() => {
         const fetchCities = async () => {
@@ -52,7 +51,8 @@ const HomeSimple: React.FC = () => {
                         id: city.id
                     }));
                     setCities(cityList);
-                    // Seleciona automaticamente a cidade 1
+
+                    // Seleciona automaticamente a cidade com ID 1
                     const city1 = cityList.find(city => city.id === '1');
                     if (city1) {
                         setSelectedCity({ name: city1.name, id: city1.id });
@@ -67,6 +67,7 @@ const HomeSimple: React.FC = () => {
         };
         fetchCities();
     }, []);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -98,6 +99,7 @@ const HomeSimple: React.FC = () => {
         };
         fetchData();
     }, [selectedCity, activeTab]);
+
 
     const handleCitySelect = async (cityName: string) => {
         const city = cities.find(city => city.name === cityName);
@@ -134,7 +136,11 @@ const HomeSimple: React.FC = () => {
             try {
                 const categoriesData = await getAllCategories();
                 if (categoriesData && categoriesData.content) {
-                    setAvailableCategories(categoriesData.content);
+                    const formattedCategories = categoriesData.content.map(category => ({
+                        label: category.name,
+                        value: category.name // ou outro identificador único
+                    }));
+                    setAvailableCategories(formattedCategories);
                 } else {
                     console.error('No categories data found:', categoriesData);
                 }
@@ -144,7 +150,6 @@ const HomeSimple: React.FC = () => {
         };
         fetchCategories();
     }, []);
-
 
     const backgroundStyle = {
         gradient1: lightTheme.colors.gradientBackgroundColorOne,
@@ -201,9 +206,9 @@ const HomeSimple: React.FC = () => {
                             return (
                                 <Box key={index} height={2} width={25} justifyContent='flex-start' backgroundColor='white' flexDirection='row' alignItems='center' borderRadius={0.1} elevation={1} marginRight={0.5}>
                                     <Image source={{ uri: category.icon }} style={{ width: 20, height: 20 }} />
-                                    <SvgUri        
-                                  
-                                        uri={ category.icon }
+                                    <SvgUri
+
+                                        uri={category.icon}
                                     />
                                     <Text>{category.name}</Text>
                                     <TouchableOpacity onPress={() => handleCategoryRemove(category.name)}></TouchableOpacity>
@@ -219,95 +224,171 @@ const HomeSimple: React.FC = () => {
         );
     };
 
+    const renderItem1 = (category) => {
+        const isSelected = selectedCategories.includes(category.value);
+        return (
+            <Box flexDirection='row' alignItems='center'>
+                {isSelected && <Feather style={styles.icon} color="#2F419E" name="check" size={15} />}
+                <Text style={styles.itemTextStyle}>{category.label}</Text>
+            </Box>
+        )
+    }
+
+    const renderSelectedItem1 = () => {
+        if (selectedCategories.length > 0) {
+            return (
+                <FlatList data={selectedCategories} keyExtractor={item => item} renderItem={({ item }) => (
+
+                    <View style={styles.selectedStyle}>
+                        <Text style={styles.selectedTextStyle}>
+                            {item}
+                        </Text>
+                    </View>
+
+                )} horizontal={true}  >
+
+                </FlatList>
+            );
+        }
+        return null;
+    };
+
+   
+
+
     return (
         <Background {...backgroundStyle}>
-            <CityHeader cityName={selectedCity} coverImage={selectedCity?.coverImage || img_city} />
-            <SearchInput
-                cities={cities}
-                selectedCity={selectedCity}
-                selectedUF={selectedUF}
-                onCitySelect={handleCitySelect}
-                onUFSelect={handleUFSelect}
-            />
-            <Box bottom={10} alignItems='center'>
-                <Box width={90} height={19} elevation={5} backgroundColor='white' borderRadius={1}>
-                    <Box flexDirection='row'>
-                        <TouchableOpacity onPress={() => handleTabPress('Pontos Turisticos')} style={{ flex: activeTab === 'Pontos Turisticos' ? 3 : 3 }}>
-                            <Box alignItems='center' borderColor={activeTab === 'Pontos Turisticos' ? lightTheme.colors.primary : 'transparent'} borderBottomWidth={activeTab === 'Pontos Turisticos' ? 0.45 : 0} pdVertical={1}>
-                                <Text style={activeTab === 'Pontos Turisticos' ? textStyles : textDisableStyles}>Pontos Turísticos</Text>
-                            </Box>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => handleTabPress('Comércios')} style={{ flex: activeTab === 'Comércios' ? 2 : 2 }}>
-                            <Box alignItems='center' borderColor={activeTab === 'Comércios' ? lightTheme.colors.primary : 'transparent'} borderBottomWidth={activeTab === 'Comércios' ? 0.45 : 0} pdVertical={1}>
-                                <Text style={activeTab === 'Comércios' ? textStyles : textDisableStyles}>Comércios</Text>
-                            </Box>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => handleTabPress('Eventos')} style={{ flex: activeTab === 'Eventos' ? 2 : 2 }}>
-                            <Box alignItems='center' borderColor={activeTab === 'Eventos' ? lightTheme.colors.primary : 'transparent'} borderBottomWidth={activeTab === 'Eventos' ? 0.45 : 0} pdVertical={1}>
-                                <Text style={activeTab === 'Eventos' ? textStyles : textDisableStyles}>Eventos</Text>
-                            </Box>
-                        </TouchableOpacity>
-                    </Box>
-                    <Box flexDirection='row' justifyContent='space-between' width={90} alignItems='center'>
-                        <Box zIndex={59685986956} elevation={1} top={1} pdHorizontal={2} width={80}>
-                            <Input
-                                type='dropdown'
-                                options={availableCategories}
-                                onSelect={handleCategorySelect}
-                                value=""
-                                placeholder='Categorias'
-                            />
+            <Box width={375} height={812}>
+                <CityHeader cityName={selectedCity} coverImage={selectedCity?.coverImage || img_city} />
+                <SearchInput
+                    cities={cities}
+                    selectedCity={selectedCity}
+                    selectedUF={selectedUF}
+                    onCitySelect={handleCitySelect}
+                    onUFSelect={handleUFSelect}
+                />
+                <Box alignItems='center' >
+                    <Box width={330} height={182} elevation={5} backgroundColor='white' borderRadius={1} bottom={75} >
+                        <Box flexDirection='row'>
+                            <TouchableOpacity onPress={() => handleTabPress('Pontos Turisticos')} style={{ flex: activeTab === 'Pontos Turisticos' ? 3 : 3 }}>
+                                <Box alignItems='center' borderColor={activeTab === 'Pontos Turisticos' ? lightTheme.colors.primary : 'transparent'} borderBottomWidth={activeTab === 'Pontos Turisticos' ? 0.45 : 0} pdVertical={1}>
+                                    <Text style={activeTab === 'Pontos Turisticos' ? textStyles : textDisableStyles}>Pontos Turísticos</Text>
+                                </Box>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => handleTabPress('Comércios')} style={{ flex: activeTab === 'Comércios' ? 2 : 2 }}>
+                                <Box alignItems='center' borderColor={activeTab === 'Comércios' ? lightTheme.colors.primary : 'transparent'} borderBottomWidth={activeTab === 'Comércios' ? 0.45 : 0} pdVertical={1}>
+                                    <Text style={activeTab === 'Comércios' ? textStyles : textDisableStyles}>Comércios</Text>
+                                </Box>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => handleTabPress('Eventos')} style={{ flex: activeTab === 'Eventos' ? 2 : 2 }}>
+                                <Box alignItems='center' borderColor={activeTab === 'Eventos' ? lightTheme.colors.primary : 'transparent'} borderBottomWidth={activeTab === 'Eventos' ? 0.45 : 0} pdVertical={1}>
+                                    <Text style={activeTab === 'Eventos' ? textStyles : textDisableStyles}>Eventos</Text>
+                                </Box>
+                            </TouchableOpacity>
                         </Box>
-                        <TouchableOpacity>
-                            <Box backgroundColor='white' borderRadius={1} shadowBox marginTop={2} right={1} width={10} height={5} alignItems='center' justifyContent='center'>
-                                {<SearchIcon width={20} height={20} />}
-                            </Box>
-                        </TouchableOpacity>
+                        <Box flexDirection='row' justifyContent='space-between' width={90} alignItems='center'>
+
+
+                            <View style={styles.container}>
+                                <MultiSelect
+                                    style={styles.dropdown}
+                                    placeholderStyle={styles.placeholderStyle}
+                                    selectedTextStyle={styles.selectedTextStyle}
+                                    itemContainerStyle={styles.itemContainerStyle}
+                                    inputSearchStyle={styles.inputSearchStyle}
+                                    iconStyle={styles.iconStyle}
+                                    data={availableCategories}
+                                    labelField="label" 
+                          
+                                    valueField="value"
+                                    placeholder="Categorias"
+                                    value={selectedCategories}
+                                    onChange={category => {
+                                       
+                                        setSelectedCategories(category);
+
+                                    }}
+                                    renderItem={renderItem1}
+                                    selectedStyle={styles.selectedStyle}
+                                    containerStyle={styles.containerStyles}
+                                    selectedTextProps={{ numberOfLines: 1, ellipsizeMode: 'tail' }}
+                                    activeColor='rgba(255,255,255,0.7)'
+                                    maxHeight={200}
+                                    renderSelectedItem={renderSelectedItem1}
+
+                                // maxSelect={3}
+                                />
+
+
+                            </View>
+                            {/* 
+                            <View style={styles.container}>
+                                <MultipleSelectList
+                                    setSelected={(category) => setSelectedCategories(category)}
+                                    data={availableCategories}
+                                    save="value"
+                                    onSelect={() => alert(selectedCategories)}
+                                    label="Categorias"
+                                    search={false}
+                                    dropdownStyles={styles.dropdown}
+                                    
+                                    
+
+                                />
+                            </View> */}
+
+
+                            <TouchableOpacity>
+                                <Box backgroundColor='white' borderRadius={1} shadowBox marginTop={2} right={1} width={10} height={5} alignItems='center' justifyContent='center'>
+                                    {<SearchIcon width={20} height={20} />}
+                                </Box>
+                            </TouchableOpacity>
+                        </Box>
+                        {/* <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                            {selectedCategories.map((category, index) => (
+                                <Box key={index} top={2} height={3.5} backgroundColor='white' flexDirection='row' alignItems='center' pdVertical={0.6} pdHorizontal={1.2} borderRadius={1} shadowBox marginRight={0.5}>
+                                    <Image source={{ uri: category.icon }} style={{ width: 20, height: 20 }} />
+                                    <Text style={textCategoryStyles}>{category.name}</Text>
+                                    <TouchableOpacity onPress={() => handleCategoryRemove(category)}>
+                                        <Text style={{ marginLeft: 5, color: 'black' }}>x</Text>
+                                    </TouchableOpacity>
+                                </Box>
+                            ))}
+                        </ScrollView> */}
+                        <Box alignItems='center'>
+                            <ButtonDefault text='Procurar' color='white' width={80} height={5} />
+                        </Box>
                     </Box>
-                    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                        {selectedCategories.map((category, index) => (
-                            <Box key={index} top={2} height={3.5} backgroundColor='white' flexDirection='row' alignItems='center' pdVertical={0.6} pdHorizontal={1.2} borderRadius={1} shadowBox marginRight={0.5}>
-                                {categoryIcons[category]}
-                                <Text style={textCategoryStyles}>{category}</Text>
-                                <TouchableOpacity onPress={() => handleCategoryRemove(category)}>
-                                    <Text style={{ marginLeft: 5, color: 'black' }}>x</Text>
+
+                    <ScrollView showsVerticalScrollIndicator>
+                        <Box pdBottom={4} height={40}>
+                            <Box pdVertical={1} width={87} flexDirection='row' justifyContent='space-between' left={3}>
+                                <Text>Populares</Text>
+                                <TouchableOpacity>
+                                    <Text>Ver todos</Text>
                                 </TouchableOpacity>
                             </Box>
-                        ))}
+                            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                                {data.map((item, index) => (
+                                    renderItem(item, index)
+                                ))}
+                            </ScrollView>
+                        </Box>
+                        <Box bottom={4} height={40}>
+                            <Box width={87} flexDirection='row' justifyContent='space-between' left={3}>
+                                <Text>Restaurantes</Text>
+                                <TouchableOpacity>
+                                    <Text>Ver todos</Text>
+                                </TouchableOpacity>
+                            </Box>
+                            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                                {data.map((item, index) => (
+                                    renderItem(item, index)
+                                ))}
+                            </ScrollView>
+                        </Box>
                     </ScrollView>
-                    <Box alignItems='center'>
-                        <ButtonDefault text='Procurar' color='white' width={80} height={5} />
-                    </Box>
                 </Box>
-
-                <ScrollView showsVerticalScrollIndicator>
-                    <Box pdBottom={4} height={40}>
-                        <Box pdVertical={1} width={87} flexDirection='row' justifyContent='space-between' left={3}>
-                            <Text>Populares</Text>
-                            <TouchableOpacity>
-                                <Text>Ver todos</Text>
-                            </TouchableOpacity>
-                        </Box>
-                        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                            {data.map((item, index) => (
-                                renderItem(item, index)
-                            ))}
-                        </ScrollView>
-                    </Box>
-                    <Box bottom={4} height={40}>
-                        <Box width={87} flexDirection='row' justifyContent='space-between' left={3}>
-                            <Text>Restaurantes</Text>
-                            <TouchableOpacity>
-                                <Text>Ver todos</Text>
-                            </TouchableOpacity>
-                        </Box>
-                        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                            {data.map((item, index) => (
-                                renderItem(item, index)
-                            ))}
-                        </ScrollView>
-                    </Box>
-                </ScrollView>
             </Box>
         </Background>
     );

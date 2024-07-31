@@ -1,6 +1,8 @@
 import { lightTheme } from "@mobile/theme";
+import { scale } from "@mobile/utils/resize";
 import { fonts, latoTypography, poppinsTypography} from "@mobile/utils/typograph";
 import { StyleSheet } from "react-native";
+
 
 export const styles = StyleSheet.create({
 
@@ -48,14 +50,10 @@ export const styles = StyleSheet.create({
     },
     nextButton: {
         backgroundColor: lightTheme.colors.primary,
-        borderRadius: 10,
+        borderRadius: scale(8),
         padding: 10,
     },
-    indicatorContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+
     indicator: {
         width: 45,
         height: 2,

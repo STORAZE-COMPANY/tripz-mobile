@@ -40,16 +40,16 @@ const ButtonDefault: React.FC<ButtonDefaultProps> = ({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: borderRadius ? heightScale(borderRadius) : heightScale(1),
-        top: top ? widthScale(top) : 0,
-        bottom: bottom ? widthScale(bottom) : 0,
-        flexDirection: 'row', // Adicionado para alinhar ícone e texto horizontalmente
+        top: top ? heightScale(top) : 0,
+        bottom: bottom ? heightScale(bottom) : 0,
+        flexDirection: 'row', 
     };
 
     const textStyles: TextStyle = {
         fontSize: fonts.fontSizeMediumSmall.fontSize,
         fontWeight: latoTypography.fontWeightSemiBold.fontWeight,
         fontFamily: latoTypography.fontFamilyBold.fontFamily,
-        color: color || 'white', // Garantir que a cor padrão seja branca se não for fornecida
+        color: color || 'white', 
     };
 
     const iconStyles: ViewStyle = {

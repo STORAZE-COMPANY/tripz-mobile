@@ -2,6 +2,7 @@ import { useWindow } from "@mobile/hooks/windowHook";
 import { DimensionValue, FlexAlignType, StyleProp, View, ViewStyle } from "react-native";
 import { styles } from './styles';
 import { IStyleProps } from "@mobile/utils/stylesProps";
+import { scale } from "@mobile/utils/resize";
 
 const Box = ({
   elevation,
@@ -54,11 +55,11 @@ const Box = ({
     justifyContent: justifyContent && justifyContent,
     flexDirection: flexDirection && flexDirection,
     flexWrap: flexWrap && flexWrap,
-    width: width ? widthScale(width) : undefined,
-    height: height ? heightScale(height) : undefined,
+    width: width ? scale(width) : undefined,
+    height: height ? scale(height) : undefined,
     backgroundColor: backgroundColor && backgroundColor,
     position: position && position,
-    paddingHorizontal: pdHorizontal ? heightScale(pdHorizontal) : undefined,
+    paddingHorizontal: pdHorizontal ? scale(pdHorizontal) : undefined,
     paddingVertical: pdVertical ? heightScale(pdVertical) : undefined,
     paddingLeft: pdLeft ? heightScale(pdLeft) : undefined,
     paddingRight: pdRight ? heightScale(pdRight) : undefined,
@@ -72,9 +73,9 @@ const Box = ({
     marginBottom: marginBottom ? heightScale(marginBottom) : undefined,
     borderColor: borderColor && borderColor,
     left: left ? heightScale(left) : undefined,
-    right: right ? heightScale(right) : undefined,
-    bottom: bottom ? heightScale(bottom) : undefined,
-    top: top ? heightScale(top) : undefined,
+    right: right ? scale(right) : undefined,
+    bottom: bottom ? scale(bottom) : undefined,
+    top: top ? scale(top) : undefined,
     borderRadius: borderRadius && heightScale(borderRadius),
     elevation: elevation || shadowBox ? 5 : undefined,
     shadowColor: shadowColor || shadowBox ? 'black' : undefined,

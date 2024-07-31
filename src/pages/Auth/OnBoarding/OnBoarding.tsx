@@ -27,8 +27,8 @@ const OnBoarding: React.FC = () => {
     const navigation = useNavigation();
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const { width } = useWindow()
-
+    const { width, height } = useWindow()
+   
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
@@ -118,7 +118,7 @@ const OnBoarding: React.FC = () => {
 
     const renderIndicators = () => {
         return (
-            <View style={styles.indicatorContainer}>
+            <Box flexDirection='row' alignItems='center'justifyContent='center' >
                 {data.map((_, index) => (
                     <View
                         key={index}
@@ -128,7 +128,7 @@ const OnBoarding: React.FC = () => {
                         ]}
                     />
                 ))}
-            </View>
+            </Box>
         );
     };
 
@@ -197,7 +197,7 @@ const OnBoarding: React.FC = () => {
     return (
         <Background {...backgroundStyle}>
             <Box width={0} height={1}>
-                <LogoSVG width={150} height={150} />
+                <LogoSVG  width={150} height={150} />
             </Box>
             <Carousel
                 ref={carouselRef}
@@ -207,7 +207,7 @@ const OnBoarding: React.FC = () => {
                 onSnapToItem={(index) => setCurrentIndex(index)}
                 pagingEnabled
             />
-            <Box flexDirection='row' alignItems='center' justifyContent='space-between' width={100} pdHorizontal={2} bottom={2}>
+            <Box flexDirection='row' alignItems='center' justifyContent='space-between'   width={100} pdHorizontal={2} bottom={2}>
                 <TouchableOpacity onPress={handleSkip}>
                     <Text style={getSkipTextStyles()}>
                         {t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.BUTTONS.SKIP')}
