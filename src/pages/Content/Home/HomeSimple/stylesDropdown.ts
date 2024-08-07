@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     },
     selectedTextStyle: {
         fontSize: 14,
-        // backgroundColor:'red'
+     
         
     },
     iconStyle: {
@@ -38,22 +38,27 @@ const styles = StyleSheet.create({
     
     },
     itemContainerStyle: {
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
-        paddingVertical: 10,
+        borderBottomWidth: 0,
+        borderBottomColor: 'transparent',
+     
+      
+        
       },
 
     selectedStyle: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 14,
+        borderRadius: 20,
         backgroundColor: 'white',
-        shadowColor: '#000',
-        marginTop: 8,
+        shadowColor: 'transparent',  
         marginRight: 12,
         paddingHorizontal: 12,
-        paddingVertical: 8,
+        paddingVertical: scale(3),
+        top: scale(8),
+        marginBottom: scale(10),
+        marginLeft:scale(4),
+        shadowColor: 'black',
         shadowOffset: {
           width: 0,
           height: 1,
@@ -61,10 +66,23 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 1.41,
         elevation: 2,
+        
+      
+       
     },
     containerStyles:{
-        backgroundColor:'rgba(255,255,255,0.7)',
-        borderRadius: scale(8),
+      backgroundColor: 'rgba(255,255,255,0.7)',
+      borderRadius: scale(9),
+      borderWidth: 0,
+      // Remover sombra
+      shadowColor: 'transparent',
+      shadowOffset: {
+          width: 0,
+          height: 0,
+      },
+      shadowOpacity: 0,
+      shadowRadius: 0,
+      elevation: 0,
         
     },
     itemStyle: {
@@ -74,11 +92,18 @@ const styles = StyleSheet.create({
         backgroundColor: 'red'
       },
       itemTextStyle: {
-        marginLeft: scale(10),
+        marginLeft: scale(27),
         fontSize: 16,
+     
+      },
+      itemTextSelectedStyle: {
+        marginLeft: scale(4),
+        fontSize: 16,
+     
+        
       },
       icon:{
-        marginLeft: scale(10),
+      marginLeft: scale(10)
       },
     
  

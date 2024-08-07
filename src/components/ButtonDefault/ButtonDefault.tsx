@@ -7,6 +7,7 @@ import { fonts, latoTypography } from '@mobile/utils/typograph';
 import { styles } from './styles';
 import { IStyleProps } from '@mobile/utils/stylesProps';
 import ChevronRightIcon from '@mobile/assets/chevronRight.svg'; // Importe seu ícone SVG
+import { scale } from '@mobile/utils/resize';
 
 interface ButtonDefaultProps extends IStyleProps {
     text: string;
@@ -34,14 +35,14 @@ const ButtonDefault: React.FC<ButtonDefaultProps> = ({
 
     const buttonStyles: IStyleProps = {
         ...styles.button,
-        width: width && widthScale(width),
-        height: height && heightScale(height), 
+        width: width && scale(width),
+        height: height && scale(height), 
         backgroundColor: backgroundColor || lightTheme.colors.primary, 
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: borderRadius ? heightScale(borderRadius) : heightScale(1),
-        top: top ? heightScale(top) : 0,
-        bottom: bottom ? heightScale(bottom) : 0,
+        borderRadius: borderRadius ? scale(borderRadius) : scale(1),
+        top: top ? scale(top) : 0,
+        bottom: bottom ? scale(bottom) : 0,
         flexDirection: 'row', 
     };
 

@@ -14,7 +14,7 @@ const MenuDrawner =  ({ cityName }) => {
       <TouchableOpacity>
         <Menu width={50}/>
         </TouchableOpacity>
-        <Weather  cityName={cityName}  />
+        {/* <Weather  cityName={cityName}  /> */}
     </Box>
    
   );

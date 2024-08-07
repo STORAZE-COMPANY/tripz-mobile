@@ -38,7 +38,6 @@ const HomeSimple: React.FC = () => {
     const [availableCategories, setAvailableCategories] = useState<{ label: string, value: string }[]>([]);
 
     const nav = useNavigation();
-   
 
     useEffect(() => {
         const fetchCities = async () => {
@@ -138,7 +137,8 @@ const HomeSimple: React.FC = () => {
                 if (categoriesData && categoriesData.content) {
                     const formattedCategories = categoriesData.content.map(category => ({
                         label: category.name,
-                        value: category.name // ou outro identificador único
+                        value: category.name, // ou outro identificador único
+                        icon: category.icon
                     }));
                     setAvailableCategories(formattedCategories);
                 } else {
@@ -177,219 +177,210 @@ const HomeSimple: React.FC = () => {
         const coverImage = item.coverImage;
 
         return (
-            <Box backgroundColor='white' height={30} key={index} width={85} borderRadius={1} alignItems='center' marginHorizontal={1} left={1.5}>
+            <Box backgroundColor='white' shadowBox height={267} key={index} width={325} borderRadius={1} alignItems='center' marginHorizontal={1} left={1.5} bottom={2}>
                 <Box>
-                    <Image source={{ uri: coverImage }} style={{ width: 345, height: 140, borderRadius: 10, margin: 3 }} />
-                    <Box position='absolute' justifyContent='center' alignItems='flex-end' width={80} right={1} top={1}>
+                    <Image source={{ uri: coverImage }} style={{ width: 380, height: 170, borderRadius: 10, margin: 3 }} />
+                    <Box position='absolute' justifyContent='center' alignItems='flex-end' width={80} right={9} top={4}>
                         <TouchableOpacity>
                             <FavButtonSVG />
                         </TouchableOpacity>
                     </Box>
                 </Box>
-                <Box pdHorizontal={0.5} justifyContent='flex-start' width={80}>
+                <Box pdHorizontal={0.5} justifyContent='flex-start' width={300} >
                     <Box flexDirection='row' justifyContent='space-between'>
                         <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{item.name}</Text>
                         <Box left={1} flexDirection='row' justifyContent='flex-end'>
                             <Box marginRight={0.5}>
-                                <Text>4</Text>
+                                <Text style={{ color: '#5E5E5E' }}>4</Text>
                             </Box>
                             <RatingStars rating={4} totalStars={5} />
                         </Box>
                     </Box>
                     <Box flexDirection='row' alignItems='center' right={0.5}>
                         <PinSVG width={20} height={20} />
-                        <Text style={{ fontSize: 12, color: 'gray' }}>{item.address}</Text>
+                        <Text style={{ fontSize: 10 }}>{item.address}</Text>
                     </Box>
                     <ScrollView horizontal showsHorizontalScrollIndicator={true}>
                         {availableCategories.map((category, index) => {
                             // console.log(category.icon); 
                             return (
-                                <Box key={index} height={2} width={25} justifyContent='flex-start' backgroundColor='white' flexDirection='row' alignItems='center' borderRadius={0.1} elevation={1} marginRight={0.5}>
-                                    <Image source={{ uri: category.icon }} style={{ width: 20, height: 20 }} />
-                                    <SvgUri
-
-                                        uri={category.icon}
-                                    />
-                                    <Text>{category.name}</Text>
-                                    <TouchableOpacity onPress={() => handleCategoryRemove(category.name)}></TouchableOpacity>
+                                <Box justifyContent='space-evenly' alignItems='center' height={35} >
+                                    <Box backgroundColor='white' key={index} pdHorizontal={4} justifyContent='flex-start' flexDirection='row' alignItems='center' borderRadius={4} elevation={1} marginRight={0.5} >
+                                        <SvgUri uri={category.icon} />
+                                        <Text>{category.label}</Text>
+                                        {/* <TouchableOpacity onPress={() => handleCategoryRemove(category.name)}></TouchableOpacity> */}
+                                    </Box>
                                 </Box>
                             )
                         })}
                     </ScrollView>
                 </Box>
-                <Box alignItems='center' justifyContent='center'>
-                    <ButtonDefault iconPosition="left" icon={<ArrowRoute width={20} height={20} />} text='Destacar Rota' color='white' height={5} width={80} onPress={() => nav.navigate('CustomMap')} />
+                <Box alignItems='center' bottom={7} justifyContent='center'>
+                    <ButtonDefault iconPosition="left" icon={<ArrowRoute width={20} height={20} />} borderRadius={8} text='Destacar Rota' color='white' height={40} width={303} onPress={() => nav.navigate('CustomMap')} />
                 </Box>
             </Box>
         );
     };
 
     const renderItem1 = (category) => {
-        const isSelected = selectedCategories.includes(category.value);
+        const isSelected = selectedCategories.some(selectedCategory => selectedCategory.value === category.value);
         return (
             <Box flexDirection='row' alignItems='center'>
-                {isSelected && <Feather style={styles.icon} color="#2F419E" name="check" size={15} />}
-                <Text style={styles.itemTextStyle}>{category.label}</Text>
+                {isSelected && (
+                    <>
+                        <Feather style={styles.icon} color="#2F419E" name="check" size={15} />
+                        <Text style={styles.itemTextSelectedStyle}>{category.label}</Text>
+                    </>
+                )}
+                {!isSelected && (
+                    <Text style={styles.itemTextStyle}>{category.label}</Text>
+                )}
             </Box>
-        )
-    }
+        );
+    };
 
     const renderSelectedItem1 = () => {
         if (selectedCategories.length > 0) {
             return (
-                <FlatList data={selectedCategories} keyExtractor={item => item} renderItem={({ item }) => (
-
-                    <View style={styles.selectedStyle}>
-                        <Text style={styles.selectedTextStyle}>
-                            {item}
-                        </Text>
-                    </View>
-
-                )} horizontal={true}  >
-
-                </FlatList>
+                <FlatList
+                    data={selectedCategories}
+                    keyExtractor={(item) => item.value}
+                    renderItem={({ item }) => (
+                        <View style={styles.selectedStyle}>
+                            {item.icon && (
+                                <SvgUri
+                                    uri={item.icon}
+                                    style={{ width: 20, height: 20 }}
+                                />
+                            )}
+                            <Text style={styles.selectedTextStyle}>
+                                {item.label}
+                            </Text>
+                            <TouchableOpacity onPress={() => handleCategoryRemove(item)}>
+                                <Feather color="black" name="x" size={12} />
+                            </TouchableOpacity>
+                        </View>
+                    )}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                />
             );
         }
+
         return null;
     };
-
-   
 
 
     return (
         <Background {...backgroundStyle}>
-            <Box width={375} height={812}>
-                <CityHeader cityName={selectedCity} coverImage={selectedCity?.coverImage || img_city} />
-                <SearchInput
-                    cities={cities}
-                    selectedCity={selectedCity}
-                    selectedUF={selectedUF}
-                    onCitySelect={handleCitySelect}
-                    onUFSelect={handleUFSelect}
-                />
-                <Box alignItems='center' >
-                    <Box width={330} height={182} elevation={5} backgroundColor='white' borderRadius={1} bottom={75} >
-                        <Box flexDirection='row'>
-                            <TouchableOpacity onPress={() => handleTabPress('Pontos Turisticos')} style={{ flex: activeTab === 'Pontos Turisticos' ? 3 : 3 }}>
-                                <Box alignItems='center' borderColor={activeTab === 'Pontos Turisticos' ? lightTheme.colors.primary : 'transparent'} borderBottomWidth={activeTab === 'Pontos Turisticos' ? 0.45 : 0} pdVertical={1}>
-                                    <Text style={activeTab === 'Pontos Turisticos' ? textStyles : textDisableStyles}>Pontos Turísticos</Text>
-                                </Box>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => handleTabPress('Comércios')} style={{ flex: activeTab === 'Comércios' ? 2 : 2 }}>
-                                <Box alignItems='center' borderColor={activeTab === 'Comércios' ? lightTheme.colors.primary : 'transparent'} borderBottomWidth={activeTab === 'Comércios' ? 0.45 : 0} pdVertical={1}>
-                                    <Text style={activeTab === 'Comércios' ? textStyles : textDisableStyles}>Comércios</Text>
-                                </Box>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => handleTabPress('Eventos')} style={{ flex: activeTab === 'Eventos' ? 2 : 2 }}>
-                                <Box alignItems='center' borderColor={activeTab === 'Eventos' ? lightTheme.colors.primary : 'transparent'} borderBottomWidth={activeTab === 'Eventos' ? 0.45 : 0} pdVertical={1}>
-                                    <Text style={activeTab === 'Eventos' ? textStyles : textDisableStyles}>Eventos</Text>
-                                </Box>
-                            </TouchableOpacity>
+
+            <CityHeader cityName={selectedCity} coverImage={selectedCity?.coverImage || img_city} />
+            <SearchInput
+                cities={cities}
+                selectedCity={selectedCity}
+                selectedUF={selectedUF}
+                onCitySelect={handleCitySelect}
+                onUFSelect={handleUFSelect}
+            />
+          
+                <Box width={330} height={182} elevation={5} backgroundColor='white' borderRadius={1} bottom={75} >
+                    <Box flexDirection='row'>
+                        <TouchableOpacity onPress={() => handleTabPress('Pontos Turisticos')} style={{ flex: activeTab === 'Pontos Turisticos' ? 3 : 3 }}>
+                            <Box alignItems='center' borderColor={activeTab === 'Pontos Turisticos' ? lightTheme.colors.primary : 'transparent'} borderBottomWidth={activeTab === 'Pontos Turisticos' ? 0.45 : 0} pdVertical={1}>
+                                <Text style={activeTab === 'Pontos Turisticos' ? textStyles : textDisableStyles}>Pontos Turísticos</Text>
+                            </Box>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => handleTabPress('Comércios')} style={{ flex: activeTab === 'Comércios' ? 2 : 2 }}>
+                            <Box alignItems='center' borderColor={activeTab === 'Comércios' ? lightTheme.colors.primary : 'transparent'} borderBottomWidth={activeTab === 'Comércios' ? 0.45 : 0} pdVertical={1}>
+                                <Text style={activeTab === 'Comércios' ? textStyles : textDisableStyles}>Comércios</Text>
+                            </Box>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => handleTabPress('Eventos')} style={{ flex: activeTab === 'Eventos' ? 2 : 2 }}>
+                            <Box alignItems='center' borderColor={activeTab === 'Eventos' ? lightTheme.colors.primary : 'transparent'} borderBottomWidth={activeTab === 'Eventos' ? 0.45 : 0} pdVertical={1}>
+                                <Text style={activeTab === 'Eventos' ? textStyles : textDisableStyles}>Eventos</Text>
+                            </Box>
+                        </TouchableOpacity>
+                    </Box>
+                    <Box flexDirection="row" alignItems="center" justifyContent='center' pdHorizontal={9} >
+                        <Box flex={1} pdVertical={2} >
+                            <MultiSelect
+                                style={styles.dropdown}
+                                placeholderStyle={styles.placeholderStyle}
+                                selectedTextStyle={styles.selectedTextStyle}
+                                itemContainerStyle={styles.itemContainerStyle}
+                                inputSearchStyle={styles.inputSearchStyle}
+                                iconStyle={styles.iconStyle}
+                                data={availableCategories}
+                                labelField="label"
+                                valueField="value"
+                                placeholder="Categorias"
+                                value={selectedCategories.map(category => category.value)}
+                                onChange={selectedValues => {
+                                    // Mapeia os valores selecionados para os objetos completos da categoria
+                                    const selectedCategories = selectedValues.map(value =>
+                                        availableCategories.find(category => category.value === value)
+                                    );
+
+                                    setSelectedCategories(selectedCategories);
+                                }}
+                                renderItem={renderItem1}
+                                selectedStyle={styles.selectedStyle}
+                                containerStyle={styles.containerStyles}
+                                selectedTextProps={{ numberOfLines: 1, ellipsizeMode: 'tail' }}
+                                activeColor="transparent"
+                                maxHeight={200}
+                                // renderSelectedItem={renderSelectedItem1}
+                                visibleSelectedItem={false}
+
+
+                            />
+
+                            {renderSelectedItem1()}
                         </Box>
-                        <Box flexDirection='row' justifyContent='space-between' width={90} alignItems='center'>
+                        <TouchableOpacity>
+                            <Box backgroundColor='white' borderRadius={1} shadowBox width={36} height={36} alignItems='center' justifyContent='center'>
+                                {<SearchIcon width={20} height={20} />}
+                            </Box>
+                        </TouchableOpacity>
 
-
-                            <View style={styles.container}>
-                                <MultiSelect
-                                    style={styles.dropdown}
-                                    placeholderStyle={styles.placeholderStyle}
-                                    selectedTextStyle={styles.selectedTextStyle}
-                                    itemContainerStyle={styles.itemContainerStyle}
-                                    inputSearchStyle={styles.inputSearchStyle}
-                                    iconStyle={styles.iconStyle}
-                                    data={availableCategories}
-                                    labelField="label" 
-                          
-                                    valueField="value"
-                                    placeholder="Categorias"
-                                    value={selectedCategories}
-                                    onChange={category => {
-                                       
-                                        setSelectedCategories(category);
-
-                                    }}
-                                    renderItem={renderItem1}
-                                    selectedStyle={styles.selectedStyle}
-                                    containerStyle={styles.containerStyles}
-                                    selectedTextProps={{ numberOfLines: 1, ellipsizeMode: 'tail' }}
-                                    activeColor='rgba(255,255,255,0.7)'
-                                    maxHeight={200}
-                                    renderSelectedItem={renderSelectedItem1}
-
-                                // maxSelect={3}
-                                />
-
-
-                            </View>
-                            {/* 
-                            <View style={styles.container}>
-                                <MultipleSelectList
-                                    setSelected={(category) => setSelectedCategories(category)}
-                                    data={availableCategories}
-                                    save="value"
-                                    onSelect={() => alert(selectedCategories)}
-                                    label="Categorias"
-                                    search={false}
-                                    dropdownStyles={styles.dropdown}
-                                    
-                                    
-
-                                />
-                            </View> */}
-
-
-                            <TouchableOpacity>
-                                <Box backgroundColor='white' borderRadius={1} shadowBox marginTop={2} right={1} width={10} height={5} alignItems='center' justifyContent='center'>
-                                    {<SearchIcon width={20} height={20} />}
-                                </Box>
-                            </TouchableOpacity>
-                        </Box>
-                        {/* <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                            {selectedCategories.map((category, index) => (
-                                <Box key={index} top={2} height={3.5} backgroundColor='white' flexDirection='row' alignItems='center' pdVertical={0.6} pdHorizontal={1.2} borderRadius={1} shadowBox marginRight={0.5}>
-                                    <Image source={{ uri: category.icon }} style={{ width: 20, height: 20 }} />
-                                    <Text style={textCategoryStyles}>{category.name}</Text>
-                                    <TouchableOpacity onPress={() => handleCategoryRemove(category)}>
-                                        <Text style={{ marginLeft: 5, color: 'black' }}>x</Text>
-                                    </TouchableOpacity>
-                                </Box>
-                            ))}
-                        </ScrollView> */}
-                        <Box alignItems='center'>
-                            <ButtonDefault text='Procurar' color='white' width={80} height={5} />
-                        </Box>
                     </Box>
 
-                    <ScrollView showsVerticalScrollIndicator>
-                        <Box pdBottom={4} height={40}>
-                            <Box pdVertical={1} width={87} flexDirection='row' justifyContent='space-between' left={3}>
-                                <Text>Populares</Text>
-                                <TouchableOpacity>
-                                    <Text>Ver todos</Text>
-                                </TouchableOpacity>
-                            </Box>
-                            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                                {data.map((item, index) => (
-                                    renderItem(item, index)
-                                ))}
-                            </ScrollView>
-                        </Box>
-                        <Box bottom={4} height={40}>
-                            <Box width={87} flexDirection='row' justifyContent='space-between' left={3}>
-                                <Text>Restaurantes</Text>
-                                <TouchableOpacity>
-                                    <Text>Ver todos</Text>
-                                </TouchableOpacity>
-                            </Box>
-                            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                                {data.map((item, index) => (
-                                    renderItem(item, index)
-                                ))}
-                            </ScrollView>
-                        </Box>
-                    </ScrollView>
+                    <Box alignItems='center' justifyContent='center' position='absolute' top={130} left={1}>
+                        <ButtonDefault text='Procurar' borderRadius={8} color='white' width={315} height={40} />
+                    </Box>
                 </Box>
-            </Box>
+
+                <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={true}>
+
+                    <Box flexDirection='row' alignItems='center' justifyContent='space-between' pdHorizontal={10}>
+                        <Text style={{ fontFamily: 'Lato', fontSize: 16, fontWeight: 'bold' }}>Populares</Text>
+                        <TouchableOpacity>
+                            <Text style={{ fontFamily: 'Poppins', fontSize: 12, fontWeight: 'regular', color: '#5E5E5E' }}>Ver todos</Text>
+                        </TouchableOpacity>
+                    </Box>
+
+                    <ScrollView style={{ flex: 1, right: 10 }} horizontal showsHorizontalScrollIndicator={false}>
+
+                        {data.map((item, index) => (
+                            renderItem(item, index)
+                        ))}
+                    </ScrollView>
+
+
+                    <Box flexDirection='row' alignItems='center' justifyContent='space-between' pdHorizontal={10}>
+                        <Text style={{ fontFamily: 'Lato', fontSize: 16, fontWeight: 'bold' }}>Restaurantes</Text>
+                        <TouchableOpacity>
+                            <Text style={{ fontFamily: 'Poppins', fontSize: 12, fontWeight: 'regular', color: '#5E5E5E' }}>Ver todos</Text>
+                        </TouchableOpacity>
+                    </Box>
+                    <ScrollView style={{ flex: 1, right: 10 }} horizontal showsHorizontalScrollIndicator={false}>
+                        {data.map((item, index) => (
+                            renderItem(item, index)
+                        ))}
+                    </ScrollView>
+
+                </ScrollView>
+           
         </Background>
     );
 };
