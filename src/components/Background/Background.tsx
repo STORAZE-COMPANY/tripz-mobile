@@ -14,6 +14,7 @@ const Background: React.FC<IBackGroundProps> = ({ children, height, gradient1, g
 
   const backGroundStyles = {
     ...styles.container,
+    
   };
   const backGroundGradientStyles = {
     ...styles.gradient,

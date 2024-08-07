@@ -23,6 +23,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Feather from '@expo/vector-icons/Feather';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import { MultipleSelectList } from 'react-native-dropdown-select-list'
+import { scale } from '@mobile/utils/resize';
 
 
 
@@ -301,7 +302,7 @@ const HomeSimple: React.FC = () => {
                             </Box>
                         </TouchableOpacity>
                     </Box>
-                    <Box flexDirection="row" alignItems="center" justifyContent='center' pdHorizontal={9} >
+                    <Box flexDirection="row" style={{width:'100%'}}  justifyContent='center' backgroundColor='red' pdHorizontal={9} >
                         <Box flex={1} pdVertical={2} >
                             <MultiSelect
                                 style={styles.dropdown}
@@ -336,21 +337,21 @@ const HomeSimple: React.FC = () => {
                             />
 
                             {renderSelectedItem1()}
-                        </Box>
-                        <TouchableOpacity>
-                            <Box backgroundColor='white' borderRadius={1} shadowBox width={36} height={36} alignItems='center' justifyContent='center'>
+                        </Box> 
+                        <TouchableOpacity >
+                            <Box backgroundColor='white' position='absolute' top={scale(12)} alignSelf='flex-end'  borderRadius={1} shadowBox width={36} height={36} alignItems='center' justifyContent='center'>
                                 {<SearchIcon width={20} height={20} />}
                             </Box>
                         </TouchableOpacity>
 
                     </Box>
 
-                    <Box alignItems='center' justifyContent='center' position='absolute' top={130} left={1}>
+                    <Box alignItems='center'  justifyContent='center' position='absolute' top={130} left={1}>
                         <ButtonDefault text='Procurar' borderRadius={8} color='white' width={315} height={40} />
                     </Box>
                 </Box>
 
-                <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={true}>
+                <ScrollView style={{ flex: 1,marginTop:scale(-60) }} showsVerticalScrollIndicator={true}>
 
                     <Box flexDirection='row' alignItems='center' justifyContent='space-between' pdHorizontal={10}>
                         <Text style={{ fontFamily: 'Lato', fontSize: 16, fontWeight: 'bold' }}>Populares</Text>
