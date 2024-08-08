@@ -4,6 +4,7 @@ import { Box } from '../Box/Box';
 import { lightTheme } from '@mobile/theme';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Fontisto';
+import {Map} from 'iconsax-react-native';
 import WarningIcon from 'react-native-vector-icons/MaterialIcons';
 import EyeIcon from '@mobile/assets/eye.svg';
 import EyeClosed from '@mobile/assets/eyeclose.svg';
@@ -191,7 +192,7 @@ const Input = ({
         return (
             <View style={styles.dropdownContainer}>
                 <TouchableOpacity activeOpacity={2} style={dropdownStyle} onPress={() => setShowDropdown(!showDropdown)}>
-                    {icon && <Icon2 name={icon} size={20} color={lightTheme.colors.iconWorldColor} style={styles.icon} />}
+                    {icon && <Icon2 name={icon} size={20} color={lightTheme.colors.iconWorldColor} style={styles.icon} /> && <Map name='Map' size={20} color={lightTheme.colors.iconWorldColor} style={styles.icon} />}
                     <Text style={styles.dropdownText}>{inputValue || placeholder}</Text>
                     <Icon name="keyboard-arrow-down" size={20} color="black" style={{ opacity: iconOpacity !== undefined ? iconOpacity : 1 }} />
                 </TouchableOpacity>

@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 20,
+        borderRadius: scale(8),
         backgroundColor: 'white',
-        marginRight: scale(12),
+        marginRight: scale(2),
         paddingHorizontal: scale(12),
         paddingVertical: scale(3),
         top: scale(8),
@@ -60,13 +60,11 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOffset: {
           width: 0,
-          height: 1,
+          height: 0.5,
         },
         shadowOpacity: 0.2,
         shadowRadius: 1.41,
         elevation: 2,
-        
-      
        
     },
     containerStyles:{
