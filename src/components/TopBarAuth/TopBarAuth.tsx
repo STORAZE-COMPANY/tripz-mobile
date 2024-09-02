@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, useWindowDimensions } from 'r
 import Arrow from '@mobile/assets/shape.svg';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
-import {Box} from '../Box';
+import { Box } from '../Box';
 
 interface TopBarProps {
   titleText: string;
@@ -18,16 +18,16 @@ const TopBarComponent: React.FC<TopBarProps> = ({ titleText, currentStep, totalS
     navigation.goBack();
   };
 
-  const titleTop= {
+  const titleTop = {
     ...styles.title,
   }
 
-  const stepCount={
+  const stepCount = {
     ...styles.stepCount
   }
 
   return (
-    <Box flexDirection='row' justifyContent='space-between' pdTop={4} alignItems='center' pdHorizontal={2}>
+    <Box flexDirection='row' justifyContent='space-between' pdTop={35} alignItems='center' pdHorizontal={10} width={343}>
       <TouchableOpacity onPress={goBack}>
         <Arrow />
       </TouchableOpacity>
@@ -38,4 +38,4 @@ const TopBarComponent: React.FC<TopBarProps> = ({ titleText, currentStep, totalS
 };
 
 
-export {TopBarComponent};
+export { TopBarComponent };

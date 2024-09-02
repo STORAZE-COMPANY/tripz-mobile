@@ -5,7 +5,7 @@ const baseUrl = 'http://10.0.2.2:8080/';
 
 export const api = axios.create({
     baseURL: baseUrl,
-    timeout: 10000,
+    timeout: 50000,
     headers: {
         'Content-Type': 'application/json'
     }

@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { t } from 'i18next';
 import { styles } from './styles';
 import { Box } from '@mobile/components/Box';
+import { scale } from '@mobile/utils/resize';
 
 function Login() {
 
@@ -34,16 +35,16 @@ function Login() {
     return (
         <Background {...backgroundStyle}>
 
-            <Box top={7}>
-                <LogoSVG width={145} height={60} />
+            <Box top={45}>
+                <LogoSVG width={scale(98.59)} height={scale(21)} />
             </Box>
 
-            <Box justifyContent='flex-end' flex={2} bottom={8}>
-                <Box bottom={4} pdHorizontal={5}>
+            <Box justifyContent='flex-end' alignItems='center' flex={2} bottom={60} >
+                <Box bottom={20} pdHorizontal={20}>
                     <Text style={LoginTitle}>{t('PAGES.AUTH.LOGIN.TITLE')}</Text>
                 </Box>
 
-                <Box marginBottom={1}>
+                <Box marginBottom={7} alignItems='center'>
                     <TouchableOpacity onPress={() => { }}>
                         <GoogleSvg />
                     </TouchableOpacity>
@@ -53,7 +54,7 @@ function Login() {
                         <AppleSvg />
                     </TouchableOpacity>
                 </Box>
-                <Box top={2}>
+                <Box top={15}>
                     <TouchableOpacity onPress={toRegister}>
                         <Text style={ButtonMail}>{t('PAGES.AUTH.LOGIN.EMAIL')}</Text>
                     </TouchableOpacity>

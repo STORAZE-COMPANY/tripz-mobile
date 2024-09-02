@@ -7,11 +7,12 @@ import Icon2 from 'react-native-vector-icons/Fontisto';
 import {Map} from 'iconsax-react-native';
 import WarningIcon from 'react-native-vector-icons/MaterialIcons';
 import EyeIcon from '@mobile/assets/eye.svg';
-import EyeClosed from '@mobile/assets/eyeclose.svg';
+import EyeClosed from '@mobile/assets/eyeclosed.svg';
 import { fonts, poppinsTypography } from '@mobile/utils/typograph';
 import { use } from 'i18next';
 import { styles } from './styles';
 import { useWindow } from '@mobile/hooks/windowHook';
+import { scale } from '@mobile/utils/resize';
 
 interface InputProps extends TextInputProps {
     label?: string;
@@ -218,7 +219,7 @@ const Input = ({
     return (
         <Box >
             {label && <Text style={styles.label}>{label}</Text>}
-            <Box flexDirection='row' width={width} height={height} alignItems='center'>
+            <Box flexDirection='row' width={scale(width)} height={scale(height)} alignItems='center'>
                 {type === 'code' ? (
                     renderCodeInput()
                 ) : type === 'dropdown' ? (
