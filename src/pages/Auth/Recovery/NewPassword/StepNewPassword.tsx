@@ -10,9 +10,9 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { t } from 'i18next';
 import { poppinsTypography } from '@mobile/utils/typograph';
 import { scale } from '@mobile/utils/resize';
+import axios from 'axios';
 
-
-const StepSetPassword: React.FC = () => {
+const StepNewPassword: React.FC = () => {
     const navigation = useNavigation();
     const route = useRoute();
     const [email, setEmail] = useState('');
@@ -25,14 +25,28 @@ const StepSetPassword: React.FC = () => {
         }
     }, [route.params]);
 
-    console.log(route.params)
-
     const handleNextStep = async () => {
-        if (password) {
-            navigation.navigate("StepDataUser", { email, password });
-        } else {
-            console.log("Sem senha");
-            Alert.alert(t('PAGES.AUTH.REGISTER.ALERTS.ERROR.PASSWORDNULL'))
+        if (!password) {
+            Alert.alert(t('PAGES.AUTH.REGISTER.ALERTS.ERROR.PASSWORDNULL'));
+            return;
+        }
+
+        try {
+            // Enviando a solicitação POST para o endpoint de atualização de senha
+            const response = await axios.post('http://localhost:8080/auth/updatePassWordUser', {
+                email: email.trim(),
+                password: password.trim(),
+            });
+
+            // Verifica se a resposta é bem-sucedida (status 200)
+            if (response.status === 200) {
+                navigation.navigate("StepEmail", { email, password });
+            } else {
+                Alert.alert(t('PAGES.AUTH.REGISTER.ALERTS.ERROR.ERRO'));
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar a senha:', error.response?.data || error.message);
+            Alert.alert(t('PAGES.AUTH.REGISTER.ALERTS.ERROR.ERRO'));
         }
     };
 
@@ -47,7 +61,6 @@ const StepSetPassword: React.FC = () => {
 
     const textBold = {
         fontWeight: poppinsTypography.fontWeightBold.fontWeight,
-
     }
 
     const isButtonDisabled = !password.trim(); 
@@ -56,7 +69,7 @@ const StepSetPassword: React.FC = () => {
         <Background {...backgroundStyle}>
             <Box >
                 <Box width={343}>
-                    <TopBarComponent titleText={(t('PAGES.AUTH.REGISTER.TEXTPASSWORD.TITLETOP'))} currentStep={3} totalSteps={4} />
+                    <TopBarComponent titleText={(t('PAGES.AUTH.REGISTER.TEXTPASSWORD.TITLETOP2'))} currentStep={3} totalSteps={3} />
                 </Box>
 
                 <Box alignItems='center' pdTop={30} flex={1} >
@@ -77,12 +90,17 @@ const StepSetPassword: React.FC = () => {
                         <Text style={textSimple2}>{(t('PAGES.AUTH.REGISTER.TEXTPASSWORD.TEXT7'))} </Text>
                     </Box>
                 </Box>
+                <Box alignItems='center' flex={5} top={300} position='absolute' justifyContent='center' left={12}>
+                    <Input type='password' width={scale(230)} label='Repita a senha' placeholder={(t('PAGES.AUTH.REGISTER.PLACEHOLDERPASSWORD'))}
+                        onChangeText={setPassword}
+                    />
+                </Box>
                 <Box alignItems='center' bottom={45} >
-                    <ButtonDefault width={330} height={40} borderRadius={8} disabled={isButtonDisabled}  text={(t('PAGES.AUTH.REGISTER.TEXTPASSWORD.BUTTON.CONFIRM'))} color={lightTheme.colors.secondary} onPress={handleNextStep} />
+                    <ButtonDefault width={330} height={40} borderRadius={8} disabled={isButtonDisabled} text={(t('PAGES.AUTH.REGISTER.TEXTPASSWORD.BUTTON.CONFIRM'))} color={lightTheme.colors.secondary} onPress={handleNextStep} />
                 </Box>
             </Box>
         </Background>
     );
 };
 
-export { StepSetPassword };
+export { StepNewPassword };

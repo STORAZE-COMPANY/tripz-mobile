@@ -1,4 +1,5 @@
 import { lightTheme } from "@mobile/theme";
+import { scale } from "@mobile/utils/resize";
 import { fonts, poppinsTypography } from "@mobile/utils/typograph";
 import { Dimensions, StyleSheet } from "react-native";
 
@@ -41,7 +42,8 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: '100%',
         alignItems: 'center',
-        paddingHorizontal: 70,
+        paddingHorizontal: scale(70),
+        bottom:scale(10)
     },
     codeInputWrapper: {
         alignItems: 'center',

@@ -40,6 +40,7 @@ interface IStyleProps {
     style?: StyleProp<ViewStyle>;
     flex?: number;
     maxWidth?: DimensionValue;
+    opacity?: number;
 }
 
 export {IStyleProps}

@@ -18,6 +18,7 @@ import { Background } from '@mobile/components/Background';
 import { useWindow } from '@mobile/hooks/windowHook';
 import { lightTheme } from '@mobile/theme';
 import { ButtonDefault } from '@mobile/components/ButtonDefault';
+import { scale } from '@mobile/utils/resize';
 
 
 
@@ -61,7 +62,7 @@ const OnBoarding: React.FC = () => {
             id: 1,
             title: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.ONE.TITLE'),
             subtitle: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.ONE.SUBTITLE'),
-            image: <PassaportSvg width={250} height={230} />,
+            image: <PassaportSvg width={scale(250)} height={scale(230)} />,
         },
         {
             id: 2,
@@ -70,7 +71,7 @@ const OnBoarding: React.FC = () => {
             subtitleRemember: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.TWO.REMEMBER'),
             textRemember: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.TWO.REMEMBERTEXT'),
             textRemember2: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.TWO.REMEMBERTEXT2'),
-            image: <PeoplesSVG width={300} height={184} />,
+            image: <PeoplesSVG width={scale(300)} height={scale(184)} />,
         },
         {
             id: 3,
@@ -79,37 +80,38 @@ const OnBoarding: React.FC = () => {
             subtitleRemember: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.REMEMBER'),
             textRemember: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.REMEMBERTEXT'),
             textRemember2: t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.REMEMBERTEXT2'),
-            image: <PeoplesMapsSVG width={250} height={240} />,
+            image: <PeoplesMapsSVG width={scale(250)} height={scale(240)} />,
         },
     ];
 
     const renderItem = ({ item }: { item: any }) => (
-        <Box flex={1} alignItems='center' justifyContent='center' pdHorizontal={1} top={4.5}>
+        <Box flex={1} alignItems='center' justifyContent='center' pdHorizontal={1} top={40}>
             
             {item.image}
             <Box top={2}>
-                <Box pdHorizontal={4} marginTop={1} top={6}>
+                <Box pdHorizontal={35} marginTop={1} top={35}>
                     <Text style={styles.text}>{item.title}</Text>
                 </Box>
-                <Box pdTop={2.2} top={5} marginTop={2} pdHorizontal={3} alignItems='center' alignSelf='center'>
+                <Box pdTop={2.2} top={45} marginTop={2} pdHorizontal={30} alignItems='center' alignSelf='center'>
                     <Text style={styles.subtitle}>{item.subtitle}</Text>
                 </Box>
-                <Box flexDirection='row' justifyContent='center' alignSelf='center' top={5}>
+                <Box flexDirection='row' justifyContent='center' alignSelf='center' top={40}>
                     <Text style={styles.subtitleRemember}>{item.subtitleRemember}</Text>
                     <Text style={styles.textRemember}>{item.textRemember}</Text>
                 </Box>
-                <Box top={4.2}>
+                <Box top={35}>
                     <Text style={styles.textRemember2}>{item.textRemember2}</Text>
                 </Box>
             </Box>
             {item.id === 3 && (
                 <ButtonDefault
-                    top={12}
+                    top={40}
                     text={t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.BUTTONS.ALLOW')}
                     onPress={handleLocationPermission}
-                    width={90}
-                    height={5}
+                    width={330}
+                    height={36}
                     color={lightTheme.colors.secondary}
+                    borderRadius={8}
                 ></ButtonDefault>
             )}
 
@@ -196,8 +198,8 @@ const OnBoarding: React.FC = () => {
     };
     return (
         <Background {...backgroundStyle}>
-            <Box width={0} height={1}>
-                <LogoSVG  width={150} height={150} />
+            <Box top={45} >
+                <LogoSVG  width={scale(98.95)} height={scale(27)} />
             </Box>
             <Carousel
                 ref={carouselRef}
@@ -207,7 +209,7 @@ const OnBoarding: React.FC = () => {
                 onSnapToItem={(index) => setCurrentIndex(index)}
                 pagingEnabled
             />
-            <Box flexDirection='row' alignItems='center' justifyContent='space-between'   width={100} pdHorizontal={2} bottom={2}>
+            <Box flexDirection='row' alignItems='center' justifyContent='space-between'width={330} pdHorizontal={2} bottom={15}>
                 <TouchableOpacity onPress={handleSkip}>
                     <Text style={getSkipTextStyles()}>
                         {t('PAGES.AUTH.ONBOARDING.CAROUSEL.PAGE.THREE.BUTTONS.SKIP')}

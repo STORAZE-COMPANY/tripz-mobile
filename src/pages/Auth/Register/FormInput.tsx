@@ -1,5 +1,6 @@
 import { Box } from '@mobile/components/Box';
 import { Input } from '@mobile/components/Input';
+import { scale } from '@mobile/utils/resize';
 import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
@@ -13,8 +14,8 @@ const FormField: React.FC = () => {
     
 
     return (
-        <Box flexDirection='row' alignItems='center' justifyContent='space-between' width={100} pdHorizontal={2}>
-          
+        <Box flexDirection='row' alignItems='center' justifyContent='space-between' width={scale(240)} pdHorizontal={17}>
+          <Box right={10}>
             <Input
                 type="dropdown"
                 placeholder="País"
@@ -23,9 +24,12 @@ const FormField: React.FC = () => {
                 onSelect={setCountry}
                 icon="world-o"
                 style={styles.input}
-                width={30}
+                width={scale(70)}
                 onChangeText={setCountry}                   
             />
+            </Box>
+
+            <Box right={5}>
             <Input
                 type="dropdown"
                 placeholder="UF"
@@ -33,10 +37,12 @@ const FormField: React.FC = () => {
                 value={state}
                 onSelect={setState}
                 style={styles.input}
-                width={20}
+                width={scale(50)}
                 onChangeText={setState}     
               
             />
+            </Box>
+            <Box left={2}>
             <Input
                 type="dropdown"
                 placeholder="Cidade"
@@ -44,11 +50,11 @@ const FormField: React.FC = () => {
                 value={city}
                 onSelect={setCity}
                 style={styles.input}
-                width={38}     
+                width={scale(110)}     
                 onChangeText={setCity}     
-                
-                 
+                   
             />
+            </Box>
         </Box>
     );
 };

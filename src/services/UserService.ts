@@ -3,6 +3,7 @@ import {AxiosResponse } from 'axios';
 import { api } from '@mobile/api/axios';
 // Interface para dados do usuário
 interface UserData {
+  id:number;
   email: string;
   password: string;
   name: string;
@@ -106,11 +107,50 @@ export const registerUser = async (user: UserData): Promise<UserData | null> => 
 
 };
 
-// Função para fazer login
-export const loginUser = async (email: string, password: string): Promise<boolean> => {
-    const response = await api.post('auth', { email, password, type: 2 });
-    return response.status === 200;
 
+// Função para fazer login
+
+export const loginUser = async (email, password) => {
+  try {
+    console.log('Iniciando loginUser...');
+
+    const response = await api.post('auth', { email, password, type: 2 });
+    console.log('Response from loginUser:', response.data);
+
+    const { acessToken, userId } = response.data; // Extraindo o userId
+
+    if (!acessToken || !userId) {
+      throw new Error('Resposta inválida do servidor: token ou userId ausente');
+    }
+
+    console.log('Login bem-sucedido. User ID:', userId);
+
+    // Aqui você pode armazenar o token no contexto ou onde for necessário
+    // Retornando o userId para uso posterior
+    return userId;
+
+  } catch (error) {
+    console.error('UserService: Erro ao fazer login:', error);
+    return false;
+  }
+};
+
+export const getUserById = async (id: number): Promise<UserData | null> => {
+  console.log("getUserByID solicitado com ID:", id);
+  try {
+    const response: AxiosResponse<UserData> = await api.get(`user/${id}`);
+    console.log("Dados do usuário:", response.data);
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      console.error('Erro na resposta da API:', error.response.data);
+    } else if (error.request) {
+      console.error('Erro na requisição:', error.request);
+    } else {
+      console.error('Erro ao configurar a requisição:', error.message);
+    }
+    return null;
+  }
 };
 
 // Função para buscar todas as cidades
@@ -175,6 +215,48 @@ export const getAllCategories = async () => {
         throw error;
     }
 };
+
+
+export const sendTokenToEmail = async (email: string): Promise<void> => {
+  await api.post('auth/send', { email });
+};
+
+export const validateToken = async (data: { token: string, email: string }): Promise<boolean> => {
+  try {
+      const response = await api.post('auth/validateToken', data);
+      return response.status === 200; // Assumindo que uma resposta 200 indica sucesso
+  } catch (error) {
+      console.error('Erro ao validar token:', error.response?.data || error.message);
+      return false;
+  }
+};
+
+export const sendTokenToPassword = async (email: string) => {
+  const response = await api.post('auth/sendResetPassword', { email });
+  return response.data;
+};
+
+export const validatePasswordResetToken = async (tokenReset: string): Promise<boolean> => {
+  try {
+      const response: AxiosResponse<void> = await api.post('auth/validateTokenReset', { tokenReset });
+      return response.status === 200;
+  } catch (error) {
+      console.error('Erro ao validar o token de redefinição de senha:', error.response?.data || error.message);
+      return false;
+  }
+};
+
+
+export const getTourGuidesByCityId = async (cityId: string) => {
+  try {
+      const response = await api.get(`tourGuide/city/${cityId}`);
+      return response.data; // Supondo que a resposta seja o objeto contendo os dados dos guias turísticos
+  } catch (error) {
+      console.error('Erro ao buscar guias turísticos:', error);
+      throw error;
+  }
+};
+
 
 
 

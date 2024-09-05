@@ -15,6 +15,7 @@ interface ButtonDefaultProps extends IStyleProps {
     icon?: React.ReactNode; // Adicionando a prop de ícone como ReactNode
     iconPosition?: 'left' | 'right'; // Posição do ícone
     iconSpacing?: number; // Espaçamento entre o ícone e o texto
+    disabled?: boolean; // Prop para desativar o botão
 }
 
 const ButtonDefault: React.FC<ButtonDefaultProps> = ({
@@ -30,6 +31,7 @@ const ButtonDefault: React.FC<ButtonDefaultProps> = ({
     icon,
     iconPosition = 'right', // Posição padrão do ícone é à direita
     iconSpacing = 8, // Espaçamento padrão entre ícone e texto
+    disabled = false, // Prop padrão desativada
 }) => {
     const { heightScale, widthScale } = useWindow();
 
@@ -37,20 +39,23 @@ const ButtonDefault: React.FC<ButtonDefaultProps> = ({
         ...styles.button,
         width: width && scale(width),
         height: height && scale(height), 
-        backgroundColor: backgroundColor || lightTheme.colors.primary, 
+        backgroundColor: disabled ? '#DEDEDE' : backgroundColor || lightTheme.colors.primary, // Cor do botão desativado
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: borderRadius ? scale(borderRadius) : scale(1),
         top: top ? scale(top) : 0,
         bottom: bottom ? scale(bottom) : 0,
         flexDirection: 'row', 
+        opacity: disabled ? 1 : 1, // Deixa o botão levemente translúcido quando desativado
+     
+
     };
 
     const textStyles: TextStyle = {
         fontSize: fonts.fontSizeMediumSmall.fontSize,
         fontWeight: latoTypography.fontWeightSemiBold.fontWeight,
         fontFamily: latoTypography.fontFamilyBold.fontFamily,
-        color: color || 'white', 
+        color: disabled ? '#A0A0A0': color || 'white', // Cor do texto desativado
     };
 
     const iconStyles: ViewStyle = {
@@ -59,9 +64,9 @@ const ButtonDefault: React.FC<ButtonDefaultProps> = ({
     };
 
     return (
-        <TouchableOpacity onPress={onPress} style={buttonStyles}>
+        <TouchableOpacity onPress={onPress} style={buttonStyles} disabled={disabled}>
             <Box justifyContent='center' alignItems='center' flexDirection='row' >
-            <Text style={textStyles}>{text}</Text>
+                <Text style={textStyles}>{text}</Text>
                 {icon && <Box style={iconStyles} left={1}>{icon}</Box>}
             </Box>
         </TouchableOpacity>

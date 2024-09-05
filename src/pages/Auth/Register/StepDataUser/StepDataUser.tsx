@@ -11,6 +11,7 @@ import { t } from 'i18next';
 import { fonts, poppinsTypography } from '@mobile/utils/typograph';
 import { FormField } from '../FormInput';
 import { registerUser } from '@mobile/services/UserService';
+import { scale } from '@mobile/utils/resize';
 
 const StepDataUser: React.FC = () => {
     const navigation = useNavigation();
@@ -96,27 +97,27 @@ const StepDataUser: React.FC = () => {
     return (
         <Background {...backgroundStyle}>
               <Box>
-                <Box pdTop={1}>
+                <Box width={343}>
                     <TopBarComponent titleText={(t('PAGES.AUTH.REGISTER.DATAUSER.TITLETOP'))} currentStep={4} totalSteps={4} />
                 </Box>
 
-                <Box alignItems='center' pdTop={4} >
-                    <Input width={90} pdTop={2} justifyContent='flex-start' label={(t('PAGES.AUTH.REGISTER.LABELNAME'))} placeholder={(t('PAGES.AUTH.REGISTER.PLACEHOLDERNAME'))}
+                <Box alignItems='center' pdTop={35} >
+                    <Input width={scale(240)} label={(t('PAGES.AUTH.REGISTER.LABELNAME'))} placeholder={(t('PAGES.AUTH.REGISTER.PLACEHOLDERNAME'))}
                         value={name}
                         onChangeText={setName}
                     />
                 </Box>
 
-                <Box flex={6} pdTop={2}  >
-                    <Box flexDirection='row' pdHorizontal={2}>
+                <Box flex={6} pdTop={10}  >
+                    <Box flexDirection='row' pdHorizontal={5}>
                         <Text style={textSimple2} >{(t('PAGES.AUTH.REGISTER.DATAUSER.LABELLOCATION'))}</Text>
                     </Box>
                     <FormField />
 
-                    <Box alignItems='center' justifyContent='center' pdHorizontal={3} pdTop={4}>
+                    <Box alignItems='center' justifyContent='center' pdHorizontal={21} pdTop={4} top={20}>
 
                         <Text style={textSimpleTerms}>{(t('PAGES.AUTH.REGISTER.DATAUSER.TEXTTERMS'))}</Text>
-                        <Box flexDirection='row' flexWrap='wrap' alignItems='center' justifyContent='center' pdHorizontal={1} >
+                        <Box flexDirection='row' flexWrap='wrap' alignItems='center' justifyContent='center' pdHorizontal={40}  >
                             <Text style={textSimpleTerms}>{(t('PAGES.AUTH.REGISTER.DATAUSER.TEXTTERMS2'))}</Text>
                             <Text style={textColorTerms}>{(t('PAGES.AUTH.REGISTER.DATAUSER.TEXTTERMS3'))}</Text>
                             <Text style={textSimpleTerms}>{(t('PAGES.AUTH.REGISTER.DATAUSER.TEXTTERMS4'))}</Text>
@@ -125,8 +126,8 @@ const StepDataUser: React.FC = () => {
                     </Box>
                 </Box>
 
-                <Box alignItems='center' bottom={5} >
-                    <ButtonDefault width={90} height={5} text={(t('PAGES.AUTH.REGISTER.DATAUSER.BUTTON.CONFIRM'))} color={lightTheme.colors.secondary} onPress={handleRegister} />
+                <Box alignItems='center' bottom={5}  bottom={40} >
+                    <ButtonDefault width={300} height={40} borderRadius={8} text={(t('PAGES.AUTH.REGISTER.DATAUSER.BUTTON.CONFIRM'))} color={lightTheme.colors.secondary} onPress={handleRegister} />
                 </Box>
             </Box>
         </Background>

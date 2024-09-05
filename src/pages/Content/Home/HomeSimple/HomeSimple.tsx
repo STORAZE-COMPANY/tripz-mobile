@@ -189,14 +189,13 @@ const HomeSimple: React.FC = () => {
         }
     }, [selectedCategories]);
 
-    const renderItem = (item: any, index: number) => {
-        // Extrair as URLs das imagens, assumindo que 'images' é uma string de URLs separadas por vírgulas
+    const renderItem = (item, index) => {
         const coverImage = item.coverImage;
-
+    
         return (
-            <Box backgroundColor='white' shadowBox height={267} key={index} width={325} borderRadius={8} alignItems='center' marginHorizontal={7} left={12} bottom={1}>
+            <Box backgroundColor='white' shadowBox height={267} key={item.id} width={325} borderRadius={8} alignItems='center' marginHorizontal={7} left={12} bottom={1}>
                 <Box>
-                    <Image source={{ uri: coverImage }} style={{ width:scale(325), height:scale(144), borderRadius: scale(8), margin: 3 }} />
+                    <Image source={{ uri: coverImage }} style={{ width: scale(325), height: scale(144), borderRadius: scale(8), margin: 3 }} />
                     <Box position='absolute' justifyContent='center' alignItems='flex-end' width={80} right={9} top={4}>
                         <TouchableOpacity>
                             <FavButtonSVG />
@@ -218,27 +217,32 @@ const HomeSimple: React.FC = () => {
                         <Text style={{ fontSize: 10 }}>{item.address}</Text>
                     </Box>
                     <ScrollView horizontal showsHorizontalScrollIndicator={true}>
-                        {availableCategories.map((category, index) => {
-                            // console.log(category.icon); 
-                            return (
-                                <Box justifyContent='space-evenly' alignItems='center' height={35}>
-                                    <Box left={3} height={20} backgroundColor='white' key={index} pdHorizontal={15} justifyContent='flex-start' flexDirection='row' alignItems='center' borderRadius={4} elevation={1} marginRight={4}>
-                                      
-                                        <SvgUri uri={category.icon} stroke='red' strokeOpacity='100%' style={{  marginLeft:-6, marginRight:4, right:5 }} /> 
-                                                       
-                                        <Text style={{color:'#2D3370' , justifyContent:'flex-end', left:5}}>{category.label}</Text>                 
-                                    </Box>
+                        {availableCategories.map((category, index) => (
+                            <Box justifyContent='space-evenly' alignItems='center' height={35} key={index}>
+                                <Box left={3} height={20} backgroundColor='white' pdHorizontal={15} justifyContent='flex-start' flexDirection='row' alignItems='center' borderRadius={4} elevation={1} marginRight={4}>
+                                    <SvgUri uri={category.icon} stroke='red' strokeOpacity='100%' style={{ marginLeft: -6, marginRight: 4, right: 5 }} />
+                                    <Text style={{ color: '#2D3370', justifyContent: 'flex-end', left: 5 }}>{category.label}</Text>
                                 </Box>
-                            )
-                        })}
+                            </Box>
+                        ))}
                     </ScrollView>
                 </Box>
                 <Box alignItems='center' bottom={7} justifyContent='center'>
-                    <ButtonDefault iconPosition="left" icon={<ArrowRoute width={20} height={20} />} borderRadius={8} text='Destacar Rota' color='white' height={40} width={303} onPress={() => nav.navigate('CustomMap')} />
+                    <ButtonDefault
+                        iconPosition="left"
+                        icon={<ArrowRoute width={20} height={20} />}
+                        borderRadius={8}
+                        text='Destacar Rota'
+                        color='white'
+                        height={40}
+                        width={303}
+                        onPress={() => nav.navigate('DetalhesLocal', { item,  cityId: selectedCity.id, itemID:item.id  })}
+                    />
                 </Box>
             </Box>
         );
     };
+    
 
     const renderItem1 = (category) => {
         const isSelected = selectedCategories.some(selectedCategory => selectedCategory.value === category.value);
@@ -266,9 +270,10 @@ const HomeSimple: React.FC = () => {
                     renderItem={({ item }) => (
                         <View style={styles.selectedStyle}>
                             {item.icon && (
-                                <SvgUri
+                                <Svg
                                     uri={item.icon}
                                     style={{ width: 20, height: 20, right:6 }}
+                                    
                                 />
                             )}
                             <Text style={styles.selectedTextStyle}>

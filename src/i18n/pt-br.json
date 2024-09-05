@@ -52,28 +52,32 @@
         "TITLETOP": "Bem vindo(a)!",
         "TITLETOP2": "Insira sua senha",
         "TITLETOP3": "Faça seu cadastro",
+        "TITLETOP4": "Esqueceu a senha?",
         "BUTTON": {
           "NEXT": "Avançar",
           "LOGIN": "Entrar",
           "REGISTER": "Cadastrar"
         },
         "ALERTS": {
-          "ERROR":{
-            "ERRO": "Erro",
-            "PASSWORDNULL":"Por favor, insira a senha.",
-            "PASSWORDERROR":"Erro ao fazer login.",
-            "PASSWORDINCORRECT":"Senha incorreta.",
-            "404":"",
+          "ERROR": {
             "403": "Erro, acesso negado",
-            "ERROREMAIL":"Erro ao verificar e-mail.",
+            "404": "",
+            "ERRO": "Erro",
+            "PASSWORDNULL": "Por favor, insira a senha.",
+            "PASSWORDERROR": "Erro ao fazer login.",
+            "PASSWORDINCORRECT": "Senha incorreta.",
+            "ERROREMAIL": "Erro ao verificar e-mail.",
             "EMAILNOTFOUND": "Email não encontrado",
             "EMAILNULL": "Por favor, insira um e-mail.",
+            "EMAILLABEL": "E-mail",
             "EMAILNOTFOUND2": "O email não foi encontrado. Deseja continuar para a criação de conta?",
             "CANCEL": "Cancelar",
-             "ACCEPT": "Sim",
-             "DATAUSER": {
-              "REGISTERERROR":"Erro ao cadastrar usuário."
-             }
+            "ACCEPT": "Sim",
+            "DATAUSER": {
+              "REGISTERERROR": "Erro ao cadastrar usuário."
+            },
+            "USERSEARCHFAIL": "Falha ao buscar usuário",
+            "SENDTOKENFAIL": "Erro ao enviar o token"
           }
         },
         "TEXTCODE": {
@@ -84,7 +88,7 @@
             "THREE": "Lixo Eletrônico",
             "FOUR": "ou",
             "FIVE": "Spam",
-            "SIX": "para ver se o e-mail não está lá",
+            "SIX": "para ver se o e-mail não está lá.",
             "SEVEN": "O envio do e-mail pode levar até"
           },
           "BUTTON": {
@@ -94,6 +98,7 @@
         },
         "TEXTPASSWORD": {
           "TITLETOP": "Faça seu cadastro",
+          "TITLETOP2": "Esqueceu a senha?",
           "TEXT": "Importante:",
           "TEXT2": "Crie uma senha mais segura",
           "TEXT3": "•  Use mais de 8 dígitos",
