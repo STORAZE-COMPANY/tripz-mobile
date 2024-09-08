@@ -1,6 +1,0 @@
-module Pods_Tripz {
-  umbrella header "Pods-Tripz-umbrella.h"
-
-  export *
-  module * { export * }
-}

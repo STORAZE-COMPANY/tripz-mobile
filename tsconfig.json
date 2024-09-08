@@ -1,18 +1,14 @@
 {
   "extends": "expo/tsconfig.base",
-  "baseUrl": "./",
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@mobile/*": [
-        "./src/*"
-      ]
-    },
+      "@mobile/*": ["./src/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@contexts/*": ["./src/contexts/*"],
+      "@components/*": ["./src/components/*"],
+      "@theme/*": ["./src/theme/*"]
+    }
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "babel.config.js",
-    "metro.config.js",
-  ]
+  "exclude": ["node_modules", "dist", "babel.config.js", "metro.config.js"]
 }

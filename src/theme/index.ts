@@ -1,1 +1,1 @@
-export * from './lightTheme'
+export * from '@theme/colors/lightTheme'

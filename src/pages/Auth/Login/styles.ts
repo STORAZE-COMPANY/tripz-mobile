@@ -17,3 +17,18 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
     },
 });
+
+
+
+const ButtonMail = {
+    ...styles.buttonEmail,
+};
+
+const LoginTitle = {
+    ...styles.title,
+};
+
+export {
+    ButtonMail,
+    LoginTitle,
+}

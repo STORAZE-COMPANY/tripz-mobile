@@ -1,38 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import { ActivityIndicator, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import MainNavigation from './src/MainNavigation';
-import { NavigationContainer } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Lato_400Regular, Lato_700Bold} from '@expo-google-fonts/lato';
-import {Poppins_500Medium ,Poppins_400Regular, Poppins_600SemiBold, Poppins_300Light } from '@expo-google-fonts/poppins';
-import './src/i18n';
-import { useTranslation } from 'react-i18next';
-import { AppProvider } from '@mobile/context';
-export default function App() {
-  const { t } = useTranslation();
+import "./src/i18n";
+import { useFonts } from "expo-font";
+import { StatusBar } from "expo-status-bar";
 
-  const [fontLoaded, fontError] = useFonts({
+import { ActivityIndicator } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
+
+import { Lato_400Regular, Lato_700Bold } from "@expo-google-fonts/lato";
+import {
+  Poppins_500Medium,
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+  Poppins_300Light,
+} from "@expo-google-fonts/poppins";
+
+import { AppProvider } from "@contexts/AppContext";
+import { MainNavigation } from "@routes/MainNavigation";
+import { lightTheme } from "@theme/colors/lightTheme";
+
+export default function App() {
+  const [fontLoaded] = useFonts({
     Lato_400Regular,
     Lato_700Bold,
- 
+
     Poppins_300Light,
     Poppins_400Regular,
     Poppins_500Medium,
     Poppins_600SemiBold,
-  
   });
 
   return (
     <AppProvider>
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <StatusBar style="auto" />
-       {fontLoaded ? <MainNavigation /> :   <ActivityIndicator size="large" color="#0000ff" /> }
-      </NavigationContainer>
-    </SafeAreaProvider>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <StatusBar style="auto" />
+          {fontLoaded ? (
+            <MainNavigation />
+          ) : (
+            <ActivityIndicator size="large" color={lightTheme.colors.primary} />
+          )}
+        </NavigationContainer>
+      </SafeAreaProvider>
     </AppProvider>
   );
 }
-
-
